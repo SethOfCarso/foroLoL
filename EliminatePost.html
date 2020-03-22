@@ -65,6 +65,15 @@
     blockquote p {
         display: inline;
     }
+    .modal-header{
+        background-color: white;
+    }
+    .modal-footer{
+        background-color: white;
+    }
+    .modal-body{
+        background-color: white;
+    }
 </style>
 
 <body>
@@ -76,8 +85,7 @@
     <object type="text/html" data="./navbar.html"width="100%" height="100%"></object>
 
 
-
-    <h1 class="text-white">Si solo vees el post como invitado/sin haber contestado</h1>
+<h1 class="text-white">Si eres el dueño del post</h1>
     <!-- =================================================================== -->
     <!--  Inicio de posts-->
     <!-- =================================================================== -->
@@ -112,6 +120,8 @@
                 <div class="card-footer text-muted text-right">
                     <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
                     <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Comentar</a>
+                    <a name="" id="" class="btn btn-info text-white" href="#" role="button"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a name="" id="" class="btn btn-danger text-white" href="#" role="button" data-toggle="modal" data-target="#modelId" ><i class="fa fa-trash" aria-hidden="true"></i> </a>
                 </div>
             </div>
         </div>
@@ -188,10 +198,12 @@
                     <10></10></p>
                     
 
-                    <p class="card-text"><small class="text-muted">Creado hace 10 horas.</small></p>
+                    <p class="card-text"><small class="text-muted">Editado hace 10 horas.</small></p>
                 </div>
                 <div class="card-footer text-muted text-right">
                     <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
+                    <a name="" id="" class="btn btn-info text-white" href="#" role="button"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a name="" id="" class="btn btn-danger text-white" href="#" role="button" data-toggle="modal" data-target="#modelId"><i class="fa fa-trash" aria-hidden="true"></i> </a>
                 </div>
             </div>
         </div>
@@ -243,9 +255,38 @@
     <!-- =================================================================== -->
     <!--  Fin Chat -->
     <!-- =================================================================== -->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                    <div class="modal-header" >
+                            <h5 class="modal-title">Estas seguro de eliminar tu post? </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Si eliminas tu publicacion ya no se podra recuperar</p>
+                          </div>
 
-
-      <!-- =================================================================== -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Si Eliminar</button>
+                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $('#exampleModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+            
+        });
+    </script>
+     <!-- =================================================================== -->
                     <!--  inicio Footer -->
     <!-- =================================================================== -->
     <object type="text/html" data="./footer.html"width="100%" height="100%"></object>

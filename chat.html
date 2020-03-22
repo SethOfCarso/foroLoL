@@ -232,11 +232,35 @@
         input:focus {
             outline: none;
         }
+
+        .float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#09578b;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float:hover{
+    color: gray;
+}
+
+.my-float{
+	margin-top:22px;
+}  
+body {
+            background-color: #1b262c;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div id="chatBox" class="container">
         <div class="messaging">
             <div class="inbox_msg">
                 <div class="inbox_people">
@@ -413,6 +437,21 @@
             </div>
         </div>
     </div>
+    <a id="chatButton" href="#" class="float">
+        <i class="fa fa-comment my-float"></i>
+    </a>
+
+    <script>
+        $('#chatButton').click((event) => {
+            $('#chatBox').toggle();
+        });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 <!-- This template was taken from https://bootsnipp.com/snippets/1ea0N credits: Sunil Rajput -->
 </html>

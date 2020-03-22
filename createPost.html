@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    body {
+        background-color: #1b262c;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    div {
+        background-color: #1A1A1B;
+    }
+
+    .post {
+        color: #B2B2B2;
+        margin-top: 20px;
+    }
+
+    .cardImage {
+        max-height: 150px;
+    }
+
+    .card-title {
+        color: white;
+        font-weight: 600;
+    }
+
+    .chat {
+        border-radius: 50%;
+        max-width: 5%;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+    }
+
+    blockquote:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    blockquote p {
+        display: inline;
+    }
+</style>
+
+<body>
+
+    <!-- =================================================================== -->
+    <!-- navbar -->
+    <!-- =================================================================== -->
+
+    <object type="text/html" data="./navbar.html"width="100%" height="100%"></object>
+
+    <!-- =================================================================== -->
+    <!--  Inicio de posts-->
+    <!-- =================================================================== -->
+    <div class="card mb-6 post">
+        <div class="row no-gutters">
+            <div class="col-md-2 ">
+                <div class="card-profile">
+                    <img src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
+                        class="card-img-top" alt="Imagen de perfil">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
+                        Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
+                            alt="imagen de rango" width="40%"> <br>
+                        Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
+                            alt="imagen de rango" width="40%">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <input type="text" size="80" placeholder="Ingresa el titulo da la publicacion">
+                    <h5 class="card-title"></h5>
+                    <!-- <img src="https://www.webdesignerdepot.com/cdn-origin/uploads/2008/11/01_tinymce.jpg" alt=""> -->
+                    <textarea id="w3mission" rows="8" cols="80" placeholder="Usa codigo HTML para darle estilo al texto"></textarea>
+                    <form action="/action_page.php">
+                        <label for="img">Seleccionar imagen:</label>
+                        <input type="file" id="img" name="img" accept="image/*">
+                        <input type="submit">
+                      </form>
+                </div>
+                <div class="card-footer text-muted text-right">
+                    <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Crear post </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =================================================================== -->
+    <!--  Fin de posts-->
+    <!-- =================================================================== -->
+
+
+    <!-- =================================================================== -->
+    <!--  inicio Chat -->
+    <!-- =================================================================== -->
+    <a href="./chat.html"><img class="chat" src="https://static.vecteezy.com/system/resources/previews/000/425/269/non_2x/vector-chat-icon.jpg" alt="Chat" > </a>
+    <!-- =================================================================== -->
+    <!--  Fin Chat -->
+    <!-- =================================================================== -->
+
+
+      <!-- =================================================================== -->
+                    <!--  inicio Footer -->
+    <!-- =================================================================== -->
+    <object type="text/html" data="./footer.html"width="100%" height="100%"></object>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

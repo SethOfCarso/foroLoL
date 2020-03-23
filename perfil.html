@@ -43,15 +43,15 @@
         h1,
         h3,
         h6 {
-            color: #c4c4c4;
+            color: #c4c4c4 !important;
         }
 
         span, td {
-            color: #a3a2a2;
+            color: #a3a2a2 !important;
         }
 
         i {
-            color:#adadad;
+            color:#adadad !important;
         }
 
         .center {
@@ -59,17 +59,17 @@
         }
 
         .match-victory {
-            color: green;
+            color: green !important;
         }
         .match-loss {
-            color: darkred;
+            color: darkred !important;
         }
     </style>
 </head>
 
 <body>
     <div class="navbar-test"></div>
-    
+
     <div class="profile-container">
         <img src="https://pm1.narvii.com/6372/a4f41d9998581bf4f00d3025a959a10d948eb587_hq.jpg"
             class="profile-image rounded-circle mt-5" alt="Profile image">
@@ -298,18 +298,20 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                      <label for="">Nuevo correo:</label>
-                      <input type="text" class="form-control" name="" id="z" placeholder="">
-                      <label for="">Confirme correo:</label>
-                      <input type="text" class="form-control" name="" id="y" placeholder="">
+                <form action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                        <label for="">Nuevo correo:</label>
+                        <input type="email" class="form-control" name="" id="z" placeholder="" required>
+                        <label for="">Confirme correo:</label>
+                        <input type="email" class="form-control" name="" id="y" placeholder="" required>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Cambiar</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Cambiar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -324,20 +326,22 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Contraseña anterior:</label>
-                        <input type="text" class="form-control" name="" id="a" placeholder="">
-                        <label for="">Nueva contraseña:</label>
-                        <input type="text" class="form-control" name="" id="b" placeholder="">
-                        <label for="">Confirme contraseña:</label>
-                        <input type="text" class="form-control" name="" id="c" placeholder="">
+                <form action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Contraseña anterior:</label>
+                            <input type="password" class="form-control" name="" id="a" placeholder="" required>
+                            <label for="">Nueva contraseña:</label>
+                            <input type="password" class="form-control" name="" id="b" placeholder="" required>
+                            <label for="">Confirme contraseña:</label>
+                            <input type="password" class="form-control" name="" id="c" placeholder="" required>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Cambiar</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Cambiar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

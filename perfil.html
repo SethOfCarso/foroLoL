@@ -68,7 +68,8 @@
 </head>
 
 <body>
-    <object type="text/html" data="./navbar.html"width="100%" height="100%"></object>
+    <!-- <object type="text/html" data="./navbar.html"width="100%" height="100%"></object> -->
+    <div class="navbar-test"></div>
     <div class="profile-container">
         <img src="https://pm1.narvii.com/6372/a4f41d9998581bf4f00d3025a959a10d948eb587_hq.jpg"
             class="profile-image rounded-circle mt-5" alt="Profile image">
@@ -300,9 +301,9 @@
                 <div class="modal-body">
                     <div class="form-group">
                       <label for="">Nuevo correo:</label>
-                      <input type="text" class="form-control" name="" id="" placeholder="">
+                      <input type="text" class="form-control" name="" id="z" placeholder="">
                       <label for="">Confirme correo:</label>
-                      <input type="text" class="form-control" name="" id="" placeholder="">
+                      <input type="text" class="form-control" name="" id="y" placeholder="">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -326,11 +327,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Contraseña anterior:</label>
-                        <input type="text" class="form-control" name="" id="" placeholder="">
+                        <input type="text" class="form-control" name="" id="a" placeholder="">
                         <label for="">Nueva contraseña:</label>
-                        <input type="text" class="form-control" name="" id="" placeholder="">
+                        <input type="text" class="form-control" name="" id="b" placeholder="">
                         <label for="">Confirme contraseña:</label>
-                        <input type="text" class="form-control" name="" id="" placeholder="">
+                        <input type="text" class="form-control" name="" id="c" placeholder="">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -340,12 +341,12 @@
             </div>
         </div>
     </div>
-    <object type="text/html" data="./chat.html" width="100%" height="800px"></object>
-    <object type="text/html" data="./footer.html"width="100%" height="100%"></object>
+    <div class="chat-test" height="800px"></div>
+    <div class="footer-test"></div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
@@ -353,6 +354,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar-test').load('./navbar.html');
+    });
+    $(document).ready(function () {
+        $('.chat-test').load('./chat.html');
+    });
+    $(document).ready(function () {
+        $('.footer-test').load('./footer.html');
+    });
+</script>
 </body>
 
 </html>

@@ -1,9 +1,15 @@
+"use strict";
+
 // =================================
 // Imports
 // =================================
-const express = require('express')
-const cors = require ('cors')
-const puerto = 3000;
+const express = require('express');
+const cors = require ('cors');
+const config = require('./config/config');
+
+const app = express();
+const puerto = config.port;
+
 
 
 // =================================
@@ -15,7 +21,9 @@ const routerLol = require('./routes/routerApiLoL');
 // =================================
 // Middlewares
 // =================================
-const app = express();
+app.use(cors());
+app.use(express.json());
+
 app.use('/api/lol', routerLol);
 
 
@@ -33,4 +41,4 @@ app.get('/',(req,res) =>{
 
 // =================================
 // =================================
-app.listen(puerto, () => console.log("Estoy corriendo ya el server en el puerto: " , puerto , "\nEstoy en http://localhost:",puerto));
+app.listen(puerto, () => console.log("Estoy corriendo ya el server en el puerto: " , puerto , "\nEstoy en http://localhost:" + puerto));

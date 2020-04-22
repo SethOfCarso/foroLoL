@@ -10,11 +10,10 @@ const config = require('./config/config');
 const app = express();
 const puerto = config.port;
 
-
-
 // =================================
 // Routers
 // =================================
+const userRouter = require('./routes/user.route');
 const routerLol = require('./routes/routerApiLoL');
 
 
@@ -24,6 +23,7 @@ const routerLol = require('./routes/routerApiLoL');
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/users', userRouter);
 app.use('/api/lol', routerLol);
 
 

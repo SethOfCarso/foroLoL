@@ -3,6 +3,9 @@
 # Sensitive info
 /server/.env
 
+# Non important files
+/server/temp
+
 # compiled output
 /dist
 /tmp

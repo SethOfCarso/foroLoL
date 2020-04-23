@@ -8,12 +8,14 @@ const cors = require ('cors');
 const config = require('./config/config');
 
 const app = express();
-const puerto = config.port;
+const port = config.port;
 
 // =================================
 // Routers
 // =================================
 const userRouter = require('./routes/user.route');
+const uploadRouter = require('./routes/upload.route');
+const imageRouter = require('./routes/image.route');
 const routerLol = require('./routes/routerApiLoL');
 
 
@@ -24,6 +26,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', userRouter);
+app.use('/api/upload', uploadRouter);
+app.use('/api/image', imageRouter);
 app.use('/api/lol', routerLol);
 
 
@@ -41,4 +45,4 @@ app.get('/',(req,res) =>{
 
 // =================================
 // =================================
-app.listen(puerto, () => console.log("Estoy corriendo ya el server en el puerto: " , puerto , "\nEstoy en http://localhost:" + puerto));
+app.listen(port, () => console.log("http://localhost:" + port));

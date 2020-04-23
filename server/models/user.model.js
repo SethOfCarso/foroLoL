@@ -10,7 +10,7 @@ class User extends DataBaseWrapper {
         super();
         
         this._schema = new mongoose.Schema({
-            uid: {
+            id: {
                 type: Number,
                 unique: true
             },
@@ -52,8 +52,8 @@ class User extends DataBaseWrapper {
         return await super.query(query, projection, options);
     }
     
-    async getUserById(uid, projection = "", options = {}) {
-        return await super.queryOne({uid : uid}, projection, options);
+    async getUserById(id, projection = "", options = {}) {
+        return await super.queryOne({id : id}, projection, options);
     }
     
     async exists(conditions) {
@@ -66,7 +66,7 @@ class User extends DataBaseWrapper {
 }
 const user = new User();
 // let info = {
-//     uid: '1000',
+//     id: '1000',
 //     username: 'EliasGaspar',
 //     password: '123',
 //     email: 'eGasparArellano@gmail.com',

@@ -12,7 +12,7 @@ class UserController {
         if(Object.keys(req.query).length != 0){
             for(let queryParam in req.query){
                 switch(queryParam){
-                    case "uid":
+                    case "id":
                         query.uid = req.query.uid;
                         break;
                     case "name":
@@ -35,15 +35,15 @@ class UserController {
     }
 
     async readById(req, res) {
-        let queryUid = {}          // Search by name or uid
+        let queryId = {}          // Search by name or uid
         let options = {}        // Page or limit
         let projection = "";    // Which fields are wanted
         let searchedUser = {};
 
         // Check for uid in the url
         if(req.params.id !== undefined){
-            queryUid = Number(req.params.id);
-            const docs = await User.getUserById(queryUid, projection, options);
+            queryId = Number(req.params.id);
+            const docs = await User.getUserById(queryId, projection, options);
             searchedUser = JSON.parse(JSON.stringify(docs));
             res.status(200);
         }

@@ -10,6 +10,17 @@ const config = require('./config/config');
 const app = express();
 const port = config.port;
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+// =================================
+// Chat
+// =================================
+
+io.on('connection', (socket) => {
+    const chat = require('./routes/chat.route')(socket, io);
+});
+
 // =================================
 // Routers
 // =================================
@@ -45,4 +56,5 @@ app.get('/',(req,res) =>{
 
 // =================================
 // =================================
-app.listen(port, () => console.log("http://localhost:" + port));
+//app.listen(port, () => console.log("http://localhost:" + port));
+http.listen(port, () => console.log("http://localhost:" + port));

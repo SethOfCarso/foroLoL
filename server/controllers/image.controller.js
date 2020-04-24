@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 const Image = require("../models/image.model");
 
 class ImageController{
-    async getImage(req, res){
+    async getImageById(req, res){
         const filename = req.params.filename;
         const url = cloudinary.url(filename);
 

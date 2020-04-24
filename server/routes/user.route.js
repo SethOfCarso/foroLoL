@@ -4,9 +4,9 @@ const router = require('express').Router();
 const UserController = require("../controllers/user.controller");
 
 router.route('/')
-    .get(UserController.read);      // Add more middlewares if needed
+    .get(UserController.getUsers);      // Add more middlewares if needed
 
-router.route("/:id")
-    .get(UserController.readById);  // Add more middlewares if needed
+router.route("/:email")
+    .get(UserController.getUserById);  // Add more middlewares if needed
 
 module.exports = router;

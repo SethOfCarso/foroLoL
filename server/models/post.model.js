@@ -48,6 +48,10 @@ class Post extends DataBaseWrapper {
         this._model = mongoose.model('posts', this._schema);
     }
 
+    async getPosts(query = {}, projection = "", options = {}) {
+        return await super.query(query, projection, options);
+    }
+
     async getPostbyidPost(idPost){
         const idPost = { idPost };
         return await super.queryOne(idPost);
@@ -58,9 +62,9 @@ class Post extends DataBaseWrapper {
         return await super.queryOne(idUser);
     }
 
-    async getPostbyidTitle(idTitle){
-        const idTitle = { idTitle };
-        return await super.queryOne(idTitle);
+    async getPostbyTitle(Title){
+        const Title = { Title };
+        return await super.queryOne(Title);
     }
 
     async getPostbyTags(tags){
@@ -71,18 +75,6 @@ class Post extends DataBaseWrapper {
     async getPostbypostDate(date){
         const date = { date };
         return await super.queryOne(date);
-    }
-
-    async createImage(id, filename, url, userId){
-        const newImage = {
-            id: id,
-            filename: filename,
-            url: url,
-            registerDate: new Date(),
-            userId: userId
-        }
-
-        return await super.add(newImage);
     }
 
     async createPost(id, idPost, userId, url, title,content , tags,objtPost){

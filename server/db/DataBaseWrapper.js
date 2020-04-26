@@ -13,6 +13,9 @@ class DataBaseWrapper {
     async queryOne(query, projection = {}, options = {}) {
         return await this._model.findOne(query, projection, options);
     }
+    async queryLike(query, projection = {}, options = {}) {
+        return await this._model.find(query, projection, options);
+    }
     async update(query, dataObject) {
         return await this._model.findOneAndUpdate(query, {
             $set: dataObject

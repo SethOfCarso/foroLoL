@@ -6,6 +6,7 @@
 const express = require('express');
 const cors = require ('cors');
 const config = require('./config/config');
+const fetch = require('node-fetch');
 
 const app = express();
 const port = config.port;
@@ -29,7 +30,7 @@ const userRouter = require('./routes/user.route');
 const uploadRouter = require('./routes/upload.route');
 const imageRouter = require('./routes/image.route');
 const postRouter = require('./routes/post.route');
-const routerLol = require('./routes/routerApiLoL');
+const routerLol = require('./routes/lol.route');
 
 
 // =================================
@@ -44,6 +45,7 @@ app.use('/api/upload', uploadRouter);
 app.use('/api/image', imageRouter);
 app.use('/api/lol', routerLol);
 app.use('/api/post', postRouter);
+
 
 
 // =================================

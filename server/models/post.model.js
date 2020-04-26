@@ -41,7 +41,7 @@ class Post extends DataBaseWrapper {
                 type: Array
             },
             objtPost: {
-                type: Array
+                type: Object
             }
             
         });
@@ -63,26 +63,21 @@ class Post extends DataBaseWrapper {
         return await super.queryOne(User);
     }
 
-    // Me quede viendo como poner Like en titulos, falta probar title, tags
-    // Date y a la vez la ruta de lolcito
-    async getPostbyTitle(title1){
-        // const Title = { title };
-        let prueba = {title :{ $regex: "/"+title1+"$/"}}
-        console.log(prueba);
-        return await super.queryLike(prueba);
+    async getPostbyTitle(value){
+        let queryTitle = { "title" : new RegExp('^'+value,"i")};
+        return await super.queryLike(queryTitle);
     }
 
     async getPostbyTags(tags2search){
-        const tags = { tags2search };
-        return await super.queryOne(tags);
+        let queryTitle = { "tags" : new RegExp('^'+tags2search,"i")};
+        return await super.queryLike(queryTitle);
     }
 
-    async getPostbypostDate(date2search){
-        const date = { date };
-        return await super.queryOne(date);
-    }
+    // async getPostbypostDate(date2search){
+    //     const date = { date };
+    //     return await super.queryOne(date);
+    // }
 
-    // async createPost(id, idPost, userId, url, title,content , tags,objtPost){
     async createPost(body, projection, options){
         
         const newPost = {
@@ -94,7 +89,7 @@ class Post extends DataBaseWrapper {
             content: body.content,
             postDate: new Date(),
             tags: body.tags,
-            objtPost: body.objtPost,
+            objtPost: body.objPost,
         }
 
         return await super.add(newPost);

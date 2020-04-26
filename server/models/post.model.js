@@ -41,7 +41,7 @@ class Post extends DataBaseWrapper {
                 type: Array
             },
             objtPost: {
-                type: Array
+                type: Object
             }
             
         });
@@ -94,7 +94,7 @@ class Post extends DataBaseWrapper {
             content: body.content,
             postDate: new Date(),
             tags: body.tags,
-            objtPost: body.objtPost,
+            objtPost: body.objPost,
         }
 
         return await super.add(newPost);

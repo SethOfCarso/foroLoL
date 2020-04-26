@@ -10,8 +10,9 @@ class User extends DataBaseWrapper {
         super();
         
         this._schema = new mongoose.Schema({
-            id: {
-                type: Number,
+            email: {
+                type: String,
+                required: true,
                 unique: true
             },
             username: {
@@ -19,10 +20,6 @@ class User extends DataBaseWrapper {
                 required: true
             },
             password: {
-                type: String,
-                required: true
-            },
-            email: {
                 type: String,
                 required: true
             },
@@ -52,8 +49,13 @@ class User extends DataBaseWrapper {
         return await super.query(query, projection, options);
     }
     
-    async getUserById(id, projection = "", options = {}) {
-        return await super.queryOne({id : id}, projection, options);
+    async getUserById(email, projection = "", options = {}) {
+        const userEmail = { email }
+        return await super.queryOne(userEmail, projection, options);
+    }
+
+    async getUser(query = {}, projection = "", options = {}) {
+        return await super.queryOne(query, projection, options);
     }
     
     async exists(conditions) {
@@ -66,10 +68,9 @@ class User extends DataBaseWrapper {
 }
 const user = new User();
 // let info = {
-//     id: '1000',
+//     email: 'eGasparArellano@gmail.com',
 //     username: 'EliasGaspar',
 //     password: '123',
-//     email: 'eGasparArellano@gmail.com',
 //     lolAccount: 'Hillsong',
 //     urlImage: 'https://vignette.wikia.nocookie.net/leagueoflegendsoficial/images/e/e5/Teemo_8.jpg/revision/latest/top-crop/width/220/height/220?cb=20170326185212&path-prefix=es',
 //     level: 2,

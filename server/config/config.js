@@ -13,6 +13,7 @@ module.exports = {
     cloudinary_cloudName: process.env.CD_CLOUD_NAME,
     cloudinary_apiKey: process.env.CD_API_KEY,
     cloudinary_apiSecret: process.env.CD_API_SECRET,
+    passport_secretKey: process.env.PSSPRT_SECRET_KEY,
     get dbUrl() {
         return `mongodb+srv://${this.mongo_dbUser}:${this.mongo_dbPassword}@${this.mongo_dbCluster}.mongodb.net/${this.mongo_dbName}?retryWrites=true&w=majority`
     }, 

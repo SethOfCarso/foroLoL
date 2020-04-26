@@ -52,27 +52,27 @@ class Post extends DataBaseWrapper {
         return await super.query(query, projection, options);
     }
 
-    async getPostbyidPost(idPost){
-        const idPost = { idPost };
-        return await super.queryOne(idPost);
+    async getPostbyidPost(post2Search){
+        const Postid = { post2Search };
+        return await super.queryOne(Postid);
     }
 
-    async getPostbyidUser(idUser){
-        const idUser = { idUser };
-        return await super.queryOne(idUser);
+    async getPostbyidUser(user2Search){
+        const User = { user2Search };
+        return await super.queryOne(User);
     }
 
-    async getPostbyTitle(Title){
-        const Title = { Title };
+    async getPostbyTitle(Title2search){
+        const Title = { Title2search };
         return await super.queryOne(Title);
     }
 
-    async getPostbyTags(tags){
-        const tags = { tags };
+    async getPostbyTags(tags2search){
+        const tags = { tags2search };
         return await super.queryOne(tags);
     }
 
-    async getPostbypostDate(date){
+    async getPostbypostDate(date2search){
         const date = { date };
         return await super.queryOne(date);
     }
@@ -93,6 +93,8 @@ class Post extends DataBaseWrapper {
         return await super.add(newPost);
     }
 }
+
+
 
 let post = new Post();
 module.exports = post;

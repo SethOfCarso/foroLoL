@@ -55,8 +55,6 @@ class Post extends DataBaseWrapper {
 
     async getPostbyidPost(idPost){
         const Postid = { idPost };
-        console.log("En modelo");
-        console.log(Postid);
         return await super.queryOne(Postid);
     }
 
@@ -65,9 +63,13 @@ class Post extends DataBaseWrapper {
         return await super.queryOne(User);
     }
 
-    async getPostbyTitle(title){
-        const Title = { title };
-        return await super.queryOne(Title);
+    // Me quede viendo como poner Like en titulos, falta probar title, tags
+    // Date y a la vez la ruta de lolcito
+    async getPostbyTitle(title1){
+        // const Title = { title };
+        let prueba = {title :{ $regex: "/"+title1+"$/"}}
+        console.log(prueba);
+        return await super.queryLike(prueba);
     }
 
     async getPostbyTags(tags2search){

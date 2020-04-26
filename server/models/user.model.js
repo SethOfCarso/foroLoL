@@ -53,6 +53,10 @@ class User extends DataBaseWrapper {
         const userEmail = { email }
         return await super.queryOne(userEmail, projection, options);
     }
+
+    async getUser(query = {}, projection = "", options = {}) {
+        return await super.queryOne(query, projection, options);
+    }
     
     async exists(conditions) {
         return await super.exists(conditions);

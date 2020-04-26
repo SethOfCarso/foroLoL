@@ -16,6 +16,7 @@ const port = config.port;
 const userRouter = require('./routes/user.route');
 const uploadRouter = require('./routes/upload.route');
 const imageRouter = require('./routes/image.route');
+const postRouter = require('./routes/post.route');
 const routerLol = require('./routes/routerApiLoL');
 
 
@@ -29,6 +30,7 @@ app.use('/api/users', userRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/image', imageRouter);
 app.use('/api/lol', routerLol);
+app.use('/api/post', postRouter);
 
 
 // =================================

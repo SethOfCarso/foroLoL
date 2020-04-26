@@ -14,6 +14,7 @@ class Post extends DataBaseWrapper {
             },
             idPost: {
                 type: Number,
+                unique: true,
                 required: true
             },
             userId: {
@@ -52,18 +53,20 @@ class Post extends DataBaseWrapper {
         return await super.query(query, projection, options);
     }
 
-    async getPostbyidPost(post2Search){
-        const Postid = { post2Search };
+    async getPostbyidPost(idPost){
+        const Postid = { idPost };
+        console.log("En modelo");
+        console.log(Postid);
         return await super.queryOne(Postid);
     }
 
-    async getPostbyidUser(user2Search){
-        const User = { user2Search };
+    async getPostbyidUser(userId){
+        const User = { userId };
         return await super.queryOne(User);
     }
 
-    async getPostbyTitle(Title2search){
-        const Title = { Title2search };
+    async getPostbyTitle(title){
+        const Title = { title };
         return await super.queryOne(Title);
     }
 
@@ -77,17 +80,19 @@ class Post extends DataBaseWrapper {
         return await super.queryOne(date);
     }
 
-    async createPost(id, idPost, userId, url, title,content , tags,objtPost){
+    // async createPost(id, idPost, userId, url, title,content , tags,objtPost){
+    async createPost(body, projection, options){
+        
         const newPost = {
-            id: id,
-            idPost: idPost,
-            userId: userId,
-            url: url,
-            title: title,
-            content: content,
+            id: body.id,
+            idPost: body.idPost,
+            userId: body.userId,
+            url: body.url,
+            title: body.title,
+            content: body.content,
             postDate: new Date(),
-            tags: tags,
-            objtPost: objtPost,
+            tags: body.tags,
+            objtPost: body.objtPost,
         }
 
         return await super.add(newPost);

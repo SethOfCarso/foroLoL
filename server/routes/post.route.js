@@ -4,7 +4,8 @@ const router = require('express').Router();
 const PostController = require("../controllers/post.controller");
 
 router.route('/')
-    .get(PostController.readAllPosts);      // Add more middlewares if needed
+    .get(PostController.readAllPosts)
+    .post(PostController.writePost);      // Add more middlewares if needed
 
 router.route("/:id/post/post")
     .get(PostController.readByIdPost);  // Add more middlewares if needed

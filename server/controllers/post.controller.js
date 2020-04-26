@@ -122,8 +122,8 @@ class PostController {
         let searchedPost = {};
 
         
-        if(req.params.tag !== undefined){
-            queryId = String(req.params.tag);
+        if(req.params.tags !== undefined){
+            queryId = String(req.params.tags);
             const docs = await Post.getPostbyTags(queryId, projection, options);
             searchedPost = JSON.parse(JSON.stringify(docs));
             res.status(200);

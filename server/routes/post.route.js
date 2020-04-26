@@ -16,10 +16,9 @@ router.route("/:id/post/user")
 router.route("/:title/post/title")
     .get(PostController.readByTitle);  // Add more middlewares if neede
 
-router.route("/:date/post/date")
-    .get(PostController.readByPostDate);  // Add more middlewares if neede
+// router.route("/:date/post/date").get(PostController.readByPostDate);  // Add more middlewares if neede
 
-router.route("/:tags/post/user")
+router.route("/:tags/post/tag")
     .get(PostController.readByTags);  // Add more middlewares if neede
 
 module.exports = router;

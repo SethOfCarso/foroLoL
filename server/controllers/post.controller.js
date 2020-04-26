@@ -115,6 +115,26 @@ class PostController {
         res.json(searchedPost);
     }
 
+    async readByTags(req, res) {
+        let queryId = {}          // Search by name or uid
+        let options = {}        // Page or limit
+        let projection = "";    // Which fields are wanted
+        let searchedPost = {};
+
+        
+        if(req.params.tag !== undefined){
+            queryId = String(req.params.tag);
+            const docs = await Post.getPostbyTags(queryId, projection, options);
+            searchedPost = JSON.parse(JSON.stringify(docs));
+            res.status(200);
+        }
+        else{
+            res.status(404);
+        }
+
+        res.json(searchedPost);
+    }
+
 }
 
 const postController = new PostController();

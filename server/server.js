@@ -10,9 +10,21 @@ const config = require('./config/config');
 const app = express();
 const port = config.port;
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+// =================================
+// Chat
+// =================================
+
+io.on('connection', (socket) => {
+    const chat = require('./routes/chat.route')(socket, io);
+});
+
 // =================================
 // Routers
 // =================================
+const authRouter = require('./routes/auth.route');
 const userRouter = require('./routes/user.route');
 const uploadRouter = require('./routes/upload.route');
 const imageRouter = require('./routes/image.route');
@@ -26,6 +38,7 @@ const routerLol = require('./routes/routerApiLoL');
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/login', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/image', imageRouter);
@@ -47,4 +60,5 @@ app.get('/',(req,res) =>{
 
 // =================================
 // =================================
-app.listen(port, () => console.log("http://localhost:" + port));
+//app.listen(port, () => console.log("http://localhost:" + port));
+http.listen(port, () => console.log("http://localhost:" + port));

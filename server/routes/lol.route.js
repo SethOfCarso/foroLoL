@@ -5,4 +5,7 @@ const lolController = require("../controllers/lolApi.controller");
 
 // Por el momento todos los que se utilizaran sera para LAN
 router.route('/:Summoner')
-    .get(lolController.getSummoner());
+    .get(lolController.getSummoner);
+
+
+module.exports = router;

@@ -65,6 +65,14 @@ class User extends DataBaseWrapper {
     async add(document) {
         return await super.add(document);
     }
+
+    async update(query, data) {
+        return await super.update(query, data);
+    }
+
+    async delete(query) {
+        return await super.delete(query);
+    }
 }
 const user = new User();
 // let info = {

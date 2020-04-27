@@ -8,6 +8,8 @@ router.route('/')
     .post(UserController.saveUser);
 
 router.route("/:email")
-    .get(UserController.getUserById);  // Add more middlewares if needed
+    .get(UserController.getUserById)   // Add more middlewares if needed
+    .put(UserController.updateUser)
+    .delete(UserController.deleteUser);
 
 module.exports = router;

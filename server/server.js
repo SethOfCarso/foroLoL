@@ -64,3 +64,5 @@ app.get('/',(req,res) =>{
 // =================================
 //app.listen(port, () => console.log("http://localhost:" + port));
 http.listen(port, () => console.log("http://localhost:" + port));
+
+module.exports = app;

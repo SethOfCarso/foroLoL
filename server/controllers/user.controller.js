@@ -53,6 +53,15 @@ class UserController {
 
         res.json(searchedUser);
     }
+
+    async saveUser(req, res) {
+        const newUser = await User.add(req.body); 
+        if (newUser.error) {
+            res.status(401).json({msg: 'Ya hay un usuario registrado con ese email'});
+        } else {
+            res.status(201).json(newUser);
+        }
+    }
 }
 
 const userController = new UserController();

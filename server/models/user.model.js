@@ -62,8 +62,8 @@ class User extends DataBaseWrapper {
         return await super.exists(conditions);
     }
 
-    async add(document){
-        return super.add(document);
+    async add(document) {
+        return await super.add(document);
     }
 }
 const user = new User();
@@ -78,7 +78,7 @@ const user = new User();
 //     posts: ['My post 1', 'My post 2', 'My post 3']
 // };
 
-//user.add(info);
+//user.add(info).then((value) => console.log(value));
 //user.getUserById(1000).then((value) => console.log(value));
 
 module.exports = user;

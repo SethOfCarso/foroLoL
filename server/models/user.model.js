@@ -34,11 +34,13 @@ class User extends DataBaseWrapper {
                 required: true
             },
             favorites: {
-                type: Array,
-                required: true
+                type: Array
             },
             posts: {
                 type: Array
+            },
+            token: {
+                type: String
             }
         });
         

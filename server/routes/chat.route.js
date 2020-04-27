@@ -8,7 +8,12 @@ const chatEvents = {
     joinRoom: 'joinRoom',
     exitRoom: 'exitRoom',
     chat: 'chat'
-}
+};
+
+const errorMessages = {
+    duplicatedUser: 'Ya existe un usuario con este mail en el chat, no se puede unir',
+    invalidEmail: 'Email inválido'
+};
 
 function createChatUser(email, username, socketId){
     const currentRoom = '';
@@ -22,9 +27,8 @@ exports = module.exports = function(socket, io) {
         if (!found) {
             const user = createChatUser(email, username, socket.id);
             users.push(user);
-            //socket.emit(emitEvents.respEntrar, user.code);
         } else {
-            //socket.emit(emitEvents.errores, errorMessages.duplicatedUser);
+            socket.emit(chatEvents.join, errorMessages.duplicatedUser);
         }
     });
 
@@ -46,15 +50,15 @@ exports = module.exports = function(socket, io) {
                 socket.join(room);
                 io.to(room).emit(chatEvents.chat, user.username + " se ha unido a '"+ room + "'" + "<br>");
             }
-        }
-        else{
-            //socket.emit(emitEvents.errores, errorMessages.invalidCode);
+        } else {
+            socket.emit(chatEvents.joinRoom, errorMessages.invalidEmail);
         }
     });
 
     // Exit room
     socket.on(chatEvents.exitRoom, (email, room) => {
         const user = users.find((user) => user.email == email);
+
         if (user) {
             if(user.currentRoom == room){
                 user.currentRoom = '';
@@ -62,9 +66,8 @@ exports = module.exports = function(socket, io) {
                 io.to(room).emit(chatEvents.chat, user.username + " ha salido de '"+ room + "'" + "<br>");
                 io.to(`${user.socketId}`).emit(chatEvents.chat, "Has salido de '"+ room + "'" + "<br>");
             }
-        }
-        else{
-            //socket.emit(emitEvents.errores, errorMessages.invalidCode);
+        } else {
+            socket.emit(chatEvents.exitRoom, errorMessages.invalidEmail);
         }
     });
 
@@ -73,9 +76,8 @@ exports = module.exports = function(socket, io) {
         const user = users.find((user) => user.email == email);
         if (user) {
             io.to(user.currentRoom).emit(chatEvents.chat, user.username + ": " + msg + "<br>");
-        }
-        else{
-            //socket.emit(emitEvents.errores, errorMessages.invalidCode);
+        } else {
+            socket.emit(chatEvents.chat, errorMessages.invalidEmail);
         }
     });
 }

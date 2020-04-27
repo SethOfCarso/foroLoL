@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const mongoose = require('../db/mongodb-connection')
 const DataBaseWrapper = require('../db/DataBaseWrapper');
@@ -62,8 +62,16 @@ class User extends DataBaseWrapper {
         return await super.exists(conditions);
     }
 
-    async add(document){
-        return super.add(document);
+    async add(document) {
+        return await super.add(document);
+    }
+
+    async update(query, data) {
+        return await super.update(query, data);
+    }
+
+    async delete(query) {
+        return await super.delete(query);
     }
 }
 const user = new User();
@@ -78,7 +86,7 @@ const user = new User();
 //     posts: ['My post 1', 'My post 2', 'My post 3']
 // };
 
-//user.add(info);
+//user.add(info).then((value) => console.log(value));
 //user.getUserById(1000).then((value) => console.log(value));
 
 module.exports = user;

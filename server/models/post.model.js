@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const DataBaseWrapper = require('../db/DataBaseWrapper');
 const mongoose = require('mongoose');

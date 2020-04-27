@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const fetch = require('node-fetch');
 const lolToken = 'headers: {"X-Riot-Token": "RGAPI-78bfbf70-f3a8-4e20-9b22-f000a0c95d03"}'
 const baseUrl = "https://la1.api.riotgames.com/lol/"; 

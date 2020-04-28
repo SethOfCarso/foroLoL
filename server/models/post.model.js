@@ -73,6 +73,10 @@ class Post extends DataBaseWrapper {
         return await super.queryLike(queryTitle);
     }
 
+    async delete(query) {
+        return await super.delete(query);
+    }
+
     // async getPostbypostDate(date2search){
     //     const date = { date };
     //     return await super.queryOne(date);

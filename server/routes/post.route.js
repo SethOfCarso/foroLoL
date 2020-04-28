@@ -7,8 +7,9 @@ router.route('/')
     .get(PostController.readAllPosts)
     .post(PostController.writePost);      // Add more middlewares if needed
 
-router.route("/:id/post/post")
-    .get(PostController.readByIdPost);  // Add more middlewares if needed
+router.route("/:id/post/post")  // Add more middlewares if needed
+    .get(PostController.readByIdPost).
+    delete(PostController.deletePost);
     
 router.route("/:id/post/user")
     .get(PostController.readByIdUser);  // Add more middlewares if neede

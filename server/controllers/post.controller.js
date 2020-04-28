@@ -145,13 +145,31 @@ class PostController {
             let body = req.body;
             const docs = await Post.createPost(body, projection, options);
             writedPost = JSON.parse(JSON.stringify(docs));
-            res.status(200);
+            res.status(201);
         }
         else{
             res.status(404);
         }
 
         res.json(writedPost);
+    }
+
+    async deletePost(req, res) {
+        // Check for email in the url
+        if (req.params.id) {
+            const idPost = req.params.id;
+            const query = { idPost };
+            
+            const deletedPost = await Post.delete(query);
+            if (deletedPost) {
+                res.status(200).json(deletedPost);
+            } else {
+                res.status(404).json({msg: 'Post not found'});
+            }
+            
+        } else {
+            res.status(400).json({msg: 'Whoops -err- deleting'});
+        }
     }
 
 }

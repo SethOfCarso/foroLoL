@@ -160,7 +160,6 @@ class PostController {
             const idPost = req.params.id;
             const query = { idPost };
             const data = req.body;
-            console.log(data);
             const updatedPost = await Post.update(query, data);
             if (updatedPost) {
                 res.status(200).json(updatedPost);

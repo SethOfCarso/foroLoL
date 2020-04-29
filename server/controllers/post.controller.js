@@ -154,12 +154,30 @@ class PostController {
         res.json(writedPost);
     }
 
-    async deletePost(req, res) {
+    async updatePost(req, res) {
         // Check for email in the url
         if (req.params.id) {
             const idPost = req.params.id;
             const query = { idPost };
+            const data = req.body;
+            console.log(data);
+            const updatedPost = await Post.update(query, data);
+            if (updatedPost) {
+                res.status(200).json(updatedPost);
+            } else {
+                res.status(404).json({msg: 'Post no encontrado'});
+            }
             
+        } else {
+            res.status(400).json({msg: 'Error en la petición de update'});
+        }
+    }
+
+    async deletePost(req, res) {
+        // Check for email in the url
+        if (req.params.id) {
+            const idPost = Number(req.params.id);
+            const query = { idPost };
             const deletedPost = await Post.delete(query);
             if (deletedPost) {
                 res.status(200).json(deletedPost);

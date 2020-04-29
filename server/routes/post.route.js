@@ -9,7 +9,8 @@ router.route('/')
 
 router.route("/:id/post/post")  // Add more middlewares if needed
     .get(PostController.readByIdPost).
-    delete(PostController.deletePost);
+    delete(PostController.deletePost).
+    put(PostController.updatePost);
     
 router.route("/:id/post/user")
     .get(PostController.readByIdUser);  // Add more middlewares if neede

@@ -1,0 +1,95 @@
+body {
+    background-color: #1b262c !important;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
+}
+div.card{
+    background-color: #1A1A1B;
+}
+.post {
+    color: #B2B2B2;
+    margin-top: 20px;
+}
+
+.landingImage{
+    background-image: url("https://s3.amazonaws.com/battlefy-user-generated-assets/users/56d8b856e6c3b785128cacc8/56dcc08f85359a7a12f5c635.jpg");
+    background-position: center;
+    color: #b2b2b2;
+    /* display: flex; */
+    max-width: 100%;
+    min-height: 200px;
+    background-repeat: no-repeat;
+    
+} 
+
+.proyect_name{
+    color: #ffffff;
+    font-weight: 900;
+}
+#sortTags {
+    /* margin-left: 15px;
+    margin-right: 15px; */
+    color: #B2B2B2;
+    display: flex;
+    justify-content: space-evenly;
+}
+select {
+    background-color: #1A1A1B;
+    color: #B2B2B2;
+    font-size: 12px;
+    border-color: gray;
+    appearance: none;
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.fan-art{
+    background-color: red;
+    color: black;
+}
+.buscarAmigos{
+    background-color: blue;
+    color: black;
+}
+.discusion{
+    background-color: green;
+    color: black;
+}
+.erroresDeJuego{
+    background-color: purple;
+    color: black;
+}
+.campeon{
+    background-color: yellow;
+    color: black;
+}
+.searchs {
+    background-color: rgba(0, 0, 0, 0.075);
+    color: white;
+}
+.searchs::placeholder{
+    color: white;
+    opacity: 1;
+}
+
+.cardImage{
+    max-height: 150px;
+}
+.card-title{
+    color: white;
+    font-weight: 600;
+}
+#paginacion{
+    background-color: transparent;
+}
+.chat{
+  border-radius: 50%;
+  max-width: 5%;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}

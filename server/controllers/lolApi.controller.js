@@ -1,6 +1,6 @@
 'use strict';
 const fetch = require('node-fetch');
-const lolToken = 'RGAPI-4f95519b-cdf1-43b9-aad2-7136e8728090'
+const lolToken = 'RGAPI-18b71773-57dd-44c5-8adb-396b9082800f'
 const baseUrl = "https://la1.api.riotgames.com/lol/"; 
 let summoner_base = {
     name : "",
@@ -50,19 +50,7 @@ class LOLController{
             // Get match details
             // ===========================================
 
-
-            // for(let i = 0; i < 20; i ++)
-            // {
-            //     url = 'https://la1.api.riotgames.com/lol/match/v4/matches'
-            //     url = url + summoner_base.matches[i];
-            //     let res_fetch_matchedDetail = await fetch(url,{
-            //         headers: {
-            //             "X-Riot-Token": lolToken
-            //         }
-            //     })
-            //     json = json = await res_fetch_matchedDetail.json();
-            //     summoner_base.matches[i].detail = json;
-            // }
+            
 
             if(summoner_base.accountId !== undefined){
                 res.status(200).send(summoner_base)

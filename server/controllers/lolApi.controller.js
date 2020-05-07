@@ -1,6 +1,6 @@
 'use strict';
 const fetch = require('node-fetch');
-const lolToken = 'headers: {"X-Riot-Token": "RGAPI-78bfbf70-f3a8-4e20-9b22-f000a0c95d03"}'
+const lolToken = 'RGAPI-18b71773-57dd-44c5-8adb-396b9082800f'
 const baseUrl = "https://la1.api.riotgames.com/lol/"; 
 let summoner_base = {
     name : "",
@@ -17,9 +17,13 @@ class LOLController{
             let summoner = req.params.Summoner
             let url  =  baseUrl + endpoint+summoner;
             let json2send= {};
+
+            // ===========================================
+            // Get basic info by basic summoner Name
+            // ===========================================
             let res_fetch = await fetch(url,{
                 headers: {
-                    "X-Riot-Token": "RGAPI-78bfbf70-f3a8-4e20-9b22-f000a0c95d03"
+                    "X-Riot-Token": lolToken
                 }
             })
             let json = await res_fetch.json();
@@ -27,8 +31,27 @@ class LOLController{
             summoner_base.summonerLevel = json.summonerLevel;
             summoner_base.accountId = json.accountId
             summoner_base.profileIconId = json.profileIconId
-            // ==============================================
-            // TODO complete lolapi
+            
+
+            // ===========================================
+            // Get matches by summoner id
+            // ===========================================
+            url = "https://la1.api.riotgames.com/lol/match/v4/matchlists/by-account/"
+            url = url + summoner_base.accountId
+            let res_fetch_matches = await fetch(url,{
+                headers: {
+                    "X-Riot-Token": lolToken
+                }
+            })
+            json = json = await res_fetch_matches.json();
+            summoner_base.matches = json;
+
+            // ===========================================
+            // Get match details
+            // ===========================================
+
+            
+
             if(summoner_base.accountId !== undefined){
                 res.status(200).send(summoner_base)
             } else {

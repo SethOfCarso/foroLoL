@@ -68,6 +68,10 @@ class Post extends DataBaseWrapper {
         return await super.queryLike(queryTitle);
     }
 
+    async update(query, data) {
+        return await super.update(query, data);
+    }
+
     async getPostbyTags(tags2search){
         let queryTitle = { "tags" : new RegExp('^'+tags2search,"i")};
         return await super.queryLike(queryTitle);

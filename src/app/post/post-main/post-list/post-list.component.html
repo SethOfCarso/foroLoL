@@ -4,5 +4,74 @@
         <input class="searchs" type="text" name="" placeholder="Buscar post... ">
     <a name="" id="" class="btn btn-dark " href="#" role="button">Buscar</a>
     <br>
-    
 </div>
+
+
+<div id="sortTags" class="sort tags search">
+    <div class="">
+        <label for="sortBy">Ordenar por:</label>
+        <select id="sortBy" class="round">
+        <option value="nada"> selecciona ...</option>  
+        <option value="mostComents">Mayor número de comentarios</option>
+        <option value="leastComents">Menor número de comentarios</option>
+        <option value="newestPost">Publicacion mas reciente</option>
+        <option value="oldestPost">Publicacion mas antigüa</option>
+        </select>
+
+        <label for="tagsBy">Buscar por tags:</label>
+        <select id="tagsBy" class="round">
+        <option value="nada"> selecciona ...</option>    
+        <option class="fan-art" value="fant-art"> Fan-Art</option>
+        <option class="buscarAmigos" value="buscarAmigos">   Buscar amigos</option>
+        <option class="discusion" value="discusion">Discusion</option>
+        <option class="erroresDeJuego" value="erroresDeJuego">Errores en juego</option>
+        <option class="campeon" value="campeon">Campeón</option>
+        </select>
+
+    </div>
+</div>
+
+<!-- ================================== -->
+<!--            Hacer ngFor-->
+<!-- ================================== -->
+
+<div *ngFor="let item of allPost;let i">
+    <p>Soy el ID {{item.id}}</p>
+    <h1>Soy un post</h1>
+</div>
+
+
+<div  class="card mb-6 post">
+    <div class="row no-gutters">
+      <div class="col-md-2 ">
+          <div class="my-3 mx-3">
+            <p>Comentarios :<br> # </p>
+            <p>Tags: <br>
+            <a name="" id="" class="btn btn-warning" href="#" role="button">Campeon</a>
+            </p>
+          </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5  class="card-title">Garen se encuentra en el top 3 de campeones arriba de 55% de W/r</h5>
+          <p class="card-text">Al momento de estar haciendo una investigacion de campeones para poder estar jugando en la linea superior me percate que en <a href="https://lan.op.gg/champion/statistics"> op.gg </a> garen se encuentra ahorita en segundo lugar... </p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><a href="./perfil.html" class="card-link">SethOfCarso</a> <br></h5>
+              <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
+              Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png" alt="imagen de rango" width="40%"> <br>
+              Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1" alt="imagen de rango" width="40%">
+              
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================== -->
+<!--            Fin del ngFor-->
+<!-- ================================== -->

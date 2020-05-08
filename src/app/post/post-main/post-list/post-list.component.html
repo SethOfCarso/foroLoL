@@ -4,7 +4,7 @@
 <!-- ================================== -->
 
 <div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
-    <div  class="card border-light mb-6 post"  [routerLink]="['/my-book-details','3']">
+    <div  class="card border-light mb-6 post"  [routerLink]="['./post-detail','3']">
       <div class="row no-gutters">
         <div class="col-md-2 ">
             <div class="my-3 mx-3">

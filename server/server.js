@@ -6,7 +6,6 @@
 const express = require('express');
 const cors = require ('cors');
 const config = require('./config/config');
-const fetch = require('node-fetch');
 
 const app = express();
 const port = config.port;

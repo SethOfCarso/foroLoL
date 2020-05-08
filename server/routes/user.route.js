@@ -1,15 +1,16 @@
 'use strict';
 
 const router = require('express').Router();
-const UserController = require("../controllers/user.controller");
+const UserController = require('../controllers/user.controller');
+const AuthMiddleware = require('../middlewares/auth.middleware');
 
 router.route('/')
-    .get(UserController.getUsers)      // Add more middlewares if needed
+    .get(AuthMiddleware.checkToken, UserController.getUsers)      // Add more middlewares if needed
     .post(UserController.saveUser);
 
 router.route("/:email")
-    .get(UserController.getUserById)   // Add more middlewares if needed
-    .put(UserController.updateUser)
-    .delete(UserController.deleteUser);
+    .get(AuthMiddleware.checkToken, UserController.getUserById)   // Add more middlewares if needed
+    .put(AuthMiddleware.checkToken, UserController.updateUser)
+    .delete(AuthMiddleware.checkToken, UserController.deleteUser);
 
 module.exports = router;

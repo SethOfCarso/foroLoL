@@ -10,9 +10,9 @@ import { PostDetailComponent } from './post/post-main/post-detail/post-detail.co
 
 const routes: Routes = [
   {path: 'home', component: PostMainComponent, children:[
-    {path: '', component: PostListComponent},
       {path: 'post-list', component: PostListComponent},
-      {path: 'post-detail', component: PostDetailComponent}
+      {path: 'post-detail/:id', component: PostDetailComponent},
+      {path: '', component: PostListComponent},
   ]},
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   {path: '**', component: NotFoundComponent}

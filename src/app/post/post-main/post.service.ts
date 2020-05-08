@@ -102,7 +102,7 @@ export class PostService {
 
   deletePostByPostID(postID){
     console.log("Delete Post in service");
-    this.newURL = this.urlGetPost + '/' + tag + '/post/tag';
+    this.newURL = this.urlGetPost + '/' + postID + '/post/tag';
   }
 
   updatePostByPostID(postID){

@@ -20,7 +20,6 @@ export class PostListComponent implements OnInit {
       this.allPost = data;
     })
     this.allPost = postService.getPost();
-    console.log(this.allPost);
    }
    
 

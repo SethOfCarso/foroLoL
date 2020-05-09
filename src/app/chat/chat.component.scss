@@ -7,7 +7,6 @@
   margin-top: -300px;
   margin-left: -400px;
   z-index: 50;
-  //visibility: hidden;
 }
 
 img {
@@ -160,7 +159,7 @@ img {
 .mesgs {
   background-color: #1b262c;
   float: left;
-  padding: 30px 15px 0px 25px;
+  padding: 0px 15px 0px 25px;
   width: 60%;
 }
 
@@ -244,4 +243,16 @@ input:focus {
 
 .float:hover {
   color: gray;
+}
+
+.close-btn {
+    float: right;
+    color: white;
+}
+
+.chat-color {
+    background-color: #1b262c;
+    float: left;
+    padding: 0px 5px 3px 0px;
+    width: 60%;
 }

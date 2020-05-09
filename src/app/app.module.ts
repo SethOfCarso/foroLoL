@@ -11,6 +11,7 @@ import { PostMainComponent } from './post/post-main/post-main.component';
 import { PostListComponent } from './post/post-main/post-list/post-list.component';
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PostCreateComponent } from './post/post-main/post-create/post-create.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     PostComponent,
     PostMainComponent,
     PostListComponent,
-    PostDetailComponent
+    PostDetailComponent,
+    PostCreateComponent
   ],
   imports: [
     BrowserModule,

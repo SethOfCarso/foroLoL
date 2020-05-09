@@ -12,6 +12,7 @@ import { PostListComponent } from './post/post-main/post-list/post-list.componen
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     PostMainComponent,
     PostListComponent,
     PostDetailComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

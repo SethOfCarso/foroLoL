@@ -14,11 +14,7 @@ export class PostListComponent implements OnInit {
 
 
   constructor(private postService:PostService) {
-    
-
-    this.postService.postsSubject.subscribe(data =>{
-      this.allPost = data;
-    })
+    this.postService.postsSubject.subscribe(data =>{this.allPost = data;})
     this.allPost = postService.getPost();
    }
    

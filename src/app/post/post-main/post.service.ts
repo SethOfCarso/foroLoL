@@ -10,9 +10,10 @@ export class PostService {
   newURL: string;
   urlGetPost = 'http://localhost:3000/api/post';
 
-  posts: Post[] = [];
   singlePost : Post;
+  posts: Post[] = [];
   postsSubject = new BehaviorSubject<Post[]>([]);
+  postDetailSubject = new BehaviorSubject<Post>(this.singlePost);
 
   constructor(private http: HttpClient) {
     this.loadAllPost();
@@ -25,9 +26,8 @@ export class PostService {
      return this.posts.slice();
    }
 
-   getPostById(idPost):Post{
-    this.loadPostByPostId(idPost);
-    return this.singlePost;
+   getPostByIdPost(idPost){
+    return this.loadPostByPostId(idPost);
    }
 
    addPost(){
@@ -60,14 +60,7 @@ export class PostService {
 
    loadPostByPostId(postID) {
      this.newURL = this.urlGetPost + '/' + postID + '/post/post';
-     this.http.get(this.newURL).subscribe(
-      (data: Post) => {
-        this.singlePost = data;
-        this.postsSubject.next(this.getPost());
-      },
-      (err) => (console.log(err))
-    );
-     console.log('Entre a load Post por ID');
+     return this.http.get(this.newURL);
    }
 
    loadPostsByUserId(userID) {

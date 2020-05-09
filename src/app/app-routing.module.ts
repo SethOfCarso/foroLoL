@@ -6,6 +6,7 @@ import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post/post-main/post-list/post-list.component';
 import { PostMainComponent } from './post/post-main/post-main.component';
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path: 'post-list', component: PostListComponent},
       {path: 'post-detail', component: PostDetailComponent}
   ]},
+  {path: 'profile', component: ProfileComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];

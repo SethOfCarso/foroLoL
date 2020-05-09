@@ -1,0 +1,11 @@
+<form #signInForm="ngForm" (ngSubmit)="submit(signInForm)">
+  <div class="form-group">
+    <label for="">Correo:</label>
+    <input type="email" class="form-control" name="email" required>
+    <label for="">Contraseña:</label>
+    <input type="password" class="form-control" name="password" required>
+    <label for="">Usuario de LOL:</label>
+    <input type="text" class="form-control" name="username" required>
+  </div>
+  <button type="submit" class="btn btn-primary float-right">Registrarse</button>
+</form>

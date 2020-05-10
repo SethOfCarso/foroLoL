@@ -35,4 +35,16 @@ function login(req, res) {
     })(req, res);
 }
 
-module.exports = { login };
+async function logout(req, res) {
+        const query = { email: req.user.email };
+        const data = { token: '' };
+        const response = await User.update(query, data);
+        if(response) {
+            res.status(200).send();
+        } else {
+            res.status(404).send();
+        }
+        
+}
+
+module.exports = { login, logout };

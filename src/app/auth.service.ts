@@ -1,54 +1,93 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // token = '';
-  // constructor(private http: HttpClient) { }
+  token = '';
 
-  // private saveToken(token: string) {
-  //   localStorage.setItem('token', token);
-  //   this.token = token;
-  // }
+  constructor(private http: HttpClient) { }
 
-  // public isLoggedIn(): boolean {
-  //   const tokenData = this.getTokenData();
-  //   console.log(tokenData);
+  private saveToken(token: string) {
+    localStorage.setItem('token', token);
+    this.token = token;
+  }
 
-  //   if (tokenData) {
-  //     const response = tokenData.exp > Date.now() / 1000;
-  //     return response;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  public isLoggedIn(): boolean {
+    const tokenData = this.getTokenData();
 
-  // public getTokenData() {
-  //   let payload;
-  //   if (this.token) {
-  //     payload = this.token.split('.')[1];
-  //     payload = window.atob(payload);
+    if (tokenData) {
+      const response = tokenData.exp > Date.now() / 1000;
+      return response;
+    } else {
+      return false;
+    }
+  }
 
-  //     return JSON.parse(payload);
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  public getTokenData() {
+    let payload;
 
-  // public login(name: string, password: string): Observable<any> {
-  //   console.log(name, password);
-  //   return this.http
-  //     .post(environment.url + '/api/login', {name, password})
-  //     .pipe( // pipe es para preprocesar la información que te llega
-  //       map((data: any) => {
-  //         if (data.token) {
-  //           this.saveToken(data.token);
-  //         }
+    // Token from service
+    if (this.token) {
+      payload = this.token.split('.')[1];
+      payload = window.atob(payload);
 
-  //         return data;
-  //       })
-  //     );
-  // }
+      return JSON.parse(payload);
+    } else {
+      // Search in localstorage
+      const savedToken = localStorage.getItem('token');
+      if (savedToken) {
+        payload = savedToken.split('.')[1];
+        payload = window.atob(payload);
+
+        return JSON.parse(payload);
+      } else {
+        return null;
+      }
+    }
+  }
+
+  public login(email: string, password: string): Observable<any> {
+    return this.http
+      .post(environment.url + '/api/auth/login', {email, password})
+      .pipe( // Preprocess response
+        map((data: any) => {
+          if (data.token) {
+            this.saveToken(data.token);
+          }
+
+          return data;
+        })
+      );
+  }
+
+   public logout() {
+    if (this.isLoggedIn()) {
+      const headers = new HttpHeaders({
+        'x-auth': this.getToken()
+      });
+      const options = { headers };
+      this.http.post(environment.url + '/api/auth/logout', null, options).subscribe();
+      this.token = '';
+      localStorage.setItem('token', '');
+    }
+  }
+
+  private getToken() {
+    if (this.token) {
+      return this.token;
+    } else {
+      const savedToken = localStorage.getItem('token');
+      if (savedToken) {
+        return savedToken;
+      } else {
+        return '';
+      }
+    }
+  }
 }

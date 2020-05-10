@@ -63,6 +63,16 @@ class UserController {
         }
     }
 
+    async registerUser(req, res, next) {
+        let newUser = await User.add(req.body); 
+        if (newUser.error) {
+            res.status(401).json({msg: 'Ya hay un usuario registrado con ese email'});
+        } else {
+            req.user = newUser;
+            next();
+        }
+    }
+
     async updateUser(req, res) {
         // Check for email in the url
         if (req.params.email) {

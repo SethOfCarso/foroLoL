@@ -18,12 +18,13 @@ export class LogInComponent implements OnInit {
   submit(form: NgForm) {
     this.authService.login(form.value.email, form.value.password)
       .subscribe(
-      () => {
-        this.successful.emit();
-      },
-      () => {
-        alert('Los datos son incorrectos!');
-      }
+        () => {
+          this.successful.emit();
+          form.reset();
+        },
+        (responseError) => {
+          alert(responseError.error.msg);
+        }
       );
   }
 

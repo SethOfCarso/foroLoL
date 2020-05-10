@@ -30,21 +30,35 @@ function login(req, res) {
             
             res.send({ token });
         } else {
-            res.status(401).send(info);
+            res.status(401).send({msg: 'Los datos son incorrectos!'});
         }
     })(req, res);
 }
 
 async function logout(req, res) {
+    const query = { email: req.user.email };
+    const data = { token: '' };
+    const response = await User.update(query, data);
+    if(response) {
+        res.status(200).send({msg: 'Sesión cerrada correctamente'});
+    } else {
+        res.status(404).send({msg: 'No existe el usuario'});
+    }
+}
+
+async function redirectLogin(req, res) {
+    if(req.user) {
+        const token = jwt.sign({email: req.user.email}, config.passport_secretKey, {expiresIn: '1h'});
+        
         const query = { email: req.user.email };
-        const data = { token: '' };
-        const response = await User.update(query, data);
-        if(response) {
-            res.status(200).send();
-        } else {
-            res.status(404).send();
-        }
+        const data = { token };
+        await User.update(query, data);
+        
+        res.send({ token });
+    } else {
+        res.status(401).send({msg: 'Hubo un error al iniciar sesión'});
+    }
         
 }
 
-module.exports = { login, logout };
+module.exports = { login, logout, redirectLogin };

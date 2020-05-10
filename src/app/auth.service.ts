@@ -13,11 +13,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private saveToken(token: string) {
-    localStorage.setItem('token', token);
-    this.token = token;
-  }
-
   public isLoggedIn(): boolean {
     const tokenData = this.getTokenData();
 
@@ -26,6 +21,19 @@ export class AuthService {
       return response;
     } else {
       return false;
+    }
+  }
+
+  private getToken() {
+    if (this.token) {
+      return this.token;
+    } else {
+      const savedToken = localStorage.getItem('token');
+      if (savedToken) {
+        return savedToken;
+      } else {
+        return '';
+      }
     }
   }
 
@@ -50,6 +58,11 @@ export class AuthService {
         return null;
       }
     }
+  }
+
+  private saveToken(token: string) {
+    localStorage.setItem('token', token);
+    this.token = token;
   }
 
   public login(email: string, password: string): Observable<any> {
@@ -78,16 +91,28 @@ export class AuthService {
     }
   }
 
-  private getToken() {
-    if (this.token) {
-      return this.token;
-    } else {
-      const savedToken = localStorage.getItem('token');
-      if (savedToken) {
-        return savedToken;
-      } else {
-        return '';
-      }
-    }
+  public signin(email, password, username) {
+    const newUser = {
+      email,
+      password,
+      username,
+      urlImage: '',
+      level: 0,
+      favorites: [],
+      posts: [],
+      token: ''
+    };
+
+    return this.http
+      .post(environment.url + '/api/auth/signin', newUser)
+      .pipe( // Preprocess response
+        map((data: any) => {
+          if (data.token) {
+            this.saveToken(data.token);
+          }
+
+          return data;
+        })
+      );
   }
 }

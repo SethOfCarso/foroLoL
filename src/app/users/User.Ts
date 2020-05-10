@@ -4,6 +4,7 @@ export class User {
     password: string;
     urlImage: string;
     level: number;
+    token: string;
     favorites: any[];
     posts: any[];
 

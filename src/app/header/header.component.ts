@@ -28,4 +28,9 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.router.navigate(['/']);
   }
+
+  signedIn() {
+    this.isLoggedIn = true;
+    $('#modalRegister').modal('hide');
+  }
 }

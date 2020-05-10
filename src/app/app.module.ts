@@ -16,6 +16,8 @@ import { ProfileComponent } from './users/profile/profile.component';
 import { ChatComponent } from './chat/chat.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
+import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { SignInComponent } from './sign-in/sign-in.component';
     ProfileComponent,
     ChatComponent,
     LogInComponent,
-    SignInComponent
+    SignInComponent,
+    ChangePasswordComponent,
+    ChangeEmailComponent
   ],
   imports: [
     BrowserModule,

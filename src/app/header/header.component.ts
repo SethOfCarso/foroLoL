@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../users/users.service';
 declare var $: any;
 
 @Component({
@@ -11,26 +12,30 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.isLoggedIn = this.authService.isLoggedIn();
+  constructor(private router: Router, private authService: AuthService, private usersService: UsersService) {
+    // Subscribe to know if user is logged in
+    this.authService.isLoggedInSubject.subscribe((isloggedIn) => {
+      this.isLoggedIn = isloggedIn;
+    });
   }
 
   ngOnInit(): void {
   }
 
   loggedIn() {
-    this.isLoggedIn = true;
+    this.authService.successfulLogIn();
+    this.usersService.loadUser();
     $('#modalLogin').modal('hide');
   }
 
   logout() {
     this.authService.logout();
-    this.isLoggedIn = this.authService.isLoggedIn();
     this.router.navigate(['/']);
   }
 
   signedIn() {
-    this.isLoggedIn = true;
+    this.authService.successfulLogIn();
+    this.usersService.loadUser();
     $('#modalRegister').modal('hide');
   }
 }

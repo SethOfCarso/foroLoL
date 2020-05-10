@@ -1,30 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment.prod';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  isLoggedInSubject = new BehaviorSubject<boolean>(false);
   token = '';
 
   constructor(private http: HttpClient) { }
 
-  public isLoggedIn(): boolean {
+  private updateLoggedInSubject() {
     const tokenData = this.getTokenData();
+    let loggedIn = false;
 
     if (tokenData) {
-      const response = tokenData.exp > Date.now() / 1000;
-      return response;
-    } else {
-      return false;
+      loggedIn = tokenData.exp > Date.now() / 1000;
     }
+
+    this.isLoggedInSubject.next(loggedIn);
   }
 
-  private getToken() {
+  public successfulLogIn() {
+    this.isLoggedInSubject.next(true);
+  }
+
+  public getToken() {
     if (this.token) {
       return this.token;
     } else {
@@ -79,15 +84,24 @@ export class AuthService {
       );
   }
 
-   public logout() {
+  public logout() {
     if (this.isLoggedIn()) {
       const headers = new HttpHeaders({
         'x-auth': this.getToken()
       });
       const options = { headers };
-      this.http.post(environment.url + '/api/auth/logout', null, options).subscribe();
+      // Delete user's token from DB
+      this.http.post(environment.url + '/api/auth/logout', null, options).subscribe(
+        () => {},
+        () => {}
+      );
+
+      // Delete local token
       this.token = '';
       localStorage.setItem('token', '');
+
+      // Update subject
+      this.updateLoggedInSubject();
     }
   }
 
@@ -114,5 +128,16 @@ export class AuthService {
           return data;
         })
       );
+  }
+
+  private isLoggedIn() {
+    const tokenData = this.getTokenData();
+    let loggedIn = false;
+
+    if (tokenData) {
+      loggedIn = tokenData.exp > Date.now() / 1000;
+    }
+
+    return loggedIn;
   }
 }

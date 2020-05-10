@@ -1,0 +1,55 @@
+<div class="card mb-6 post">
+  <div class="row no-gutters">
+    <div class="col-md-2 ">
+      <div class="card-profile">
+        <img
+          src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
+          class="card-img-top" alt="Imagen de perfil">
+        <div class="card-body">
+          <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
+          Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
+            alt="imagen de rango" width="40%"> <br>
+          Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
+            alt="imagen de rango" width="40%">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+
+
+      <form #f="ngForm" (ngSubmit)="createPost(f)">
+
+        <div class="card-body">
+          <input type="text" [(ngModel)]="post.title" name="title"  size="100" placeholder="Ingresa el titulo da la publicacion">
+          <h5 class="card-title"></h5>
+          <!-- ============================ -->
+          <!-- <div id="content" [froalaEditor]>Escribe tu publicacion utilizando HTML!</div> -->
+          <div [froalaEditor] [(froalaModel)]="post.content"></div>
+          <!-- ============================== -->
+          <p>Agrega los tags para tu publicacion: <br>
+            <label for="fan-art"> <span class="btn btn-danger text-white">fan-art </span></label>
+            <input type="checkbox" [(ngModel)]='post.tags["1"]' value='1' name="tag" id="fan-art" class="btn btn-danger text-white">
+
+            <label for="Campeon"> <span class="btn btn-warning text-white">Campeon </span></label>
+            <input type="checkbox"  id="Campeon" [(ngModel)]='post.tags["2"]' value='2' name="tag" class="btn btn-warning text-white" role="button">
+
+            <label for="BuscarAmigos"> <span class="btn btn-primary text-white">Buscar Amigos </span></label>
+            <input type="checkbox"  id="BuscarAmigos" [(ngModel)]='post.tags["3"]' value='3' name="tag" role="button">
+
+            <label for="Discusión"> <span class="btn btn-success text-white">Discusión</span></label>
+            <input type="checkbox" id="Discusión" [(ngModel)]='post.tags["4"]' value='4' name="tag"role="button">
+
+            <label for="Bugs"> <span class="btn btn-secondary text-white">Bugs </span></label>
+            <input type="checkbox"  id="Bugs" [(ngModel)]='post.tags["5"]' value="5" name="tag" role="button">
+          </p>
+        </div>
+        <div class="card-footer text-muted text-right">
+            <a name="" id="" class="btn btn-secondary text-white" type="submit" (click)="validar()" role="button">Crear post </a>
+          </div>
+      </form>
+
+      
+    </div>
+  </div>
+</div>

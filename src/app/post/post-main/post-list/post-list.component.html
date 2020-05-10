@@ -4,7 +4,8 @@
 <!-- ================================== -->
 
 <div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
-    <div  class="card border-light mb-6 post"  [routerLink]="['/post-details', post.id  ]">
+    <div  class="card border-light mb-6 post"  [routerLink]="['/home/post-detail', post.idPost  ]">
+      <!-- <div  class="card border-light mb-6 post"  [routerLink]="['./post-detail']"> -->
       <div class="row no-gutters">
         <div class="col-md-2 ">
             <div class="my-3 mx-3">
@@ -15,11 +16,11 @@
                 No hay comentarios
               </span>  </p>
               <p>Tags: <br>
-              <a *ngIf="post.tags.includes('1')" name="" id="" class="btn btn-danger" href="#" role="button">Fan art</a>
-              <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning" href="#" role="button">Campeon</a>
-              <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary" href="#" role="button">Buscar Amigos</a>
-              <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success" href="#" role="button">Discusión</a>
-              <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary" href="#" role="button">Bugs</a>
+              <a *ngIf="post.tags.includes('1')" name="" id="" class="btn btn-danger text-white" role="button">Fan art</a>
+              <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning text-white" role="button">Campeon</a>
+              <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary text-white" role="button">Buscar Amigos</a>
+              <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success text-white" role="button">Discusión</a>
+              <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary text-white"  role="button">Bugs</a>
               </p>
             </div>
         </div>

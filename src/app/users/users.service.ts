@@ -43,6 +43,15 @@ export class UsersService {
     return this.http.put(environment.url + '/api/users/' + tokenData.email, { email: newEmail }, options);
   }
 
+  changePassword(password): Observable<any> {
+    const tokenData = this.authService.getTokenData();
+    const headers = new HttpHeaders({
+      'x-auth': this.authService.getToken()
+    });
+    const options = { headers };
+    return this.http.put(environment.url + '/api/users/' + tokenData.email, { password }, options);
+  }
+
   updateUser(updatedUser) {
     this.userSubject.next(updatedUser);
   }

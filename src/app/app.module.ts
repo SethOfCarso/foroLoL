@@ -14,11 +14,11 @@ import { PostDetailComponent } from './post/post-main/post-detail/post-detail.co
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './users/profile/profile.component';
 import { ChatComponent } from './chat/chat.component';
-import { LogInComponent } from './log-in/log-in.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { LogInComponent } from './auth/log-in/log-in.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
 import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
-import { UploadImageComponent } from './upload-image/upload-image.component';
+import { UploadImageComponent } from './uploads/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [

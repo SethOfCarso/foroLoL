@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-create.component.scss']
 })
 export class PostCreateComponent implements OnInit {
+textArea = document.getElementById('#demo');
 
-  constructor() { }
+  constructor() { 
+
+  }
 
   ngOnInit(): void {
   }

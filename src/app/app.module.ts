@@ -12,6 +12,15 @@ import { PostListComponent } from './post/post-main/post-list/post-list.componen
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostCreateComponent } from './post/post-main/post-create/post-create.component';
+// For rich text Editor
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import 'froala-editor/js/plugins.pkgd.min.js';
+import 'froala-editor/js/plugins/align.min.js';
+import 'froala-editor/js/languages/de.js';
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
 
 @NgModule({
   declarations: [
@@ -29,8 +38,10 @@ import { PostCreateComponent } from './post/post-main/post-create/post-create.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

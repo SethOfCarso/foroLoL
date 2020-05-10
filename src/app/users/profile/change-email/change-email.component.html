@@ -1,0 +1,9 @@
+<form #emailForm="ngForm" (ngSubmit)="submit(emailForm)">
+  <div class="form-group">
+    <label for="">Nuevo correo:</label>
+    <input type="email" class="form-control" name="email" ngModel required>
+    <label for="">Confirme correo:</label>
+    <input type="email" class="form-control" name="emailConfirmation" ngModel required>
+  </div>
+  <button type="submit" class="btn btn-primary float-right">Cambiar de correo</button>
+</form>

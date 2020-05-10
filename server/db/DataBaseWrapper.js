@@ -20,11 +20,15 @@ class DataBaseWrapper {
     }
 
     async update(query, dataObject) {
-        return await this._model.findOneAndUpdate(query, {
-            $set: dataObject
-        }, {
-            new: true
-        })
+        try{
+            return await this._model.findOneAndUpdate(query, {
+                $set: dataObject
+            }, {
+                new: true
+            });
+        } catch (e) {
+            return {error: e.errmsg};
+        }
     }
 
     async delete(query, options = {}) {

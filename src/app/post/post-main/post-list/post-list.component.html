@@ -1,0 +1,60 @@
+
+<!-- ================================== -->
+<!--            Hacer ngFor-->
+<!-- ================================== -->
+
+<div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
+    <div  class="card border-light mb-6 post"  [routerLink]="['/post-details', post.id  ]">
+      <div class="row no-gutters">
+        <div class="col-md-2 ">
+            <div class="my-3 mx-3">
+              <p *ngIf="(post.objtPost)">Comentarios : <br> <span> 
+                Hay comentarios
+              </span>  </p>
+              <p *ngIf="!(post.objtPost)" >Comentarios : <br> <span > 
+                No hay comentarios
+              </span>  </p>
+              <p>Tags: <br>
+              <a *ngIf="post.tags.includes('1')" name="" id="" class="btn btn-danger" href="#" role="button">Fan art</a>
+              <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning" href="#" role="button">Campeon</a>
+              <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary" href="#" role="button">Buscar Amigos</a>
+              <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success" href="#" role="button">Discusión</a>
+              <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary" href="#" role="button">Bugs</a>
+              </p>
+            </div>
+        </div>
+        <div class="col-md-1">
+          <hr>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5  class="card-title"> {{post.title}} </h5>
+            <p class="card-text"> {{post.content}} </p>
+            <p class="card-text"><small class="text-muted"> Post created : {{post.postDate.toString().slice(0,10)}} </small></p>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <hr class="hr-small ">
+        </div>
+        <div class="col-md-2">
+          <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><a href="./perfil.html" class="card-link">SethOfCarso</a> <br></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}}  </h6>
+                Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png" alt="imagen de rango" width="40%"> <br>
+                Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1" alt="imagen de rango" width="40%">
+                
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+
+
+
+  <!-- ================================== -->
+<!--            Fin del ngFor-->
+<!-- ================================== -->

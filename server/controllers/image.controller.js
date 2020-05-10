@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const path = require('path');
 const cloudinary = require('cloudinary');
@@ -7,12 +7,19 @@ const fs = require('fs-extra');
 const Image = require("../models/image.model");
 
 class ImageController{
-    async getImage(req, res){
+    async getImageById(req, res){
         const filename = req.params.filename;
-        const url = cloudinary.url(filename);
+        
+        if (filename) {
+            if (filename == 'default_profile.png') {
+                res.sendFile(path.join(__dirname, '../public/default_profile.png'));
+            } else {
+                const url = cloudinary.url(filename);
 
-        await download(url, path.join(__dirname,'../temp/'));
-        res.sendFile(path.join(__dirname, '../temp/' + filename));
+                await download(url, path.join(__dirname,'../temp/'));
+                res.sendFile(path.join(__dirname, '../temp/' + filename));
+            }
+        }
     }
 
     async saveImage(req, res){
@@ -24,14 +31,14 @@ class ImageController{
         
         // Save image in our database
         const timestamp = Date.now();
-        await Image.createImage(
+        const uploadedImage = await Image.createImage(
             timestamp, 
             result.public_id + "." + result.format,
             result.secure_url, 
-            'eGasparArellano@gmail.com' // TODO implement authentication and put here the user ID
+            req.user.email
         );
-        
-        res.status(201).send({msg: 'File uploaded'});
+
+        res.status(201).json(uploadedImage);
     }
 }
 

@@ -40,4 +40,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  passwordChanged(data) {
+    $('#modalChangePassword').modal('hide');
+  }
+
 }

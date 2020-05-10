@@ -7,17 +7,19 @@ import { PostListComponent } from './post/post-main/post-list/post-list.componen
 import { PostMainComponent } from './post/post-main/post-main.component';
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
 import { PostCreateComponent } from './post/post-main/post-create/post-create.component';
-
+import { ProfileComponent } from './users/profile/profile.component';
 
 const routes: Routes = [
-  {path: 'home', component: PostMainComponent, children:[
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: PostMainComponent, children: [
       {path: 'post-list', component: PostListComponent},
       {path: 'post-detail/:id', component: PostDetailComponent},
       {path: 'post-create', component: PostCreateComponent},
       {path: '', component: PostListComponent},
   ]},
-  { path: '',   redirectTo: '/home', pathMatch: 'full' },
-  {path: '**', component: NotFoundComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

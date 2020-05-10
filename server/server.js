@@ -37,8 +37,9 @@ const routerLol = require('./routes/lol.route');
 // =================================
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname + 'public'));
 
-app.use('/api/login', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/image', imageRouter);

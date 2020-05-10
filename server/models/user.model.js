@@ -23,9 +23,6 @@ class User extends DataBaseWrapper {
                 type: String,
                 required: true
             },
-            lolAccount: {
-                type: String
-            },
             urlImage: {
                 type: String
             },
@@ -79,9 +76,8 @@ class User extends DataBaseWrapper {
 const user = new User();
 // let info = {
 //     email: 'eGasparArellano@gmail.com',
-//     username: 'EliasGaspar',
+//     username: 'Hillsong',
 //     password: '123',
-//     lolAccount: 'Hillsong',
 //     urlImage: 'https://vignette.wikia.nocookie.net/leagueoflegendsoficial/images/e/e5/Teemo_8.jpg/revision/latest/top-crop/width/220/height/220?cb=20170326185212&path-prefix=es',
 //     level: 2,
 //     favorites: ['Post 1', 'Post 2'],

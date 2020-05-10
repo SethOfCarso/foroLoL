@@ -13,6 +13,7 @@ function checkToken(req, res, next){
                 const query = { email: decoded.email, token };
                 const user = await User.getUser(query);
                 if (user) {
+                    req.user = user;
                     next();
                 } else {
                     res.status(401).json({msg: 'Autenticación incorrecta'});

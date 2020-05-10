@@ -63,6 +63,16 @@ class UserController {
         }
     }
 
+    async registerUser(req, res, next) {
+        let newUser = await User.add(req.body); 
+        if (newUser.error) {
+            res.status(401).json({msg: 'Ya hay un usuario registrado con ese email'});
+        } else {
+            req.user = newUser;
+            next();
+        }
+    }
+
     async updateUser(req, res) {
         // Check for email in the url
         if (req.params.email) {
@@ -71,12 +81,20 @@ class UserController {
             const data = req.body;
             
             const updatedUser = await User.update(query, data);
+
             if (updatedUser) {
-                res.status(200).json(updatedUser);
+                if(updatedUser.error) {
+                    if(updatedUser.error.includes('duplicate key')) {
+                        res.status(401).json({msg: 'Ya hay un usuario registrado con ese email'});
+                    } else {
+                        res.status(500).json({msg: 'Hubo un error en la actualización'});
+                    }
+                } else {
+                    res.status(200).json(updatedUser);
+                }
             } else {
                 res.status(404).json({msg: 'Usuario no encontrado'});
             }
-            
         } else {
             res.status(400).json({msg: 'Error en la petición'});
         }

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,13 @@ import 'froala-editor/js/third_party/font_awesome.min';
 import 'froala-editor/js/third_party/image_tui.min';
 import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
+import { ProfileComponent } from './users/profile/profile.component';
+import { ChatComponent } from './chat/chat.component';
+import { LogInComponent } from './auth/log-in/log-in.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
+import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
+import { UploadImageComponent } from './uploads/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +41,14 @@ import 'froala-editor/js/third_party/embedly.min';
     PostMainComponent,
     PostListComponent,
     PostDetailComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    ProfileComponent,
+    ChatComponent,
+    LogInComponent,
+    SignInComponent,
+    ChangePasswordComponent,
+    ChangeEmailComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

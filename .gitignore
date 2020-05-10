@@ -4,7 +4,7 @@
 /server/.env
 
 # Non important files
-/server/temp
+/server/temp/*
 
 # compiled output
 /dist

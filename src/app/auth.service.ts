@@ -110,7 +110,7 @@ export class AuthService {
       email,
       password,
       username,
-      urlImage: '',
+      urlImage: 'default_profile.png',
       level: 0,
       favorites: [],
       posts: [],

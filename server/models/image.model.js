@@ -24,7 +24,7 @@ class Image extends DataBaseWrapper {
                 type: Date,
                 required: true
             },
-            userId: {
+            username: {
                 type: String
             }
         });
@@ -37,13 +37,13 @@ class Image extends DataBaseWrapper {
         return await super.queryOne(file);
     }
 
-    async createImage(id, filename, url, userId){
+    async createImage(id, filename, url, username){
         const newImage = {
-            id: id,
-            filename: filename,
-            url: url,
+            id,
+            filename,
+            url,
             registerDate: new Date(),
-            userId: userId
+            username
         }
 
         return await super.add(newImage);

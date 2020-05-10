@@ -1,7 +1,7 @@
 <div class="mybody">
   <div class="profile-container">
     <div class="profile-image-container mt-5">
-      <img src="https://pm1.narvii.com/6372/a4f41d9998581bf4f00d3025a959a10d948eb587_hq.jpg"
+      <img src="{{environment}}/api/image/{{user.urlImage}}"
         class="profile-image rounded-circle" alt="Profile image">
       <div class="profile-image-edit rounded-circle">
         <a href="#modalChangeImage" class="profile-image-edit-link" data-toggle="modal"
@@ -232,18 +232,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="">
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="">Seleccione una imagen:</label>
-              <input type="file" class="form-control" name="" id="ab" placeholder="" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="fixImage()">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Cambiar</button>
-          </div>
-        </form>
+        <div class="modal-body">
+          <app-upload-image (successful)="imageChanged($event)"></app-upload-image>
+        </div>
       </div>
     </div>
   </div>

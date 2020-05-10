@@ -53,6 +53,18 @@ export class UsersService {
   }
 
   updateUser(updatedUser) {
-    this.userSubject.next(updatedUser);
+    const tokenData = this.authService.getTokenData();
+    const headers = new HttpHeaders({
+      'x-auth': this.authService.getToken()
+    });
+    const options = { headers };
+    this.http.put(environment.url + '/api/users/' + tokenData.email, updatedUser, options).subscribe(
+      (user: User) => { this.userSubject.next(user); },
+      () => {}
+    );
+  }
+
+  getEnvironmentUrl() {
+    return environment.url;
   }
 }

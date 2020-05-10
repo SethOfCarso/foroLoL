@@ -1,0 +1,7 @@
+<form #uploadImageForm="ngForm" (ngSubmit)="submit(uploadImageForm)">
+  <div class="form-group">
+    <label for="">Seleccione una imagen:</label>
+    <input type="file" class="form-control" name="image" ngModel (change)="getImage($event)" required>
+  </div>
+  <button type="submit" class="btn btn-primary float-right">Cambiar imagen</button>
+</form>

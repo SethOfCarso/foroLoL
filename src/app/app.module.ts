@@ -18,6 +18,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
 import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ChangeEmailComponent } from './users/profile/change-email/change-email.
     LogInComponent,
     SignInComponent,
     ChangePasswordComponent,
-    ChangeEmailComponent
+    ChangeEmailComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

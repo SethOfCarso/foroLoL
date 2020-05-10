@@ -13,6 +13,7 @@ declare var $: any;
 export class ProfileComponent implements OnInit {
   isloggedIn: boolean;
   user: User;
+  environment: string;
 
   constructor(private router: Router,  private authService: AuthService, private usersService: UsersService) {
     // Subscribe to know if user is logged in
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit {
       this.user = user;
     });
 
+    this.environment = usersService.getEnvironmentUrl();
+
     if (!this.isloggedIn) {
       this.router.navigate(['/']);
     }
@@ -33,15 +36,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  emailChanged(data) {
+  emailChanged(user) {
     this.authService.logout();
     alert('Su email cambió, por favor vuelva a iniciar sesión');
     $('#modalChangeEmail').modal('hide');
     this.router.navigate(['/']);
   }
 
-  passwordChanged(data) {
+  passwordChanged(user) {
     $('#modalChangePassword').modal('hide');
+  }
+
+  imageChanged(image) {
+    this.user.urlImage = image.filename;
+    this.usersService.updateUser(this.user);
+    $('#modalChangeImage').modal('hide');
   }
 
 }

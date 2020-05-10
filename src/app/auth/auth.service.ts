@@ -12,7 +12,12 @@ export class AuthService {
   isLoggedInSubject = new BehaviorSubject<boolean>(false);
   token = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if (this.isLoggedIn() && this.token === '') {
+      this.token = this.getToken();
+      this.isLoggedInSubject.next(true);
+    }
+  }
 
   private updateLoggedInSubject() {
     const tokenData = this.getTokenData();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
+import { User } from '../users/User';
 declare var $: any;
 
 @Component({
@@ -11,12 +12,17 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
+  user: User;
 
-  constructor(private router: Router, private authService: AuthService, private usersService: UsersService) {
+  constructor(private router: Router,
+              private authService: AuthService,
+              private usersService: UsersService) {
+
     // Subscribe to know if user is logged in
-    this.authService.isLoggedInSubject.subscribe((isloggedIn) => {
-      this.isLoggedIn = isloggedIn;
-    });
+    this.authService.isLoggedInSubject.subscribe((isloggedIn) => this.isLoggedIn = isloggedIn);
+
+    // Subscribe to user
+    this.usersService.userSubject.subscribe((user) => this.user = user);
   }
 
   ngOnInit(): void {

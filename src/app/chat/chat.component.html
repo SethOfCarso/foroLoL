@@ -20,7 +20,7 @@
           <app-conversation></app-conversation>
           <app-conversation></app-conversation>
           <app-conversation></app-conversation>
-          
+
         </div>
       </div>
       <!-- Close button -->
@@ -32,30 +32,20 @@
       <!-- Messages -->
       <div class="mesgs">
         <div class="msg_history">
-          
-          <app-incoming-msg></app-incoming-msg>
-          <app-incoming-msg></app-incoming-msg>
-          <app-incoming-msg></app-incoming-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
-          <app-outgoing-msg></app-outgoing-msg>
+          <app-chat-messages [chatMessages]="msgList"></app-chat-messages>
         </div>
         <div class="type_msg">
           <div class="input_msg_write">
-            <input type="text" class="write_msg" placeholder="Type a message" />
-            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            <input type="text" class="write_msg" placeholder="Escribe un mensaje" [(ngModel)]="msg"
+              (keydown.enter)="sendMyMessage()" />
+            <button class="msg_send_btn" type="button" (click)="sendMyMessage()"><i class="fa fa-paper-plane"
+                aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<button (click)="toggleChatVisibility()" class="float">
+<button (click)="toggleChatVisibility()" class="float" *ngIf="isLoggedIn">
   <i class="fa fa-comment"></i>
 </button>

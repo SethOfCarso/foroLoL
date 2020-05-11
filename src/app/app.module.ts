@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,9 +30,14 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
 import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
 import { UploadImageComponent } from './uploads/upload-image/upload-image.component';
-import { OutgoingMsgComponent } from './chat/outgoing-msg/outgoing-msg.component';
-import { IncomingMsgComponent } from './chat/incoming-msg/incoming-msg.component';
 import { ConversationComponent } from './chat/conversation/conversation.component';
+import { ChatMessagesComponent } from './chat/chat-messages/chat-messages.component';
+
+
+import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment.prod';
+
+const config: SocketIoConfig = { url: environment.url,  options: {} };
 
 @NgModule({
   declarations: [
@@ -51,9 +57,8 @@ import { ConversationComponent } from './chat/conversation/conversation.componen
     ChangePasswordComponent,
     ChangeEmailComponent,
     UploadImageComponent,
-    OutgoingMsgComponent,
-    IncomingMsgComponent,
-    ConversationComponent
+    ConversationComponent,
+    ChatMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,8 @@ import { ConversationComponent } from './chat/conversation/conversation.componen
     HttpClientModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    FormsModule
+    FormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent],

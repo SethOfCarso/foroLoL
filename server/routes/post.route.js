@@ -12,8 +12,8 @@ router.route("/:id/post/post")  // Add more middlewares if needed
     delete(PostController.deletePost).
     put(PostController.updatePost);
     
-router.route("/:id/post/user")
-    .get(PostController.readByIdUser);  // Add more middlewares if neede
+router.route("/:email/post/user")
+    .get(PostController.readByEmailUser);  // Add more middlewares if neede
 
 router.route("/:title/post/title")
     .get(PostController.readByTitle);  // Add more middlewares if neede

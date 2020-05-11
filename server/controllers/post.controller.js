@@ -75,6 +75,29 @@ class PostController {
         res.json(searchedPost);
     }
 
+    async readByEmailUser(req, res) {
+        let queryId = {}          // Search by name or uid
+        let options = {}        // Page or limit
+        let projection = "";    // Which fields are wanted
+        let searchedPost = {};
+
+
+        
+        if(req.params.email !== undefined){
+            queryId = String(req.params.email);
+            console.log(queryId);
+            const docs = await Post.getPostbyEmailUser(queryId, projection, options);
+            searchedPost = JSON.parse(JSON.stringify(docs));
+            console.log(searchedPost);
+            res.status(200);
+        }
+        else{
+            res.status(404);
+        }
+
+        res.json(searchedPost);
+    }
+
     async readByTitle(req, res) {
         let queryId = {}          // Search by name or uid
         let options = {}        // Page or limit

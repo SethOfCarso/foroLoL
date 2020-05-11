@@ -29,6 +29,9 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
 import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
 import { UploadImageComponent } from './uploads/upload-image/upload-image.component';
+import { OutgoingMsgComponent } from './chat/outgoing-msg/outgoing-msg.component';
+import { IncomingMsgComponent } from './chat/incoming-msg/incoming-msg.component';
+import { ConversationComponent } from './chat/conversation/conversation.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import { UploadImageComponent } from './uploads/upload-image/upload-image.compon
     SignInComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    OutgoingMsgComponent,
+    IncomingMsgComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,

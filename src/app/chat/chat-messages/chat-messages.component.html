@@ -1,5 +1,5 @@
 <div *ngFor="let chatMessage of chatMessages">
-  <div class="incoming_msg" *ngIf="!(chatMessage.type == 'incoming')">
+  <div class="incoming_msg" *ngIf="chatMessage.type == 'incoming'">
     <div class="incoming_msg_img"> <img src="{{environment}}/api/image/{{chatMessage.userImage}}" alt="sunil" class="rounded-circle">
     </div>
     <div class="received_msg">
@@ -11,7 +11,7 @@
   </div>
 
 
-  <div class="outgoing_msg" *ngIf="chatMessage.type == 'incoming'">
+  <div class="outgoing_msg" *ngIf="!(chatMessage.type == 'incoming')">
     <div class="sent_msg">
       <p>{{chatMessage.message}}</p>
       <span class="time_date"> {{chatMessage.date}}</span>

@@ -41,9 +41,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       // Determine type of message
       let type = '';
       if (chatMessage[0] === 'Server' || chatMessage[0] !== this.user.email) {
-        type = 'outgoing';
-      } else {
         type = 'incoming';
+      } else {
+        type = 'outgoing';
       }
 
       // Create the new message

@@ -15,20 +15,56 @@ const errorMessages = {
     invalidEmail: 'Email inválido'
 };
 
-function createChatUser(email, username, socketId){
+function createChatUser(email, username, userImage, socketId){
     const currentRoom = '';
-    return {email, username, socketId, currentRoom} 
+    return { email, username, userImage, socketId, currentRoom } 
+}
+
+function getMessageTime() {
+    const date = new Date();
+    const hour = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
+    const minutes  = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+    const am_pm = (date.getHours() < 12) ? 'am' : 'pm';
+    
+    const time = hour + ':' + minutes + ' ' + am_pm;
+    return time; 
 }
 
 exports = module.exports = function(socket, io) {
     // Join chat for the first time
-    socket.on(chatEvents.join, (email, username) => {
-        let found = users.find((user) => user.email == email && user.username == username);
-        if (!found) {
-            const user = createChatUser(email, username, socket.id);
-            users.push(user);
-        } else {
-            socket.emit(chatEvents.join, errorMessages.duplicatedUser);
+    socket.on(chatEvents.join, (userInfo) => {
+        const userInfoSplitted = userInfo.split('|');
+        const user = {
+            email: userInfoSplitted[0],
+            username: userInfoSplitted[1],
+            userImage: userInfoSplitted[2]
+        };
+
+        if (userInfo) {
+            let found = users.find((u) => u.email == user.email);
+            if (!found) {
+                const newUser = createChatUser(user.email, user.username, user.userImage, socket.id);
+                users.push(newUser);
+            } else {
+                socket.emit(chatEvents.join, errorMessages.duplicatedUser);
+            }
+        }
+    });
+
+    // Exit
+    socket.on(chatEvents.exit, (email) => {
+        if (email !== null) {
+            let found = users.find((user) => user.email == email);
+            if (found) {
+                socket.leave(found.currentRoom);
+                
+                const userLeft = found.username + " ha salido de '"+ found.currentRoom + "'";
+                const userLeftMsg = 'Server' + '|' + 'chat_server.png' + '|' + userLeft + '|' + 'type' + '|' + getMessageTime();
+                io.to(found.currentRoom).emit(chatEvents.chat, userLeftMsg);
+
+                const index = users.findIndex((user) => user.email == email);
+                users.splice(index, 1);
+            }
         }
     });
 
@@ -39,8 +75,14 @@ exports = module.exports = function(socket, io) {
             // If user has already an active room, then leave it
             if(user.currentRoom != '' && user.currentRoom != room){
                 socket.leave(user.currentRoom);
-                io.to(user.currentRoom).emit(chatEvents.chat, user.username + " ha salido de '"+ user.currentRoom + "'" + "<br>");
-                io.to(`${user.socketId}`).emit(chatEvents.chat, "Has salido de '"+ user.currentRoom + "'" + "<br>");
+
+                const userLeft = user.username + " ha salido de '"+ user.currentRoom + "'";
+                const userLeftMsg = 'Server' + '|' + 'chat_server.png' + '|' + userLeft + '|' + 'type' + '|' + getMessageTime();
+                io.to(user.currentRoom).emit(chatEvents.chat, userLeftMsg);
+                
+                const youLeft = "Has salido de '"+ user.currentRoom + "'";
+                const youLeftMsg = 'Server' + '|' + 'chat_server.png' + '|' + youLeft + '|' + 'type' + '|' + getMessageTime();
+                io.to(`${user.socketId}`).emit(chatEvents.chat, youLeftMsg);
                 user.currentRoom = ''; 
             }
 
@@ -48,7 +90,9 @@ exports = module.exports = function(socket, io) {
             if(user.currentRoom != room){
                 user.currentRoom = room;
                 socket.join(room);
-                io.to(room).emit(chatEvents.chat, user.username + " se ha unido a '"+ room + "'" + "<br>");
+                const msg = user.username + " se ha unido a '"+ room + "'";
+                const chatMessage = 'Server' + '|' + 'chat_server.png' + '|' + msg + '|' + 'type' + '|' + getMessageTime();
+                io.to(room).emit(chatEvents.chat, chatMessage);
             }
         } else {
             socket.emit(chatEvents.joinRoom, errorMessages.invalidEmail);
@@ -75,7 +119,9 @@ exports = module.exports = function(socket, io) {
     socket.on(chatEvents.chat, (email, msg) => {
         const user = users.find((user) => user.email == email);
         if (user) {
-            io.to(user.currentRoom).emit(chatEvents.chat, user.username + ": " + msg + "<br>");
+            const chatMessage = user.email + '|' + user.userImage + '|' + msg + '|' + 'type' + '|' + getMessageTime();
+            
+            io.to(user.currentRoom).emit(chatEvents.chat, chatMessage);
         } else {
             socket.emit(chatEvents.chat, errorMessages.invalidEmail);
         }

@@ -10,9 +10,17 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
+  isLoggedIn: boolean;
   userSubject = new BehaviorSubject<User>(new User());
 
   constructor(private authService: AuthService, private http: HttpClient) {
+    authService.isLoggedInSubject.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+
+    if (this.isLoggedIn) {
+      this.loadUser();
+    }
   }
 
   loadUser() {

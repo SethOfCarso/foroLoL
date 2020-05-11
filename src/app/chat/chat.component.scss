@@ -123,35 +123,6 @@ img {
   background: #0f4c75;
 }
 
-.incoming_msg_img {
-  display: inline-block;
-  width: 6%;
-}
-
-.received_msg {
-  display: inline-block;
-  padding: 0 0 0 10px;
-  vertical-align: top;
-  width: 92%;
-}
-
-.received_withd_msg p {
-  background: #09578b none repeat scroll 0 0;
-  border-radius: 3px;
-  color: #c4c4c4;
-  font-size: 14px;
-  margin: 0;
-  padding: 5px 10px 5px 12px;
-  width: 100%;
-}
-
-.time_date {
-  color: #747474;
-  display: block;
-  font-size: 12px;
-  margin: 8px 0 0;
-}
-
 .received_withd_msg {
   width: 57%;
 }
@@ -171,16 +142,6 @@ img {
   color: #c4c4c4;
   padding: 5px 10px 5px 12px;
   width: 100%;
-}
-
-.outgoing_msg {
-  overflow: hidden;
-  margin: 26px 0 26px;
-}
-
-.sent_msg {
-  float: right;
-  width: 46%;
 }
 
 .input_msg_write input {
@@ -246,13 +207,53 @@ input:focus {
 }
 
 .close-btn {
-    float: right;
-    color: white;
+  float: right;
+  color: white;
 }
 
 .chat-color {
-    background-color: #1b262c;
-    float: left;
-    padding: 0px 5px 3px 0px;
-    width: 60%;
+  background-color: #1b262c;
+  float: left;
+  padding: 0px 5px 3px 0px;
+  width: 60%;
+}
+
+.outgoing_msg {
+  overflow: hidden;
+  margin: 26px 0 26px;
+}
+
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 7%;
+  height: 7%;
+}
+
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+}
+
+.received_withd_msg p {
+  background: #09578b none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #c4c4c4;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
 }

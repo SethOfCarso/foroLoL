@@ -11,14 +11,8 @@ import { Subscription } from 'rxjs';
 export class PostListComponent implements OnInit {
   allPost : Post[];
   postSubscription = new Subscription();
-
-
   constructor(private postService:PostService) {
-    
-
-    this.postService.postsSubject.subscribe(data =>{
-      this.allPost = data;
-    })
+    this.postService.postsSubject.subscribe(data =>{this.allPost = data;})
     this.allPost = postService.getPost();
    }
    

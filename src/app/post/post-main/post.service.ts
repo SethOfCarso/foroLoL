@@ -10,14 +10,14 @@ export class PostService {
   newURL: string;
   urlGetPost = 'http://localhost:3000/api/post';
 
-  singlePost: Post;
+  singlePost: Post[] = [];
   posts: Post[] = [];
   postTitle: Post[] = [];
   postTag: Post[] = [];
   postsSubject = new BehaviorSubject<Post[]>([]);
   postsTitleSubject = new BehaviorSubject<Post[]>([]);
   postsTagsSubject = new BehaviorSubject<Post[]>([]);
-  postDetailSubject = new BehaviorSubject<Post>(this.singlePost);
+  postDetailSubject = new BehaviorSubject<Post[]>([]);
   createPostDone = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
@@ -31,9 +31,18 @@ export class PostService {
     return this.posts.slice();
   }
 
-  getPostByIdPost(idPost) {
-    return this.loadPostByPostId(idPost);
+  getPostByIdPost(): Post [] {
+    return this.singlePost.slice();
   }
+
+  getPostByTitle(): Post[]{
+    return this.postTitle.slice();
+  }
+
+  getPostByTag(){
+    return this.postTag.slice();
+  }
+
 
   addPost(postString) {
     let urlPost = this.urlGetPost;
@@ -55,14 +64,7 @@ export class PostService {
 
   }
 
-  getPostByTitle(): Post[]{
-    return this.postTitle.slice();
-  }
-
-  getPostByTag(){
-    return this.postTag.slice();
-  }
-
+ 
 
   //  ===========================================
   //  Get post form server
@@ -80,7 +82,15 @@ export class PostService {
 
   loadPostByPostId(postID) {
     this.newURL = this.urlGetPost + '/' + postID + '/post/post';
-    return this.http.get(this.newURL);
+    console.log(this.newURL);
+    this.http.get(this.newURL).subscribe(
+      (data: Post[]) => {
+        this.singlePost = data;
+        this.postDetailSubject.next(this.getPostByIdPost());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Posts por PostID');
   }
 
   loadPostsByUserId(userID) {

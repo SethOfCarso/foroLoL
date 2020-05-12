@@ -49,7 +49,6 @@ export class PostService {
     postString = JSON.parse(JSON.stringify(postString))
     this.http.post(this.urlGetPost, postString).subscribe(
       (data) => {
-        // console.log(data);
         this.createPostDone.next(true);
       },
       (err) => (console.log(err))
@@ -57,7 +56,15 @@ export class PostService {
   }
 
   deletePost(postID) {
-    //  TODO add return something if true or false
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.delete(this.newURL).subscribe(
+      (data) => {
+        console.log("Todo bien");
+        console.log(data);
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Posts por PostID');
   }
 
   putPost(postID) {
@@ -82,7 +89,6 @@ export class PostService {
 
   loadPostByPostId(postID) {
     this.newURL = this.urlGetPost + '/' + postID + '/post/post';
-    console.log(this.newURL);
     this.http.get(this.newURL).subscribe(
       (data: Post[]) => {
         this.singlePost = data;

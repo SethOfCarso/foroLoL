@@ -1,167 +1,92 @@
 <!-- =================================================== -->
 <!-- Cuando este el servicio de usuarios -->
 <!-- =================================================== -->
-<div class="card mb-6 post">
-    <div class="row no-gutters">
-        <div class="col-md-2 ">
-            <div class="card-profile">
-                <img src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
-                    class="card-img-top" alt="Imagen de perfil">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
-                    Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                        alt="imagen de rango" width="40%"> <br>
-                    Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                        alt="imagen de rango" width="40%">
-                </div>
-            </div>
-        </div>
-<!-- =================================================== -->
-<!-- Cuando este el servicio de usuarios -->
-<!-- =================================================== -->
 
 <div *ngFor="let post of postDetail">
-    <p> {{post.id}} </p>
-    <p> {{post.url}} </p>
-    <p> {{post.title}} </p>
-</div>
+<div class="card mb-6 post">
+  <div class="row no-gutters">
+    <div class="col-md-2 ">
+      <div class="card-profile">
+        <img
+          src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
+          class="card-img-top" alt="Imagen de perfil">
+        <div class="card-body">
+          <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
+          Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
+            alt="imagen de rango" width="40%"> <br>
+          Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
+            alt="imagen de rango" width="40%">
+        </div>
+      </div>
+    </div>
+    <!-- =================================================== -->
+    <!-- Cuando este el servicio de usuarios -->
+    <!-- =================================================== -->
 
-<div *ngFor="let item of postDetail | keyvalue">
-    Key: <b>{{item.key}}</b> and Value: <b>{{item.value}}</b> 
     
-</div>
 
-        <div class="col-md-9">
-            <div class="card-body">
-                <h5 class="card-title">Garen se encuentra en el top 3 de campeones arriba de 55% de W/r</h5>
-                <p class="card-text">Al momento de estar haciendo una investigacion de campeones para poder estar
-                    jugando en la linea superior me percate que en <a href="https://lan.op.gg/champion/statistics">
-                        op.gg </a> garen se encuentra ahorita en segundo lugar... y me parece que es por que en este
-                    parche que entramos las peleas dificiles para garen estan fuera del meta que son los personajes
-                    que tienen rango.
-                    <br> Mi duda aqui es ustedes que piensan que sera lo mejor para poder ganar este encuentro sin
-                    tener que utilizar algo como vayne. </p>
-                <p class="card-text"><small class="text-muted">Creado hace 10 horas.</small></p>
-            </div>
-            <div class="card-footer text-muted text-right">
-                <a name="" id="" class="btn btn-secondary text-white"  role="button">Responder</a>
-                <a name="" id="" class="btn btn-secondary text-white"  role="button">Comentar</a>
-            </div>
+
+      <div class="col-md-9">
+        <div class="card-body">
+          <h5 class="card-title"> {{post.title }}</h5>
+          <!-- <div class="card-text" [innerHTML]=post.content>   -->
+          <div class="card-text" [innerHTML]=post.content>
+          </div>
+          <p class="card-text"><small class="text-muted"> {{post.postDate}} </small></p>
         </div>
+        <div class="card-footer text-muted text-right">
+          <a name="" id="" class="btn btn-secondary text-white" role="button">Responder</a>
+          <a name="" id="" class="btn btn-secondary text-white" role="button">Comentar</a>
+          <a name="" id="" class="btn btn-danger text-white" (click)="deletePost()" role="button">Eliminar</a>
+        </div>
+      </div>
     </div>
-</div>
-<!-- =================================================================== -->
-<!--  Fin de posts-->
-<!-- =================================================================== -->
-
+  </div>
 
 <!-- =================================================================== -->
-<!--  Spam de post para la cantidad mostrar la cantidad-->
+<!--  Respuestas del post-->
 <!-- =================================================================== -->
-<div class="card mb-6 post">
-    <div class="row no-gutters">
-        <div class="col-md-2 ">
+{{post.objtPost.length}}
+<div *ngIf="post.objtPost.length > 0">
+
+
+  <div *ngFor="let postObj of post.objtPost">
+    
+    <div class="card mb-6 post">
+        <div class="row no-gutters">
+          <div class="col-md-2 ">
             <div class="card-profile">
-                <img src="https://res.cloudinary.com/lmn/image/upload/c_limit,h_360,w_640/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinny/554203a192af2e4a3445dded3d7c9fb7.jpg"
-                    class="card-img-top" alt="Imagen de perfil">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#" class="card-link">Elias1</a> <br></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post #155</h6>
-                    Rango <img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                        alt="imagen de rango" width="40%"> <br>
-                    Post<img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                        alt="imagen de rango" width="40%">
-                </div>
+              <img
+                src="https://res.cloudinary.com/lmn/image/upload/c_limit,h_360,w_640/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinny/554203a192af2e4a3445dded3d7c9fb7.jpg"
+                class="card-img-top" alt="Imagen de perfil">
+              <div class="card-body">
+                <h5 class="card-title"><a href="#" class="card-link">Elias1</a> <br></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Post #155</h6>
+                Rango <img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
+                  alt="imagen de rango" width="40%"> <br>
+                Post<img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
+                  alt="imagen de rango" width="40%">
+              </div>
             </div>
-        </div>
-        <div class="col-md-9">
+          </div>
+          <div class="col-md-9">
             <div class="card-body">
-                <h5 class="card-title">Garen se encuentra en el top 3 de campeones arriba de 55% de W/r</h5>
-                <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eos
-                    laboriosam soluta asperiores, numquam dolorem dignissimos tenetur, iusto ducimus iure odio vero
-                    aliquid recusandae delectus nostrum reiciendis voluptate. Culpa, quaerat.
-
-                </p>
-
-                <p class="card-text"><small class="text-muted">Creado hace 10 horas.</small></p>
+              <h5 class="card-title">{{postObj.title}}</h5>
+              <div class="card-text" [innerHTML]=postObj.content>
+            </div>
+      
+            <p class="card-text"><small class="text-muted"> {{postObj.postDate}} </small></p>
             </div>
             <div class="card-footer text-muted text-right">
-                <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
+              <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 </div>
-<div class="card mb-6 post">
-    <div class="row no-gutters">
-        <div class="col-md-2 ">
-            <div class="card-profile">
-                <img src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
-                    class="card-img-top" alt="Imagen de perfil">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
-                    Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                        alt="imagen de rango" width="40%"> <br>
-                    Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                        alt="imagen de rango" width="40%">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="card-body">
-                <h5 class="card-title">Garen se encuentra en el top 3 de campeones arriba de 55% de W/r</h5>
-
-                <blockquote>
-                    <p>De Elias1 <br></p>
-                    <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eos
-                        laboriosam soluta asperiores, numquam dolorem dignissimos tenetur, iusto ducimus iure odio vero
-                        aliquid recusandae delectus nostrum reiciendis voluptate. Culpa, quaerat.
-                    </p>
-                </blockquote>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae, voluptate error ipsa praesentium repudiandae consectetur eum,
-                     optio dolores distinctio minus blanditiis quod fugiat repellendus doloremque? Harum ipsam eaque laboriosam eum?</p>
-                
-
-                <p class="card-text"><small class="text-muted">Creado hace 10 horas.</small></p>
-            </div>
-            <div class="card-footer text-muted text-right">
-                <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
-            </div>
-        </div>
-    </div>
 </div>
-
-<div class="card mb-6 post">
-    <div class="row no-gutters">
-        <div class="col-md-2 ">
-            <div class="card-profile">
-                <img src="https://res.cloudinary.com/lmn/image/upload/c_limit,h_360,w_640/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinny/554203a192af2e4a3445dded3d7c9fb7.jpg"
-                    class="card-img-top" alt="Imagen de perfil">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#" class="card-link">Elias1</a> <br></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post #155</h6>
-                    Rango <img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                        alt="imagen de rango" width="40%"> <br>
-                    Post<img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                        alt="imagen de rango" width="40%">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="card-body">
-                <h5 class="card-title">Garen se encuentra en el top 3 de campeones arriba de 55% de W/r</h5>
-                <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eos
-                    laboriosam soluta asperiores, numquam dolorem dignissimos tenetur, iusto ducimus iure odio vero
-                    aliquid recusandae delectus nostrum reiciendis voluptate. Culpa, quaerat.
-
-                </p>
-
-                <p class="card-text"><small class="text-muted">Creado hace 10 horas.</small></p>
-            </div>
-            <div class="card-footer text-muted text-right">
-                <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
-            </div>
-        </div>
-    </div>
+<!-- =================================================================== -->
+<!--  Fin de las respuestas del post-->
+<!-- =================================================================== -->
 </div>

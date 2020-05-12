@@ -12,7 +12,11 @@ export class PostService {
 
   singlePost: Post;
   posts: Post[] = [];
+  postTitle: Post[] = [];
+  postTag: Post[] = [];
   postsSubject = new BehaviorSubject<Post[]>([]);
+  postsTitleSubject = new BehaviorSubject<Post[]>([]);
+  postsTagsSubject = new BehaviorSubject<Post[]>([]);
   postDetailSubject = new BehaviorSubject<Post>(this.singlePost);
   createPostDone = new BehaviorSubject<boolean>(false);
 
@@ -51,6 +55,13 @@ export class PostService {
 
   }
 
+  getPostByTitle(): Post[]{
+    return this.postTitle.slice();
+  }
+
+  getPostByTag(){
+    return this.postTag.slice();
+  }
 
 
   //  ===========================================
@@ -88,8 +99,8 @@ export class PostService {
     this.newURL = this.urlGetPost + '/' + title + '/post/title';
     this.http.get(this.newURL).subscribe(
       (data: Post[]) => {
-        this.posts = data;
-        this.postsSubject.next(this.getPost());
+        this.postTitle = data;
+        this.postsTitleSubject.next(this.getPostByTitle());
       },
       (err) => (console.log(err))
     );
@@ -100,8 +111,8 @@ export class PostService {
     this.newURL = this.urlGetPost + '/' + tag + '/post/tag';
     this.http.get(this.newURL).subscribe(
       (data: Post[]) => {
-        this.posts = data;
-        this.postsSubject.next(this.getPost());
+        this.postTag = data;
+        this.postsTagsSubject.next(this.getPostByTag());
       },
       (err) => (console.log(err))
     );

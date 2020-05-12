@@ -12,21 +12,23 @@
       <a name="" id="" class="btn btn-dark sort-btn" (click)="sortBy()" role="button">Buscar </a>
 
       <label for="tagsBy">Buscar por tags:</label>
-      <select id="tagsBy" class="round">
+      <select id="tagsBy" [(ngModel)]="tags" class="round">
       <option value="nada"> selecciona ...</option>    
-      <option class="fan-art" value="fant-art"> Fan-Art</option>
-      <option class="buscarAmigos" value="buscarAmigos">   Buscar amigos</option>
-      <option class="discusion" value="discusion">Discusion</option>
-      <option class="erroresDeJuego" value="bugs">Bugs</option>
-      <option class="campeon" value="campeon">Campeón</option>
+      <option class="fan-art" value="1"> Fan-Art</option>
+      <option class="campeon" value="2">Campeón</option>
+      <option class="buscarAmigos" value="3">   Buscar amigos</option>
+      <option class="discusion" value="4">Discusion</option>
+      <option class="erroresDeJuego" value="5">Bugs</option>
       </select>
-      <a name="" id="" class="btn btn-dark sort-btn" href="#" role="button">Buscar </a>
+      <a name="" id="" routerLink="/home/searchedPost/ta{{tags}}" class="btn btn-dark sort-btn" role="button">Buscar </a>
   </div>
 </div>
 
 <!-- ================================== -->
 <!--            Hacer ngFor-->
 <!-- ================================== -->
+
+
 
 <div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
     <div  class="card border-light mb-6 post"  [routerLink]="['/home/post-detail', post.idPost  ]">

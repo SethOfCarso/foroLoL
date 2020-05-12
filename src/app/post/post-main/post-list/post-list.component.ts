@@ -13,6 +13,7 @@ import { User } from 'src/app/users/User';
 export class PostListComponent implements OnInit {
   allPost: Post[];
   allUsers: User;
+  tags:string;
   selectedSort: string;
   selectedTag: string;
   rankUser = 2;

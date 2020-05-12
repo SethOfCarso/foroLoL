@@ -53,6 +53,7 @@ export class PostCreateComponent implements OnInit {
     if (this.post.title.length >= 5) {
       let postString = this.post;
       console.log(this.postService.addPost(postString));
+      this.isDone = true;
     }
   }
 
@@ -60,13 +61,13 @@ export class PostCreateComponent implements OnInit {
 
   changePost() {
     this.isDone= false;
+    this.postService.createPostDone.next(false);
     this.router.navigate(['/home/post-detail/' + this.post.idPost]);
   }
 
   postCreated() {
-    this.postService.createPostDone.next(false);
     window.setTimeout(() => {
       this.changePost();
-    }, 5000)
+    }, 2000)
   }
 }

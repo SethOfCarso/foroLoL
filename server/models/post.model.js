@@ -58,7 +58,8 @@ class Post extends DataBaseWrapper {
 
     async getPostbyidPost(idPost){
         const Postid = { idPost };
-        return await super.queryOne(Postid);
+        // return await super.queryOne(Postid);
+        return await super.query(Postid);
     }
 
     async getPostbyidUser(userId){
@@ -68,8 +69,7 @@ class Post extends DataBaseWrapper {
 
     async getPostbyEmailUser(userEmail){
         const User = { userEmail };
-        console.log(User);
-        return await super.queryOne(User);
+        return await super.query(User);
     }
 
     async getPostbyTitle(value){

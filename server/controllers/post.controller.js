@@ -85,10 +85,8 @@ class PostController {
         
         if(req.params.email !== undefined){
             queryId = String(req.params.email);
-            console.log(queryId);
             const docs = await Post.getPostbyEmailUser(queryId, projection, options);
             searchedPost = JSON.parse(JSON.stringify(docs));
-            console.log(searchedPost);
             res.status(200);
         }
         else{

@@ -8,6 +8,7 @@ import { PostMainComponent } from './post/post-main/post-main.component';
 import { PostDetailComponent } from './post/post-main/post-detail/post-detail.component';
 import { PostCreateComponent } from './post/post-main/post-create/post-create.component';
 import { ProfileComponent } from './users/profile/profile.component';
+import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'post-create', component: PostCreateComponent},
       {path: '', component: PostListComponent},
   ]},
+  {path: 'searchedPost/:postType', component: PostSearchedComponent},
   {path: 'profile', component: ProfileComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}

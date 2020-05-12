@@ -145,4 +145,21 @@ export class AuthService {
 
     return loggedIn;
   }
+
+  public googleLogin(params) {
+    return this.http.get(environment.url + '/api/auth/google/redirect', { params })
+      .pipe( // Preprocess response
+        map((data: any) => {
+          if (data.token) {
+            this.saveToken(data.token);
+          }
+
+          return data;
+        })
+      );
+  }
+
+  getEnvironmentUrl() {
+    return environment.url;
+  }
 }

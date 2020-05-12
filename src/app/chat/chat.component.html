@@ -17,10 +17,12 @@
         </div>
         <!-- List of chats side panel -->
         <div class="inbox_chat">
-          <app-conversation></app-conversation>
-          <app-conversation></app-conversation>
-          <app-conversation></app-conversation>
-
+          <app-conversation 
+            *ngFor="let conversation of conversations; let elementIndex = index;" 
+            [conversationData]="this.conversation"
+            [index]="elementIndex"
+            (selected)="conversationSelected($event)">
+          </app-conversation>
         </div>
       </div>
       <!-- Close button -->

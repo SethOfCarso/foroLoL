@@ -33,7 +33,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     // Subscribe to user
     this.usersService.userSubject.subscribe((user) => this.user = user);
 
-    // this.conversations.push(new Conversation('default_profile.png', 'General', 'general'));
+    // Add the global room to the chat
+    this.conversations.push(new Conversation('global.png', 'General', 'general', true));
+    this.conversations.push(new Conversation('global.png', 'General', 'general', false));
+    this.conversations.push(new Conversation('global.png', 'General', 'general', false));
+
     this.chatSubscription = this.socketIOService.getMessages().subscribe((chatMessageInfo: string) => {
       // Split ChatMessage
       const chatMessage = chatMessageInfo.split('|');
@@ -85,6 +89,16 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.socketIOService.sendMessage(this.user.email, this.msg);
       this.msg = '';
     }
+  }
+
+  conversationSelected(elementIndex) {
+    this.conversations.forEach((conversation: Conversation, index: number) => {
+      if (index === elementIndex) {
+        conversation.selected = true;
+      } else {
+        conversation.selected = false;
+      }
+    });
   }
 
 }

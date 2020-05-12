@@ -15,6 +15,8 @@ class ImageController{
                 res.sendFile(path.join(__dirname, '../public/default_profile.png'));
             } else if (filename == 'chat_server.png') {
                 res.sendFile(path.join(__dirname, '../public/chat_server.png'));
+            } else if (filename == 'global.png') {
+                res.sendFile(path.join(__dirname, '../public/global.png'));
             } else {
                 const url = cloudinary.url(filename);
 

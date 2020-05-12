@@ -47,6 +47,11 @@ export class ProfileComponent implements OnInit {
     $('#modalChangePassword').modal('hide');
   }
 
+  usernameChanged(user) {
+    this.usersService.updateUserLocal(user);
+    $('#modalChangeUsername').modal('hide');
+  }
+
   imageChanged(image) {
     this.user.urlImage = image.filename;
     this.usersService.updateUser(this.user);

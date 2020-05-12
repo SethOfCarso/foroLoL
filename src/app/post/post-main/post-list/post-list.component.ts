@@ -22,9 +22,11 @@ export class PostListComponent implements OnInit {
   constructor(private postService: PostService, private userService: UsersService) {
     this.postService.postsSubject.subscribe(data => { this.allPost = data; })
     this.allPost = postService.getPost();
+    this.selectedSort = "newestPost"
+    this.sortBy();
     this.userService.userSubject.subscribe(data => {
       this.allUsers = data
-      console.log(data);
+      // console.log(data);
     });
     // this.allUsers = userService.loadUser();
   }

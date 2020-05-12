@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ɵSWITCH_CHANGE_DETECTOR_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { PostService } from '../post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-create',
@@ -13,18 +15,27 @@ export class PostCreateComponent implements OnInit {
   post = {
     id: this.randomNumber,
     idPost: this.randomNumber,
-    userId: 1,
-    url: "",
+    userEmail: 'prueba@gmail.com',
+    userId: 7438,
+    url: "NA",
     title: "",
     content: "",
     postDate: new Date(),
+    // postDate: '2020-04-24T05:16:36.551+00:00',
     tags: [],
-    objtPost: {}
+    objPost: [{}]
   }
   tag1 = false;
+  isDone = false;
 
-  constructor() {
+  constructor(private postService: PostService, private router: Router) {
     this.randomID();
+    this.postService.createPostDone.subscribe((data) => {
+      this.isDone = data
+      if (this.isDone == true) {
+        this.postCreated();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -35,13 +46,27 @@ export class PostCreateComponent implements OnInit {
     console.log('aquí se guardan los datos procesados');
   }
   validar() {
-    // let content = document.getElementById("content").innerHTML;
-    // console.log(content);
-    
-    console.log(this.post);
-    console.log("Se valido");
+    for (let i = 0; i <= 5; i++) {
+      if (this.post.tags[i] === true) { this.post.tags[i] = "" + i + ""; }
+      else { this.post.tags[i] = "" + 0 + ""; }
+    }
+    if (this.post.title.length >= 5) {
+      let postString = this.post;
+      console.log(this.postService.addPost(postString));
+    }
   }
 
-  randomID():number{return Math.floor(Math.random() * 100000) + 1;}
+  randomID(): number { return Math.floor(Math.random() * 100000) + 1; }
 
+  changePost() {
+    this.isDone= false;
+    this.router.navigate(['/home/post-detail/' + this.post.idPost]);
+  }
+
+  postCreated() {
+    this.postService.createPostDone.next(false);
+    window.setTimeout(() => {
+      this.changePost();
+    }, 5000)
+  }
 }

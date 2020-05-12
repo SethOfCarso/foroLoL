@@ -22,14 +22,18 @@
 
         <div class="card-body">
           <input type="text" [(ngModel)]="post.title" name="title"  size="100" placeholder="Ingresa el titulo da la publicacion">
+          <div [hidden]="post.title.length > 5" class="alert alert-danger">Se necesita un titulo mayor a 5 caracteres</div>
           <h5 class="card-title"></h5>
+          <div *ngIf="isDone==true" class="alert alert-primary">
+            <h2>Se redireccionara en unos momentos a su post...</h2>
+          </div>
           <!-- ============================ -->
           <!-- <div id="content" [froalaEditor]>Escribe tu publicacion utilizando HTML!</div> -->
           <div [froalaEditor] [(froalaModel)]="post.content"></div>
           <!-- ============================== -->
           <p>Agrega los tags para tu publicacion: <br>
             <label for="fan-art"> <span class="btn btn-danger text-white">fan-art </span></label>
-            <input type="checkbox" [(ngModel)]='post.tags["1"]' value='1' name="tag" id="fan-art" class="btn btn-danger text-white">
+            <input type="checkbox" [(ngModel)]='post.tags[1]' value='1' name="tag" id="fan-art" class="btn btn-danger text-white">
 
             <label for="Campeon"> <span class="btn btn-warning text-white">Campeon </span></label>
             <input type="checkbox"  id="Campeon" [(ngModel)]='post.tags["2"]' value='2' name="tag" class="btn btn-warning text-white" role="button">

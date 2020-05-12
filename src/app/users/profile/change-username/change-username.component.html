@@ -1,0 +1,8 @@
+<form #usernameForm="ngForm" (ngSubmit)="submit(usernameForm)">
+    <div class="form-group">
+      <label for="">Nuevo nombre de usuario:</label>
+      <input type="text" class="form-control" name="username" ngModel required>
+    </div>
+    <button type="submit" class="btn btn-primary float-right">Cambiar nombre de usuario</button>
+  </form>
+  

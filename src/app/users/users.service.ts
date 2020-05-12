@@ -71,6 +71,15 @@ export class UsersService {
     return this.http.put(environment.url + '/api/users/' + tokenData.email, { password }, options);
   }
 
+  changeUsername(username): Observable<any> {
+    const tokenData = this.authService.getTokenData();
+    const headers = new HttpHeaders({
+      'x-auth': this.authService.getToken()
+    });
+    const options = { headers };
+    return this.http.put(environment.url + '/api/users/' + tokenData.email, { username }, options);
+  }
+
   updateUser(updatedUser) {
     const tokenData = this.authService.getTokenData();
     const headers = new HttpHeaders({
@@ -81,6 +90,10 @@ export class UsersService {
       (user: User) => { this.userSubject.next(user); },
       () => {}
     );
+  }
+
+  updateUserLocal(updatedUser) {
+    this.userSubject.next(updatedUser);
   }
 
   getEnvironmentUrl() {

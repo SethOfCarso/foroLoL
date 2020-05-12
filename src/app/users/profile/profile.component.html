@@ -8,10 +8,19 @@
           data-target="#modalChangeImage"><i class="far fa-edit fa-2x"></i></a>
       </div>
     </div>
-    <h1 class="text-center mt-1">{{user.username}}</h1>
+    
+    <h1 class="text-center mt-1">{{user.username}}
+      <button type="button" class="btn" data-toggle="modal" data-target="#modalChangeUsername">
+        <i class="fas fa-edit"></i>
+      </button>
+    </h1> 
+
+
     <h3 class="text-center mt-1">Clasificación</h3>
+    
     <h6 class="text-center mt-1">Rango en el foro</h6>
     <h6 class="text-center mt-1">{{user.level}}</h6>
+    
     <div class="center">
       <span class="mt-3">Correo: </span><span>{{user.email}}</span>
       <button type="button" class="btn" data-toggle="modal" data-target="#modalChangeEmail">
@@ -24,6 +33,7 @@
       </button>
     </div>
   </div>
+  
   <div class="container">
     <div class="row">
       <div class="col profile-container profile-historical-container">
@@ -221,7 +231,7 @@
     </div>
   </div>
 
-  <!-- Cambiar imagen de perfil -->
+  <!-- Change user image -->
   <div class="modal fade" id="modalChangeImage" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -238,7 +248,8 @@
       </div>
     </div>
   </div>
-  <!-- Cambiar correo -->
+
+  <!-- Change email -->
   <div class="modal fade" id="modalChangeEmail" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -256,7 +267,7 @@
     </div>
   </div>
 
-  <!-- Cambiar contraseña -->
+  <!-- Change password -->
   <div class="modal fade" id="modalChangePassword" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -269,6 +280,24 @@
         </div>
         <div class="modal-body">
           <app-change-password (successful)="passwordChanged($event)"></app-change-password>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change username -->
+  <div class="modal fade" id="modalChangeUsername" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cambiar nombre de usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-change-username (successful)="usernameChanged($event)"></app-change-username>
         </div>
       </div>
     </div>

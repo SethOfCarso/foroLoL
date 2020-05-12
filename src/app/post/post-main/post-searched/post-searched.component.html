@@ -1,64 +1,147 @@
-<p>post-searched works!</p>
-
-
 <div id="sortTags" class="sort tags search">
-    <div class="">
-        <label   for="sortBy">Ordenar por:</label>
-        <select [(ngModel)]="selectedSort" id="sortBy" class="round">
-        <option value="nada"> selecciona ...</option>  
-        <!-- <option value="mostComents">Mayor número de comentarios</option>
+  <div class="">
+    <label for="sortBy">Ordenar por:</label>
+    <select [(ngModel)]="selectedSort" id="sortBy" class="round">
+      <option value="nada"> selecciona ...</option>
+      <!-- <option value="mostComents">Mayor número de comentarios</option>
         <option value="leastComents">Menor número de comentarios</option> -->
-        <option value="newestPost">Publicacion mas reciente</option>
-        <option value="oldestPost">Publicacion mas antigüa</option>
-        </select>
-        <a name="" id="" class="btn btn-dark sort-btn" (click)="sortBy()" role="button">Buscar </a>
-  
-        <label for="tagsBy">Buscar por tags:</label>
-        <select id="tagsBy" class="round">
+      <option value="newestPost">Publicacion mas reciente</option>
+      <option value="oldestPost">Publicacion mas antigüa</option>
+    </select>
+    <a name="" id="" class="btn btn-dark sort-btn" (click)="sortBy()" role="button">Buscar </a>
+
+    <label for="tagsBy">Buscar por tags:</label>
+    <select id="tagsBy" [(ngModel)]="tags" class="round">
         <option value="nada"> selecciona ...</option>    
-        <option class="fan-art" value="fant-art"> Fan-Art</option>
-        <option class="buscarAmigos" value="buscarAmigos">   Buscar amigos</option>
-        <option class="discusion" value="discusion">Discusion</option>
-        <option class="erroresDeJuego" value="bugs">Bugs</option>
-        <option class="campeon" value="campeon">Campeón</option>
+        <option class="fan-art" value="1"> Fan-Art</option>
+        <option class="campeon" value="2">Campeón</option>
+        <option class="buscarAmigos" value="3">   Buscar amigos</option>
+        <option class="discusion" value="4">Discusion</option>
+        <option class="erroresDeJuego" value="5">Bugs</option>
         </select>
-        <a name="" id="" class="btn btn-dark sort-btn" href="#" role="button">Buscar </a>
+    <a name="" id="" routerLink="/home/searchedPost/ta{{tags}}" class="btn btn-dark sort-btn" role="button">Buscar </a>
+  </div>
+</div>
+
+<!-- ================================== -->
+<!--            Hacer ngFor-->
+<!-- ================================== -->
+
+<div *ngIf="array0Alert === true" class="alert alert-danger">
+    Al parecer no se encontro alguna publicación con tus especificaciones...
+</div>
+
+<div *ngIf="searchedType === 'ti'">
+<div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
+  <div class="card border-light mb-6 post" [routerLink]="['/home/post-detail', post.idPost  ]">
+    <!-- <div  class="card border-light mb-6 post"  [routerLink]="['./post-detail']"> -->
+    <div class="row no-gutters">
+      <div class="col-md-2 ">
+        <div class="my-3 mx-3">
+          <p *ngIf="(post.objtPost)">Comentarios : <br> <span>
+              Hay comentarios
+            </span> </p>
+          <p *ngIf="!(post.objtPost)">Comentarios : <br> <span>
+              No hay comentarios
+            </span> </p>
+          <p>Tags: <br>
+            <a *ngIf="post.tags.includes('1')" name="" id="" class="btn btn-danger text-white" role="button">Fan art</a>
+            <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning text-white"
+              role="button">Campeon</a>
+            <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary text-white" role="button">Buscar
+              Amigos</a>
+            <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success text-white"
+              role="button">Discusión</a>
+            <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary text-white" role="button">Bugs</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <hr>
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title"> {{post.title}} </h5>
+          <p class="card-text"> {{post.content}} </p>
+          <p class="card-text"><small class="text-muted"> Post created : {{post.postDate.toString().slice(0,10)}}
+            </small></p>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <hr class="hr-small ">
+      </div>
+      <div class="col-md-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><a href="./perfil.html" class="card-link"> {{post.userEmail}} </a> <br></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}} </h6>
+            Rango
+            <img *ngIf="rankUser==1" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango"
+              width="40%"> <br *ngIf="rankUser==1">
+            <img *ngIf="rankUser==2" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango"
+              width="40%"> <br *ngIf="rankUser==2">
+            <img *ngIf="rankUser==3" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango"
+              width="40%"> <br *ngIf="rankUser==3">
+            <img *ngIf="rankUser==4" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango"
+              width="40%"> <br *ngIf="rankUser==4">
+            <img *ngIf="rankUser==5" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango"
+              width="40%"> <br *ngIf="rankUser==5">
+
+            Post
+            <img *ngIf="postUser==1" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png"
+              alt="imagen de rango" width="40%"> <br *ngIf="postUser==1">
+            <img *ngIf="postUser==2" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png"
+              alt="imagen de rango" width="40%"> <br *ngIf="postUser==2">
+            <img *ngIf="postUser==3" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png"
+              alt="imagen de rango" width="40%"> <br *ngIf="postUser==3">
+            <img *ngIf="postUser==4" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png"
+              alt="imagen de rango" width="40%"> <br *ngIf="postUser==4">
+            <img *ngIf="postUser==5" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png"
+              alt="imagen de rango" width="40%"> <br *ngIf="postUser==5">
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <!-- ================================== -->
-  <!--            Hacer ngFor-->
-  <!-- ================================== -->
-  
-  <div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
-      <div  class="card border-light mb-6 post"  [routerLink]="['/home/post-detail', post.idPost  ]">
+
+</div>
+</div>
+
+<div *ngIf="searchedType === 'ta'">
+    <div *ngFor="let post of allPostTag;let i = index" [attr.data-index]='i'>
+      <div class="card border-light mb-6 post" [routerLink]="['/home/post-detail', post.idPost  ]">
         <!-- <div  class="card border-light mb-6 post"  [routerLink]="['./post-detail']"> -->
         <div class="row no-gutters">
           <div class="col-md-2 ">
-              <div class="my-3 mx-3">
-                <p *ngIf="(post.objtPost)">Comentarios : <br> <span> 
+            <div class="my-3 mx-3">
+              <p *ngIf="(post.objtPost)">Comentarios : <br> <span>
                   Hay comentarios
-                </span>  </p>
-                <p *ngIf="!(post.objtPost)" >Comentarios : <br> <span > 
+                </span> </p>
+              <p *ngIf="!(post.objtPost)">Comentarios : <br> <span>
                   No hay comentarios
-                </span>  </p>
-                <p>Tags: <br>
+                </span> </p>
+              <p>Tags: <br>
                 <a *ngIf="post.tags.includes('1')" name="" id="" class="btn btn-danger text-white" role="button">Fan art</a>
-                <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning text-white" role="button">Campeon</a>
-                <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary text-white" role="button">Buscar Amigos</a>
-                <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success text-white" role="button">Discusión</a>
-                <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary text-white"  role="button">Bugs</a>
-                </p>
-              </div>
+                <a *ngIf="post.tags.includes('2')" name="" id="" class="btn btn-warning text-white"
+                  role="button">Campeon</a>
+                <a *ngIf="post.tags.includes('3')" name="" id="" class="btn btn-primary text-white" role="button">Buscar
+                  Amigos</a>
+                <a *ngIf="post.tags.includes('4')" name="" id="" class="btn btn-success text-white"
+                  role="button">Discusión</a>
+                <a *ngIf="post.tags.includes('5')" name="" id="" class="btn btn-secondary text-white" role="button">Bugs</a>
+              </p>
+            </div>
           </div>
           <div class="col-md-1">
             <hr>
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <h5  class="card-title"> {{post.title}} </h5>
+              <h5 class="card-title"> {{post.title}} </h5>
               <p class="card-text"> {{post.content}} </p>
-              <p class="card-text"><small class="text-muted"> Post created : {{post.postDate.toString().slice(0,10)}} </small></p>
+              <p class="card-text"><small class="text-muted"> Post created : {{post.postDate.toString().slice(0,10)}}
+                </small></p>
             </div>
           </div>
           <div class="col-md-1">
@@ -66,35 +149,44 @@
           </div>
           <div class="col-md-2">
             <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="./perfil.html" class="card-link"> {{post.userEmail}} </a> <br></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}}  </h6>
-                  Rango 
-                  <img *ngIf="rankUser==1" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="rankUser==1">
-                  <img *ngIf="rankUser==2" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango" width="40%">     <br *ngIf="rankUser==2">
-                  <img *ngIf="rankUser==3" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango" width="40%">       <br *ngIf="rankUser==3">
-                  <img *ngIf="rankUser==4" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango" width="40%">   <br *ngIf="rankUser==4">
-                  <img *ngIf="rankUser==5" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango" width="40%">    <br *ngIf="rankUser==5">
-  
-                  Post
-                  <img *ngIf="postUser==1" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png" alt="imagen de rango" width="40%">    <br *ngIf="postUser==1">
-                  <img *ngIf="postUser==2" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png" alt="imagen de rango" width="40%">    <br *ngIf="postUser==2">
-                  <img *ngIf="postUser==3" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png" alt="imagen de rango" width="40%">      <br *ngIf="postUser==3">
-                  <img *ngIf="postUser==4" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png" alt="imagen de rango" width="40%">  <br *ngIf="postUser==4">
-                  <img *ngIf="postUser==5" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png" alt="imagen de rango" width="40%">   <br *ngIf="postUser==5">
-                  
-                </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="./perfil.html" class="card-link"> {{post.userEmail}} </a> <br></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}} </h6>
+                Rango
+                <img *ngIf="rankUser==1" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango"
+                  width="40%"> <br *ngIf="rankUser==1">
+                <img *ngIf="rankUser==2" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango"
+                  width="40%"> <br *ngIf="rankUser==2">
+                <img *ngIf="rankUser==3" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango"
+                  width="40%"> <br *ngIf="rankUser==3">
+                <img *ngIf="rankUser==4" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango"
+                  width="40%"> <br *ngIf="rankUser==4">
+                <img *ngIf="rankUser==5" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango"
+                  width="40%"> <br *ngIf="rankUser==5">
+    
+                Post
+                <img *ngIf="postUser==1" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png"
+                  alt="imagen de rango" width="40%"> <br *ngIf="postUser==1">
+                <img *ngIf="postUser==2" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png"
+                  alt="imagen de rango" width="40%"> <br *ngIf="postUser==2">
+                <img *ngIf="postUser==3" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png"
+                  alt="imagen de rango" width="40%"> <br *ngIf="postUser==3">
+                <img *ngIf="postUser==4" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png"
+                  alt="imagen de rango" width="40%"> <br *ngIf="postUser==4">
+                <img *ngIf="postUser==5" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png"
+                  alt="imagen de rango" width="40%"> <br *ngIf="postUser==5">
+    
               </div>
+            </div>
           </div>
         </div>
       </div>
-      
-  </div>
-  
-  
-  
-  
-    <!-- ================================== -->
-  <!--            Fin del ngFor-->
-  <!-- ================================== -->
-  
+    
+    </div>
+    </div>
+    
+
+
+<!-- ================================== -->
+<!--            Fin del ngFor-->
+<!-- ================================== -->

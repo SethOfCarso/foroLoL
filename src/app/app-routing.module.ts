@@ -16,9 +16,10 @@ const routes: Routes = [
       {path: 'post-list', component: PostListComponent},
       {path: 'post-detail/:id', component: PostDetailComponent},
       {path: 'post-create', component: PostCreateComponent},
+      {path: 'searchedPost/:postType', component: PostSearchedComponent},
       {path: '', component: PostListComponent},
   ]},
-  {path: 'searchedPost/:postType', component: PostSearchedComponent},
+  
   {path: 'profile', component: ProfileComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}

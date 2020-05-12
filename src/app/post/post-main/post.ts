@@ -4,6 +4,7 @@ export class Post {
     id: number;
     idPost: number;
     userId: number;
+    userEmail: string;
     url: string;
     title: string;
     content: string;
@@ -15,6 +16,7 @@ export class Post {
         id: number,
         idPost: number,
         userId: number,
+        userEmail: string,
         url: string,
         title: string,
         content: string,
@@ -25,6 +27,7 @@ export class Post {
         this.id = id;
         this.idPost = idPost;
         this.userId = userId;
+        this.userEmail = userEmail;
         this.url = url;
         this.title = title;
         this.content = content;

@@ -1,8 +1,8 @@
-<div class="chat_list active_chat">
+<div class="chat_list" [ngClass]="{'active_chat': conversationData.selected == true}" (click)="itemSelected()">
   <div class="chat_people">
-    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+    <div class="chat_img"> <img src="{{environment}}/api/image/{{conversationData.userImage}}"> </div>
     <div class="chat_ib">
-      <h5>Sunil Rajput</h5>
+      <h5>{{conversationData.username}}</h5>
     </div>
   </div>
 </div>

@@ -39,6 +39,7 @@ import { environment } from 'src/environments/environment';
 
 const config: SocketIoConfig = { url: environment.url,  options: {} };
 import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
+import { ChangeUsernameComponent } from './users/profile/change-username/change-username.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { PostSearchedComponent } from './post/post-main/post-searched/post-searc
     UploadImageComponent,
     ConversationComponent,
     ChatMessagesComponent,
-    PostSearchedComponent
+    PostSearchedComponent,
+    ChangeUsernameComponent
   ],
   imports: [
     BrowserModule,

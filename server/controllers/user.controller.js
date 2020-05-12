@@ -8,25 +8,25 @@ class UserController {
         let options = {}        // Page or limit
         let projection = "";    // Which fields are wanted
         
-        // // Check for query params
-        // if(Object.keys(req.query).length != 0){
-        //     for(let queryParam in req.query){
-        //         switch(queryParam){
-        //             case "id":
-        //                 query.uid = req.query.uid;
-        //                 break;
-        //             case "name":
-        //                 query.username = req.query.username;
-        //                 break;
-        //             case "page":
-        //                 options.page = req.query.page;
-        //                 break;
-        //             case "limit":
-        //                 options.limit = req.query.limit;
-        //                 break;
-        //         }
-        //     }
-        // }
+        // Check for query params
+        if(Object.keys(req.query).length != 0){
+            for(let queryParam in req.query){
+                switch(queryParam){
+                    case "username":
+                        query.username = req.query.username;
+                        break;
+                    // case "name":
+                    //     query.username = req.query.username;
+                    //     break;
+                    // case "page":
+                    //     options.page = req.query.page;
+                    //     break;
+                    // case "limit":
+                    //     options.limit = req.query.limit;
+                    //     break;
+                }
+            }
+        }
 
         const docs = await User.getUsers(query, projection, options);
         const users = JSON.parse(JSON.stringify(docs));

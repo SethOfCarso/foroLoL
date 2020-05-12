@@ -21,10 +21,12 @@ export class PostListComponent implements OnInit {
 
   postSubscription = new Subscription();
   constructor(private postService: PostService, private userService: UsersService) {
-    this.postService.postsSubject.subscribe(data => { this.allPost = data; })
+    this.postService.postsSubject.subscribe(data => { 
+      this.allPost = data;
+      this.selectedSort = "newestPost"
+      this.sortBy(); })
     this.allPost = postService.getPost();
-    this.selectedSort = "newestPost"
-    this.sortBy();
+    
     this.userService.userSubject.subscribe(data => {
       this.allUsers = data
       // console.log(data);
@@ -34,6 +36,11 @@ export class PostListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.postService.postsSubject.subscribe(data => { 
+      this.allPost = data;
+      this.selectedSort = "newestPost"
+      this.sortBy(); })
+    this.allPost = this.postService.getPost();
   }
 
   sortBy() {
@@ -49,10 +56,15 @@ export class PostListComponent implements OnInit {
       case "newestPost": {
         console.log("newestPost");
         this.allPost = this.allPost.sort((a, b) => {
-          const diaA = a.postDate.toString().slice(0, 10);
-          const diaB = b.postDate.toString().slice(0, 10);
+          // const diaA = a.postDate.toString().slice(0, 10);
+          // const diaB = b.postDate.toString().slice(0, 10);
+          const diaA = a.postDate.toString();
+          const diaB = b.postDate.toString();
           const newDiaA = new Date(diaA);
           const newDiaB = new Date(diaB);
+          // console.log(newDiaA);
+          // console.log(newDiaB);
+          // console.log(newDiaA.getTime() - newDiaB.getTime());
           return newDiaB.getTime() - newDiaA.getTime();
         });
         break;
@@ -60,8 +72,10 @@ export class PostListComponent implements OnInit {
       case "oldestPost": {
         console.log("oldestPost");
         this.allPost = this.allPost.sort((a, b) => {
-          const diaA = a.postDate.toString().slice(0, 10);
-          const diaB = b.postDate.toString().slice(0, 10);
+          // const diaA = a.postDate.toString().slice(0, 10);
+          // const diaB = b.postDate.toString().slice(0, 10);
+          const diaA = a.postDate.toString();
+          const diaB = b.postDate.toString();
           const newDiaA = new Date(diaA);
           const newDiaB = new Date(diaB);
           return newDiaA.getTime() - newDiaB.getTime();

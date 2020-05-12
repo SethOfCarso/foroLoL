@@ -29,6 +29,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ChangePasswordComponent } from './users/profile/change-password/change-password.component';
 import { ChangeEmailComponent } from './users/profile/change-email/change-email.component';
 import { UploadImageComponent } from './uploads/upload-image/upload-image.component';
+import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UploadImageComponent } from './uploads/upload-image/upload-image.compon
     SignInComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    PostSearchedComponent
   ],
   imports: [
     BrowserModule,

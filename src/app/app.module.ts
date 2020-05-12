@@ -38,6 +38,7 @@ import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment.prod';
 
 const config: SocketIoConfig = { url: environment.url,  options: {} };
+import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ const config: SocketIoConfig = { url: environment.url,  options: {} };
     ChangeEmailComponent,
     UploadImageComponent,
     ConversationComponent,
-    ChatMessagesComponent
+    ChatMessagesComponent,
+    PostSearchedComponent
   ],
   imports: [
     BrowserModule,

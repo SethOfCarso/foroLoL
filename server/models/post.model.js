@@ -19,6 +19,9 @@ class Post extends DataBaseWrapper {
             },
             userId: {
                 type: Number,
+            },
+            userEmail: {
+                type: String,
                 required: true
             },
             url: {
@@ -63,6 +66,12 @@ class Post extends DataBaseWrapper {
         return await super.queryOne(User);
     }
 
+    async getPostbyEmailUser(userEmail){
+        const User = { userEmail };
+        console.log(User);
+        return await super.queryOne(User);
+    }
+
     async getPostbyTitle(value){
         let queryTitle = { "title" : new RegExp('^'+value,"i")};
         return await super.queryLike(queryTitle);
@@ -91,6 +100,7 @@ class Post extends DataBaseWrapper {
         const newPost = {
             id: body.id,
             idPost: body.idPost,
+            userEmail:body.userEmail,
             userId: body.userId,
             url: body.url,
             title: body.title,
@@ -99,7 +109,6 @@ class Post extends DataBaseWrapper {
             tags: body.tags,
             objtPost: body.objPost,
         }
-
         return await super.add(newPost);
     }
 }

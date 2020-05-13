@@ -64,11 +64,19 @@ export class PostService {
       },
       (err) => (console.log(err))
     );
-    console.log('Entre a load Posts por PostID');
+    console.log('Entre delete Posts por PostID');
   }
 
-  putPost(postID) {
-
+  putPost(postID, postBody) {
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.put(this.newURL,postBody).subscribe(
+      (data) => {
+        console.log("Todo bien entre al put");
+        console.log(data);
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a put Posts por PostID');
   }
 
  

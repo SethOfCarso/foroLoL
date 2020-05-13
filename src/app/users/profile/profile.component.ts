@@ -3,6 +3,8 @@ import { UsersService } from '../users.service';
 import { User } from '../User';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/post/post-main/post.service';
+import { Post } from '../../post/post-main/post';
 declare var $: any;
 
 @Component({
@@ -14,19 +16,32 @@ export class ProfileComponent implements OnInit {
   isloggedIn: boolean;
   user: User;
   environment: string;
+  summonerInfo: any;
+  userEmail: string;
+  postByUser: Post[];
 
-  constructor(private router: Router,  private authService: AuthService, private usersService: UsersService) {
+  constructor(private router: Router,
+    private authService: AuthService,
+    private usersService: UsersService,
+    private postService: PostService) {
+    this.environment = usersService.getEnvironmentUrl();
+
     // Subscribe to know if user is logged in
-    this.authService.isLoggedInSubject.subscribe((isloggedIn) => {
-      this.isloggedIn = isloggedIn;
-    });
+    this.authService.isLoggedInSubject.subscribe(isloggedIn => this.isloggedIn = isloggedIn);
 
     // Subscribe to user
-    this.usersService.userSubject.subscribe((user) => {
-      this.user = user;
+    this.usersService.userSubject.subscribe(user => {
+    this.user = user
+      this.userEmail = user.email;
+      this.postService.loadPostByEmail(this.userEmail);
     });
 
-    this.environment = usersService.getEnvironmentUrl();
+    // this.postService.loadPostByEmail(this.userEmail);
+
+    this.postService.postsEmailSubject.
+    subscribe((post) => {
+    this.postByUser = post
+    });
 
     if (!this.isloggedIn) {
       this.router.navigate(['/']);
@@ -45,6 +60,11 @@ export class ProfileComponent implements OnInit {
 
   passwordChanged(user) {
     $('#modalChangePassword').modal('hide');
+  }
+
+  usernameChanged(user) {
+    this.usersService.updateUser(user);
+    $('#modalChangeUsername').modal('hide');
   }
 
   imageChanged(image) {

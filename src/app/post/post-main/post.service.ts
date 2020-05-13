@@ -10,39 +10,82 @@ export class PostService {
   newURL: string;
   urlGetPost = 'http://localhost:3000/api/post';
 
-  singlePost : Post;
+  singlePost: Post[] = [];
   posts: Post[] = [];
+  postTitle: Post[] = [];
+  postTag: Post[] = [];
+  postEmail: Post[] = [];
+  postsEmailSubject = new BehaviorSubject<Post[]>([]);
   postsSubject = new BehaviorSubject<Post[]>([]);
-  postDetailSubject = new BehaviorSubject<Post>(this.singlePost);
+  postsTitleSubject = new BehaviorSubject<Post[]>([]);
+  postsTagsSubject = new BehaviorSubject<Post[]>([]);
+  postDetailSubject = new BehaviorSubject<Post[]>([]);
+  createPostDone = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
     this.loadAllPost();
     this.postsSubject.next(this.getPost());
-   }
+  }
 
 
 
-   getPost(): Post[] {
-     return this.posts.slice();
-   }
+  getPost(): Post[] {
+    return this.posts.slice();
+  }
 
-   getPostByIdPost(idPost){
-    return this.loadPostByPostId(idPost);
-   }
+  getPostByEmail(): Post[] {
+    return this.postEmail.slice();
+  }
 
-   addPost(){
+  getPostByIdPost(): Post [] {
+    return this.singlePost.slice();
+  }
 
-   }
+  getPostByTitle(): Post[]{
+    return this.postTitle.slice();
+  }
 
-   deletePost(postID){
-    //  TODO add return something if true or false
-   }
-
-   putPost(postID){
-
-   }
+  getPostByTag(){
+    return this.postTag.slice();
+  }
 
 
+  addPost(postString) {
+    let urlPost = this.urlGetPost;
+    postString = JSON.parse(JSON.stringify(postString))
+    this.http.post(this.urlGetPost, postString).subscribe(
+      (data) => {
+        this.createPostDone.next(true);
+      },
+      (err) => (console.log(err))
+    );
+  }
+
+  deletePost(postID) {
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.delete(this.newURL).subscribe(
+      (data) => {
+        console.log("Todo bien");
+        console.log(data);
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre delete Posts por PostID');
+  }
+
+  putPost(postID, postBody) {
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.put(this.newURL,postBody).subscribe(
+      (data) => {
+        console.log("Todo bien entre al put");
+        console.log(data);
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a put Posts por PostID');
+  }
+
+ 
 
   //  ===========================================
   //  Get post form server
@@ -56,55 +99,75 @@ export class PostService {
       (err) => (console.log(err))
     );
     console.log('Entre a load Post');
-   }
+  }
 
-   loadPostByPostId(postID) {
-     this.newURL = this.urlGetPost + '/' + postID + '/post/post';
-     return this.http.get(this.newURL);
-   }
+  loadPostByEmail(email) {
+    this.newURL = this.urlGetPost + '/' + email + '/post/user';
+    // this.newURL = this.urlGetPost + '/prueba@gmail.com/post/user';
+    this.http.get(this.newURL).subscribe(
+      (data: Post[]) => {
+        this.postEmail = data;
+        this.postsEmailSubject.next(this.getPostByEmail());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Posts por Email');
+  }
 
-   loadPostsByUserId(userID) {
+  loadPostByPostId(postID) {
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.get(this.newURL).subscribe(
+      (data: Post[]) => {
+        this.singlePost = data;
+        this.postDetailSubject.next(this.getPostByIdPost());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Posts por PostID');
+  }
+
+  loadPostsByUserId(userID) {
     this.newURL = this.urlGetPost + '/' + userID + '/post/user';
     this.http.get(this.newURL).subscribe(
-     (data: Post[]) => {
-       this.posts = data;
-       this.postsSubject.next(this.getPost());
-     },
-     (err) => (console.log(err))
-   );
+      (data: Post[]) => {
+        this.posts = data;
+        this.postsSubject.next(this.getPost());
+      },
+      (err) => (console.log(err))
+    );
     console.log('Entre a load Posts por UserID');
   }
 
   loadPostsByTitleLike(title) {
     this.newURL = this.urlGetPost + '/' + title + '/post/title';
     this.http.get(this.newURL).subscribe(
-     (data: Post[]) => {
-       this.posts = data;
-       this.postsSubject.next(this.getPost());
-     },
-     (err) => (console.log(err))
-   );
+      (data: Post[]) => {
+        this.postTitle = data;
+        this.postsTitleSubject.next(this.getPostByTitle());
+      },
+      (err) => (console.log(err))
+    );
     console.log('Entre a load Posts by title like');
   }
 
   loadPostsByTag(tag) {
     this.newURL = this.urlGetPost + '/' + tag + '/post/tag';
     this.http.get(this.newURL).subscribe(
-     (data: Post[]) => {
-       this.posts = data;
-       this.postsSubject.next(this.getPost());
-     },
-     (err) => (console.log(err))
-   );
+      (data: Post[]) => {
+        this.postTag = data;
+        this.postsTagsSubject.next(this.getPostByTag());
+      },
+      (err) => (console.log(err))
+    );
     console.log('Entre a load Posts by tag');
   }
 
-  deletePostByPostID(postID){
+  deletePostByPostID(postID) {
     console.log("Delete Post in service");
     this.newURL = this.urlGetPost + '/' + postID + '/post/tag';
   }
 
-  updatePostByPostID(postID){
+  updatePostByPostID(postID) {
 
   }
 

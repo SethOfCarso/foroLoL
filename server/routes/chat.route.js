@@ -7,12 +7,14 @@ const chatEvents = {
     exit: 'exit',
     joinRoom: 'joinRoom',
     exitRoom: 'exitRoom',
-    chat: 'chat'
+    chat: 'chat',
+    conversationListenner: 'conversationListenner'
 };
 
 const errorMessages = {
     duplicatedUser: 'Ya existe un usuario con este mail en el chat, no se puede unir',
-    invalidEmail: 'Email inválido'
+    invalidEmail: 'Email inválido',
+    userNotFound: 'El usuario que buscas no está conectado'
 };
 
 function createChatUser(email, username, userImage, socketId){
@@ -107,8 +109,15 @@ exports = module.exports = function(socket, io) {
             if(user.currentRoom == room){
                 user.currentRoom = '';
                 socket.leave(room);
-                io.to(room).emit(chatEvents.chat, user.username + " ha salido de '"+ room + "'" + "<br>");
-                io.to(`${user.socketId}`).emit(chatEvents.chat, "Has salido de '"+ room + "'" + "<br>");
+
+
+                let userLeft = user.username + " ha salido de '"+ room + "'";
+                let userLeftMsg = 'Server' + '|' + 'chat_server.png' + '|' + userLeft + '|' + 'type' + '|' + getMessageTime();
+                io.to(room).emit(chatEvents.chat, userLeftMsg);
+                
+                userLeft = "Has salido de '"+ room + "'";
+                userLeftMsg = 'Server' + '|' + 'chat_server.png' + '|' + userLeft + '|' + 'type' + '|' + getMessageTime();
+                io.to(`${user.socketId}`).emit(chatEvents.chat, userLeftMsg);
             }
         } else {
             socket.emit(chatEvents.exitRoom, errorMessages.invalidEmail);
@@ -120,10 +129,34 @@ exports = module.exports = function(socket, io) {
         const user = users.find((user) => user.email == email);
         if (user) {
             const chatMessage = user.email + '|' + user.userImage + '|' + msg + '|' + 'type' + '|' + getMessageTime();
-            
             io.to(user.currentRoom).emit(chatEvents.chat, chatMessage);
         } else {
             socket.emit(chatEvents.chat, errorMessages.invalidEmail);
+        }
+    });
+
+    // Notify for new conversations
+    socket.on(chatEvents.conversationListenner, (conversationInfo) => {
+        const conversationInfoSplitted = conversationInfo.split('|');
+        const conversation = {
+            userEmail: conversationInfoSplitted[0],
+            userImage: conversationInfoSplitted[1],
+            username: conversationInfoSplitted[2],
+            room: conversationInfoSplitted[3],
+            selected: conversationInfoSplitted[4]
+        };
+
+        // Room Format: 'senderEmail-recipientEmail'
+        const recipientEmail = conversation.room.split('-')[1];
+        const recipientUser = users.find((user) => user.email == recipientEmail);
+        
+        if (recipientUser) {
+            // Notify to recipient user that someone wants to chat
+            const conversationMessage = conversation.userEmail + '|' + conversation.userImage + '|' + conversation.username + '|' + conversation.room + '|' + conversation.selected;
+
+            io.to(`${recipientUser.socketId}`).emit(chatEvents.conversationListenner, conversationMessage);
+        } else {
+            socket.emit(chatEvents.conversationListenner, errorMessages.userNotFound);
         }
     });
 }

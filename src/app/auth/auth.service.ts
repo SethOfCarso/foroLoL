@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 // import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -12,7 +13,8 @@ export class AuthService {
   isLoggedInSubject = new BehaviorSubject<boolean>(false);
   token = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
+    // Get again token if page is refreshed
     if (this.isLoggedIn() && this.token === '') {
       this.token = this.getToken();
       this.isLoggedInSubject.next(true);
@@ -32,6 +34,7 @@ export class AuthService {
 
   public successfulLogIn() {
     this.isLoggedInSubject.next(true);
+    this.router.navigate(['/home']);
   }
 
   public getToken() {
@@ -144,5 +147,22 @@ export class AuthService {
     }
 
     return loggedIn;
+  }
+
+  public googleLogin(params) {
+    return this.http.get(environment.url + '/api/auth/google/redirect', { params })
+      .pipe( // Preprocess response
+        map((data: any) => {
+          if (data.token) {
+            this.saveToken(data.token);
+          }
+
+          return data;
+        })
+      );
+  }
+
+  getEnvironmentUrl() {
+    return environment.url;
   }
 }

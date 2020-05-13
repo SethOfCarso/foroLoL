@@ -1,0 +1,35 @@
+<tr>
+  <td [ngClass]="victoryClass">{{victory}}</td>
+  <td>{{match.kills}}/{{match.deaths}}/{{match.assists}}<br>
+    KDA: {{match.kda}}
+  </td>
+  <td>
+    <table class="">
+      <tr>
+        <th>Aliados</th>
+        <th>Enemigos</th>
+      </tr>
+      <tr>
+        <td>{{match.allyTeam[0].name}}</td>
+        <td>{{match.enemyTeam[0].name}}</td>
+      </tr>
+      <tr>
+        <td>{{match.allyTeam[1].name}}</td>
+        <td>{{match.enemyTeam[1].name}}</td>
+      </tr>
+      <tr>
+        <td>{{match.allyTeam[2].name}}</td>
+        <td>{{match.enemyTeam[2].name}}</td>
+      </tr>
+      <tr>
+        <td>{{match.allyTeam[3].name}}</td>
+        <td>{{match.enemyTeam[3].name}}</td>
+      </tr>
+      <tr>
+        <td>{{match.allyTeam[4].name}}</td>
+        <td>{{match.enemyTeam[4].name}}</td>
+      </tr>
+
+    </table>
+  </td>
+</tr>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -11,8 +12,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UserComponent implements OnInit {
   user = new User();
   environment: string;
+  isLoggedIn: boolean;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private usersService: UsersService) {
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private usersService: UsersService,
+              private authService: AuthService) {
+
+    this.authService.isLoggedInSubject.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+
     this.user.email = 'user@mail.com';
     this.user.username = 'Username';
     this.user.urlImage = 'default_profile.png';
@@ -20,8 +30,14 @@ export class UserComponent implements OnInit {
     this.user.token = '';
     this.user.posts = [];
     this.user.favorites = [];
+  }
 
-    this.environment = usersService.getEnvironmentUrl();
+  ngOnInit(): void {
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/home']);
+    }
+
+    this.environment = this.usersService.getEnvironmentUrl();
 
     // Check the query params in the url
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -40,9 +56,6 @@ export class UserComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }

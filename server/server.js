@@ -54,17 +54,16 @@ app.use('/api/post', postRouter);
 // get / post / put /
 // =================================
 
-// app.get('/',(req,res) =>{
-//     res.send("Server");
-// })
-
-
-
+app.get('/',(req,res) =>{
+    res.sendFile(path.join(__dirname+'/dist/foroLoL/index.html'));
+})
 
 app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/foroLoL/index.html'));
-    });
-// =================================
+});
+
+
+    // =================================
 // =================================
 //app.listen(port, () => console.log("http://localhost:" + port));
 http.listen(port, () => console.log("http://localhost:" + port));

@@ -14,6 +14,22 @@ export class PostDetailComponent implements OnInit {
   idPost: number;
   postDetail;
   postDetailSubscription = new Subscription();
+  activeComment = false;
+  randomNumber = this.randomID();
+
+  postComent= {
+    id: this.randomNumber,
+    idPost: this.randomNumber,
+    userEmail: 'prueba@gmail.com',
+    userId: 7438,
+    url: "NA",
+    title: "",
+    content: "",
+    postDate: new Date(),
+    // postDate: '2020-04-24T05:16:36.551+00:00',
+    tags: [],
+    objtPost: []
+  }
 
   constructor(private route: ActivatedRoute, private router: Router, private postService: PostService) {
     this.route.params.subscribe((params) => { this.idPost = params.id;})
@@ -26,20 +42,57 @@ export class PostDetailComponent implements OnInit {
           this.router.navigate(['/404/']);
         }
       },2000)
-      
-      console.log(this.postDetail);
+      this.randomID();
     })
   }
 
-
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
+  }
 
   ngOnInit(): void {
   }
+
+  randomID(): number { return Math.floor(Math.random() * 100000) + 1; }
 
   deletePost(){
     this.postService.deletePost(this.idPost);
     console.log("Entre al delete");
     this.router.navigate(['/404']);
+  }
+
+  postPost(){
+    this.postComent= {
+      id: this.randomNumber,
+      idPost: this.randomNumber,
+      userEmail: 'prueba@gmail.com',
+      userId: 7438,
+      url: "NA",
+      title: this.postDetail[0].title,
+      content: this.postComent.content,
+      postDate: new Date(),
+      // postDate: '2020-04-24T05:16:36.551+00:00',
+      tags: [],
+      objtPost: []
+    }
+    // console.log(this.postComent);
+    // this.postDetail[0].objPost.push(this.postComent)
+    // console.log(this.postDetail[0].objtPost);
+    let newArray = this.postDetail[0].objtPost
+    console.log(newArray[0]);
+    console.log(newArray[1]);
+    newArray.push(this.postComent);
+    this.postDetail[0].objtPost = newArray;
+    console.log(this.postDetail[0]);
+    // console.log(this.postDetail[0]);
+  }
+
+  answerPost(){
+    this.activeComment= true;
+  }
+
+  comnetPost(){
+    this.activeComment= true;
   }
 
 }

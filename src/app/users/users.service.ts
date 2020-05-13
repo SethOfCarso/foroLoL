@@ -92,10 +92,6 @@ export class UsersService {
     );
   }
 
-  updateUserLocal(updatedUser) {
-    this.userSubject.next(updatedUser);
-  }
-
   getEnvironmentUrl() {
     return environment.url;
   }

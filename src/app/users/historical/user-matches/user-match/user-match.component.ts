@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiLolService } from 'src/app/api-lol.service';
 import { MatchSummary } from '../../MatchSummary';
-import { User } from 'src/app/users/User';
 
 @Component({
   selector: 'app-user-match',
@@ -11,14 +9,16 @@ import { User } from 'src/app/users/User';
 export class UserMatchComponent implements OnInit {
   @Input() match: MatchSummary;
   victory: string;
+  victoryClass: string;
 
   constructor() {
     this.match = new MatchSummary();
     this.victory = '';
-    this.victory = this.match.victory ? 'Victoria' : 'Derrota';
   }
 
   ngOnInit(): void {
+    this.victory = this.match.victory ? 'Victoria' : 'Derrota';
+    this.victoryClass = this.match.victory ? 'match-victory' : 'match-loss';
   }
 
 }

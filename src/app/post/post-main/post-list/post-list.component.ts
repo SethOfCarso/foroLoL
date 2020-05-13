@@ -12,7 +12,7 @@ import { User } from 'src/app/users/User';
 })
 export class PostListComponent implements OnInit {
   allPost: Post[];
-  allUsers: User;
+  allUsers = [];
   tags:string;
   selectedSort: string;
   selectedTag: string;
@@ -24,13 +24,10 @@ export class PostListComponent implements OnInit {
     this.postService.postsSubject.subscribe(data => { 
       this.allPost = data;
       this.selectedSort = "newestPost"
-      this.sortBy(); })
+      this.sortBy(); 
+      this.getUser()
+    })
     this.allPost = postService.getPost();
-    
-    this.userService.userSubject.subscribe(data => {
-      this.allUsers = data
-      // console.log(data);
-    });
     // this.allUsers = userService.loadUser();
   }
 
@@ -41,6 +38,21 @@ export class PostListComponent implements OnInit {
       this.selectedSort = "newestPost"
       this.sortBy(); })
     this.allPost = this.postService.getPost();
+  }
+
+  getUser(){
+    let nombreArray;
+    nombreArray = this.userService.getUsersByUsername("JuanPerez");
+    nombreArray.then( (res) => {
+      console.log(res)
+      this.allUsers = nombreArray;
+      this.populatePost();
+      }
+    );
+  }
+
+  populatePost(){
+
   }
 
   sortBy() {

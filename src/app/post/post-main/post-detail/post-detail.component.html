@@ -36,8 +36,9 @@
           <p class="card-text"><small class="text-muted"> {{post.postDate}} </small></p>
         </div>
         <div class="card-footer text-muted text-right">
-          <a name="" id="" class="btn btn-secondary text-white" role="button">Responder</a>
-          <a name="" id="" class="btn btn-secondary text-white" role="button">Comentar</a>
+          <!-- <a name="" id="" class="btn btn-secondary text-white" (click)="scroll(coment)" (click)="answerPost()" role="button">Responder</a> -->
+          <button  class="btn btn-secondary text-white"  (click)="scroll(target)" (click)="answerPost()">Responder</button>
+          <a name="" id="" class="btn btn-secondary text-white" (click)="comnetPost()"role="button">Comentar</a>
           <a name="" id="" class="btn btn-danger text-white" (click)="deletePost()" role="button">Eliminar</a>
         </div>
       </div>
@@ -47,7 +48,7 @@
 <!-- =================================================================== -->
 <!--  Respuestas del post-->
 <!-- =================================================================== -->
-{{post.objtPost.length}}
+
 <div *ngIf="post.objtPost.length > 0">
 
 
@@ -86,7 +87,48 @@
       </div>
 </div>
 </div>
+
+        <!-- =================================================== -->
+        <!-- Comentarios -->
+        <!-- =================================================== -->
+        
+        <div #target>        
+<!-- <div *ngIf="activeComment == true" > -->
+    <div >
+    <div class="card mb-6 post">
+        <div class="row no-gutters">
+          <div class="col-md-2 ">
+            <div class="card-profile">
+              <img
+                src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
+                class="card-img-top" alt="Imagen de perfil">
+              <div class="card-body">
+                <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
+                Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
+                  alt="imagen de rango" width="40%"> <br>
+                Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
+                  alt="imagen de rango" width="40%">
+              </div>
+            </div>
+          </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title" > {{post.title }}</h5>
+                <!-- <div class="card-text" [innerHTML]=post.content>   -->
+                    <div [froalaEditor] [(froalaModel)]="postComent.content">
+                <!-- <div class="card-text" [innerHTML]=post.content> -->
+                </div>
+                <p class="card-text"><small class="text-muted"> {{postComent.postDate}} </small></p>
+              </div>
+              <div class="card-footer text-muted text-right">
+                <a name="" id="" class="btn btn-secondary text-white" (click)="postPost()"role="button">Postear</a>
+              </div>
+            </div>
+          </div>
+</div>
 <!-- =================================================================== -->
 <!--  Fin de las respuestas del post-->
 <!-- =================================================================== -->
+</div>
 </div>

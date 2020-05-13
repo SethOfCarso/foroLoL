@@ -29,7 +29,6 @@
 <!-- ================================== -->
 
 
-
 <div *ngFor="let post of allPost;let i = index" [attr.data-index]='i'>
     <div  class="card border-light mb-6 post"  [routerLink]="['/home/post-detail', post.idPost  ]">
       <!-- <div  class="card border-light mb-6 post"  [routerLink]="['./post-detail']"> -->

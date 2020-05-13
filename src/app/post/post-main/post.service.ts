@@ -14,6 +14,8 @@ export class PostService {
   posts: Post[] = [];
   postTitle: Post[] = [];
   postTag: Post[] = [];
+  postEmail: Post[] = [];
+  postsEmailSubject = new BehaviorSubject<Post[]>([]);
   postsSubject = new BehaviorSubject<Post[]>([]);
   postsTitleSubject = new BehaviorSubject<Post[]>([]);
   postsTagsSubject = new BehaviorSubject<Post[]>([]);
@@ -29,6 +31,10 @@ export class PostService {
 
   getPost(): Post[] {
     return this.posts.slice();
+  }
+
+  getPostByEmail(): Post[] {
+    return this.postEmail.slice();
   }
 
   getPostByIdPost(): Post [] {
@@ -64,11 +70,19 @@ export class PostService {
       },
       (err) => (console.log(err))
     );
-    console.log('Entre a load Posts por PostID');
+    console.log('Entre delete Posts por PostID');
   }
 
-  putPost(postID) {
-
+  putPost(postID, postBody) {
+    this.newURL = this.urlGetPost + '/' + postID + '/post/post';
+    this.http.put(this.newURL,postBody).subscribe(
+      (data) => {
+        console.log("Todo bien entre al put");
+        console.log(data);
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a put Posts por PostID');
   }
 
  
@@ -85,6 +99,19 @@ export class PostService {
       (err) => (console.log(err))
     );
     console.log('Entre a load Post');
+  }
+
+  loadPostByEmail(email) {
+    // this.newURL = this.urlGetPost + '/' + email + '/post/user';
+    this.newURL = this.urlGetPost + '/prueba@gmail.com/post/user';
+    this.http.get(this.newURL).subscribe(
+      (data: Post[]) => {
+        this.postEmail = data;
+        this.postsEmailSubject.next(this.getPostByEmail());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Posts por Email');
   }
 
   loadPostByPostId(postID) {

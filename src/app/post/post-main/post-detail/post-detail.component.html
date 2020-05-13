@@ -37,9 +37,9 @@
         </div>
         <div class="card-footer text-muted text-right">
           <!-- <a name="" id="" class="btn btn-secondary text-white" (click)="scroll(coment)" (click)="answerPost()" role="button">Responder</a> -->
-          <button  class="btn btn-secondary text-white"  (click)="scroll(target)" (click)="answerPost()">Responder</button>
-          <a name="" id="" class="btn btn-secondary text-white" (click)="comnetPost()"role="button">Comentar</a>
-          <a name="" id="" class="btn btn-danger text-white" (click)="deletePost()" role="button">Eliminar</a>
+          <button  *ngIf="isLoggedIn" class="btn btn-secondary text-white"  (click)="scroll(target)" (click)="answerPost()">Responder</button>
+          <!-- <a name="" id="" class="btn btn-secondary text-white" (click)="comnetPost()"role="button">Comentar</a> -->
+          <a *ngIf="isLoggedIn" name="" id="" class="btn btn-danger text-white" (click)="deletePost()" role="button">Eliminar</a>
         </div>
       </div>
     </div>
@@ -49,9 +49,11 @@
 <!--  Respuestas del post-->
 <!-- =================================================================== -->
 
+<div *ngIf="isLoggedIn">
+    
+</div>
+
 <div *ngIf="post.objtPost.length > 0">
-
-
   <div *ngFor="let postObj of post.objtPost">
     
     <div class="card mb-6 post">
@@ -59,7 +61,7 @@
           <div class="col-md-2 ">
             <div class="card-profile">
               <img
-                src="https://res.cloudinary.com/lmn/image/upload/c_limit,h_360,w_640/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinny/554203a192af2e4a3445dded3d7c9fb7.jpg"
+                src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
                 class="card-img-top" alt="Imagen de perfil">
               <div class="card-body">
                 <h5 class="card-title"><a href="#" class="card-link">Elias1</a> <br></h5>
@@ -80,7 +82,7 @@
             <p class="card-text"><small class="text-muted"> {{postObj.postDate}} </small></p>
             </div>
             <div class="card-footer text-muted text-right">
-              <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
+              <a name="" *ngIf="isLoggedIn" id="" class="btn btn-secondary text-white" (click)="scroll(target)" (click)="answerPost()"  role="button">Responder</a>
             </div>
           </div>
         </div>
@@ -94,7 +96,7 @@
         
         <div #target>        
 <!-- <div *ngIf="activeComment == true" > -->
-    <div >
+    <div *ngIf="activeComment == true">
     <div class="card mb-6 post">
         <div class="row no-gutters">
           <div class="col-md-2 ">

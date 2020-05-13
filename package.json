@@ -71,5 +71,9 @@
     "typescript": "~3.7.5",
     "jest": "^25.4.0",
     "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "10.15.1",
+    "npm": "6.4.1"
   }
 }

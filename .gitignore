@@ -2,6 +2,7 @@
 
 # Sensitive info
 /server/.env
+/.env
 
 # Non important files
 /server/temp/*

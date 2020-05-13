@@ -23,7 +23,7 @@ export class PostCreateComponent implements OnInit {
     postDate: new Date(),
     // postDate: '2020-04-24T05:16:36.551+00:00',
     tags: [],
-    objPost: [{}]
+    objPost: []
   }
   tag1 = false;
   isDone = false;

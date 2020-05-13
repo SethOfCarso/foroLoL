@@ -23,6 +23,11 @@ module.exports = {
     passport_google_cliend_id: process.env.PSSPRT_GOOGLE_CLIENT_ID,
     passport_google_client_secret: process.env.PSSPRT_GOOGLE_CLIENT_SECRET,
     passport_google_callback_url: process.env.PSSPRT_GOOGLE_CALLBACK_URL,
+    api_lol_token: process.env.API_LOL_TOKEN,
+    api_lol_base_url: process.env.API_LOL_BASE_URL,
+    api_lol_endpoint_summoner: process.env.API_LOL_ENDPOINT_SUMMONER,
+    api_lol_endpoint_matches: process.env.API_LOL_ENDPOINT_MATCHES,
+    api_lol_endpoint_match_detail: process.env.API_LOL_ENDPOINT_MATCH_DETAIL,
     get dbUrl() {
         return `mongodb+srv://${this.mongo_dbUser}:${this.mongo_dbPassword}@${this.mongo_dbCluster}.mongodb.net/${this.mongo_dbName}?retryWrites=true&w=majority`
     }, 

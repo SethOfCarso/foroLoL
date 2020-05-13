@@ -37,8 +37,8 @@
         </div>
         <div class="card-footer text-muted text-right">
           <!-- <a name="" id="" class="btn btn-secondary text-white" (click)="scroll(coment)" (click)="answerPost()" role="button">Responder</a> -->
-          <button  class="btn btn-secondary text-white"  (click)="scroll(target)" (click)="answerPost()">Responder</button>
-          <a name="" id="" class="btn btn-secondary text-white" (click)="comnetPost()"role="button">Comentar</a>
+          <button  *ngIf="isLoggedIn" class="btn btn-secondary text-white"  (click)="scroll(target)" (click)="answerPost()">Responder</button>
+          <!-- <a name="" id="" class="btn btn-secondary text-white" (click)="comnetPost()"role="button">Comentar</a> -->
           <a *ngIf="isLoggedIn" name="" id="" class="btn btn-danger text-white" (click)="deletePost()" role="button">Eliminar</a>
         </div>
       </div>
@@ -82,7 +82,7 @@
             <p class="card-text"><small class="text-muted"> {{postObj.postDate}} </small></p>
             </div>
             <div class="card-footer text-muted text-right">
-              <a name="" id="" class="btn btn-secondary text-white" href="#" role="button">Responder</a>
+              <a name="" *ngIf="isLoggedIn" id="" class="btn btn-secondary text-white" (click)="scroll(target)" (click)="answerPost()"  role="button">Responder</a>
             </div>
           </div>
         </div>

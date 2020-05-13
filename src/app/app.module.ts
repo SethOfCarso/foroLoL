@@ -41,6 +41,8 @@ const config: SocketIoConfig = { url: environment.url,  options: {} };
 import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
 import { ChangeUsernameComponent } from './users/profile/change-username/change-username.component';
 import { UserComponent } from './users/user/user.component';
+import { UserMatchesComponent } from './users/historical/user-matches/user-matches.component';
+import { UserMatchComponent } from './users/historical/user-matches/user-match/user-match.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { UserComponent } from './users/user/user.component';
     ChatMessagesComponent,
     PostSearchedComponent,
     ChangeUsernameComponent,
-    UserComponent
+    UserComponent,
+    UserMatchesComponent,
+    UserMatchComponent
   ],
   imports: [
     BrowserModule,

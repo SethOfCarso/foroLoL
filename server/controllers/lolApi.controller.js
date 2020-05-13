@@ -14,6 +14,7 @@ class LOLController{
     async getSummoner(req, res){
         if(req.params.Summoner !== undefined){
             let summoner = req.params.Summoner
+            console.log(summoner)
 
             // ===========================================
             // Get basic info by basic summoner Name

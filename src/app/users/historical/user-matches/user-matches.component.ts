@@ -24,7 +24,7 @@ export class UserMatchesComponent implements OnInit {
           this.summonerInfo = summonerInfo;
         },
         (responseError) => {
-          alert(responseError.error.msg);
+          // alert(responseError.error.msg);
         }
       );
     });

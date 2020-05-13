@@ -102,8 +102,8 @@ export class PostService {
   }
 
   loadPostByEmail(email) {
-    // this.newURL = this.urlGetPost + '/' + email + '/post/user';
-    this.newURL = this.urlGetPost + '/prueba@gmail.com/post/user';
+    this.newURL = this.urlGetPost + '/' + email + '/post/user';
+    // this.newURL = this.urlGetPost + '/prueba@gmail.com/post/user';
     this.http.get(this.newURL).subscribe(
       (data: Post[]) => {
         this.postEmail = data;

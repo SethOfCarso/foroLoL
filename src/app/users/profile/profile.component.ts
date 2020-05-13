@@ -14,19 +14,18 @@ export class ProfileComponent implements OnInit {
   isloggedIn: boolean;
   user: User;
   environment: string;
+  summonerInfo: any;
 
-  constructor(private router: Router,  private authService: AuthService, private usersService: UsersService) {
+  constructor(private router: Router,
+              private authService: AuthService,
+              private usersService: UsersService) {
+    this.environment = usersService.getEnvironmentUrl();
+
     // Subscribe to know if user is logged in
-    this.authService.isLoggedInSubject.subscribe((isloggedIn) => {
-      this.isloggedIn = isloggedIn;
-    });
+    this.authService.isLoggedInSubject.subscribe(isloggedIn => this.isloggedIn = isloggedIn);
 
     // Subscribe to user
-    this.usersService.userSubject.subscribe((user) => {
-      this.user = user;
-    });
-
-    this.environment = usersService.getEnvironmentUrl();
+    this.usersService.userSubject.subscribe(user => this.user = user);
 
     if (!this.isloggedIn) {
       this.router.navigate(['/']);

@@ -10,6 +10,8 @@ import { PostCreateComponent } from './post/post-main/post-create/post-create.co
 import { ProfileComponent } from './users/profile/profile.component';
 import { LogInComponent } from './auth/log-in/log-in.component';
 import { PostSearchedComponent } from './post/post-main/post-searched/post-searched.component';
+import { UserComponent } from './users/user/user.component';
+import { UserMatchComponent } from './users/historical/user-matches/user-match/user-match.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,7 +23,7 @@ const routes: Routes = [
       {path: 'searchedPost/:postType', component: PostSearchedComponent},
       {path: '', component: PostListComponent},
   ]},
-  
+  {path: 'user', component: UserComponent},
   {path: 'profile', component: ProfileComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'}

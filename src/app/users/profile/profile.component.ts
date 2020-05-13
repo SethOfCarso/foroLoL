@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   usernameChanged(user) {
-    this.usersService.updateUserLocal(user);
+    this.usersService.updateUser(user);
     $('#modalChangeUsername').modal('hide');
   }
 

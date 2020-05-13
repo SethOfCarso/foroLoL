@@ -1,5 +1,5 @@
 <tr>
-  <td ngClass="victory ? 'match-victory' : 'match-loss'">{{victory}}</td>
+  <td [ngClass]="victoryClass">{{victory}}</td>
   <td>{{match.kills}}/{{match.deaths}}/{{match.assists}}<br>
     KDA: {{match.kda}}
   </td>

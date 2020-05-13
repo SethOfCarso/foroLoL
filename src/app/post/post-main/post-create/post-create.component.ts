@@ -27,6 +27,7 @@ export class PostCreateComponent implements OnInit {
   }
   tag1 = false;
   isDone = false;
+  
 
   constructor(private postService: PostService, private router: Router) {
     this.randomID();
@@ -40,6 +41,7 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   createPost(form: NgForm) {
     console.log(this.post);

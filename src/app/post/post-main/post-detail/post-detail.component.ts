@@ -3,7 +3,10 @@ import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../post.service';
 import { Post } from '../post';
-import { Subscription } from 'rxjs';
+import { Subscription, from } from 'rxjs';
+import { User } from '../../../users/User'
+import { UsersService } from '../../../users/users.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -15,6 +18,8 @@ export class PostDetailComponent implements OnInit {
   postDetail;
   postDetailSubscription = new Subscription();
   activeComment = false;
+  isLoggedIn: boolean;
+  user: User;
   randomNumber = this.randomID();
 
   postComent= {
@@ -31,19 +36,25 @@ export class PostDetailComponent implements OnInit {
     objtPost: []
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private postService: PostService) {
+  constructor(private route: ActivatedRoute, 
+              private router: Router, 
+              private postService: PostService,
+              private authService: AuthService,
+              private usersService: UsersService) {
     this.route.params.subscribe((params) => { this.idPost = params.id;})
     this.postService.loadPostByPostId(this.idPost);
     this.postService.postDetailSubject.subscribe((data) => {
       this.postDetail = data;
       window.setTimeout(()=>{
         if(this.postDetail == undefined || this.postDetail.length == 0 ){
-          console.log("Es 0");
-          this.router.navigate(['/404/']);
-        }
-      },2000)
+          this.router.navigate(['/404/']);}},2000)
       this.randomID();
     })
+    // Subscribe to know if user is logged in
+    this.authService.isLoggedInSubject.subscribe((isloggedIn) => this.isLoggedIn = isloggedIn);
+
+    // Subscribe to user
+    this.usersService.userSubject.subscribe((user) => this.user = user);
   }
 
   scroll(el: HTMLElement) {
@@ -75,16 +86,11 @@ export class PostDetailComponent implements OnInit {
       tags: [],
       objtPost: []
     }
-    // console.log(this.postComent);
-    // this.postDetail[0].objPost.push(this.postComent)
-    // console.log(this.postDetail[0].objtPost);
     let newArray = this.postDetail[0].objtPost
-    console.log(newArray[0]);
-    console.log(newArray[1]);
     newArray.push(this.postComent);
     this.postDetail[0].objtPost = newArray;
-    console.log(this.postDetail[0]);
     // console.log(this.postDetail[0]);
+    this.postService.putPost(this.idPost,this.postDetail[0])
   }
 
   answerPost(){

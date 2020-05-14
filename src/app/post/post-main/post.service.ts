@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from './post';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { BaseService } from 'src/app/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class PostService extends BaseService {
   newURL: string;
-  urlGetPost = 'http://localhost:3000/api/post';
+  urlGetPost = this.getEnvironmentUrl() + '/api/post';
 
   singlePost: Post[] = [];
   posts: Post[] = [];
@@ -23,6 +24,7 @@ export class PostService {
   createPostDone = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
+    super();
     this.loadAllPost();
     this.postsSubject.next(this.getPost());
   }

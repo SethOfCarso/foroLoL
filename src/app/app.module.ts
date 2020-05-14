@@ -39,8 +39,8 @@ import 'froala-editor/js/third_party/spell_checker.min';
 import 'froala-editor/js/third_party/embedly.min';
 
 
-import { environment } from 'src/environments/environment';
-// import { environment } from 'src/environments/environment.prod';
+// import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 const config: SocketIoConfig = { url: environment.url,  options: {} };
 

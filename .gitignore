@@ -2,12 +2,14 @@
 
 # Sensitive info
 /server/.env
+/.env
 
 # Non important files
 /server/temp/*
 
 # compiled output
 /dist
+/server/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run

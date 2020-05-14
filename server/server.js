@@ -5,6 +5,7 @@
 // =================================
 const express = require('express');
 const cors = require ('cors');
+const path = require ('path');
 const config = require('./config/config');
 
 const app = express();
@@ -38,6 +39,7 @@ const routerLol = require('./routes/lol.route');
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + 'public'));
+app.use(express.static(__dirname + '/dist/foroLoL/'));
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
@@ -52,12 +54,9 @@ app.use('/api/post', postRouter);
 // get / post / put /
 // =================================
 
-app.get('/',(req,res) =>{
-    res.send("Server");
-})
-
-
-
+app.get('/*', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/foroLoL/index.html'));
+});
 
 
 // =================================

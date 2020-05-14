@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "node ./server/server.js",
     "build": "ng build --prod",
+    "build_dev": "ng build",
     "test_front": "ng test",
     "test_back": "jest",
     "lint": "ng lint",

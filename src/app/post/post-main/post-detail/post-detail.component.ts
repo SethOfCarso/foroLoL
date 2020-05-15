@@ -21,8 +21,10 @@ export class PostDetailComponent implements OnInit {
   isLoggedIn: boolean;
   user: User;
   randomNumber = this.randomID();
+  environment: string;
+  allUsers = [];
 
-  postComent= {
+  postComent = {
     id: this.randomNumber,
     idPost: this.randomNumber,
     userEmail: 'prueba@gmail.com',
@@ -31,34 +33,62 @@ export class PostDetailComponent implements OnInit {
     title: "",
     content: "",
     postDate: new Date(),
-    // postDate: '2020-04-24T05:16:36.551+00:00',
     tags: [],
     objtPost: []
-  }
+  };
+  userLogged = {
+    email: "",
+    username: "",
+    level: 1,
+    posts: 1,
+    url: "",
+  };
 
-  constructor(private route: ActivatedRoute, 
-              private router: Router, 
-              private postService: PostService,
-              private authService: AuthService,
-              private usersService: UsersService) {
-    this.route.params.subscribe((params) => { this.idPost = params.id;})
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private postService: PostService,
+    private authService: AuthService,
+    private usersService: UsersService,
+    private userService: UsersService) {
+    this.environment = usersService.getEnvironmentUrl();
+    
+
+    this.route.params.subscribe((params) => { this.idPost = params.id; })
     this.postService.loadPostByPostId(this.idPost);
     this.postService.postDetailSubject.subscribe((data) => {
       this.postDetail = data;
-      window.setTimeout(()=>{
-        if(this.postDetail == undefined || this.postDetail.length == 0 ){
-          this.router.navigate(['/404/']);}},2000)
+      window.setTimeout(() => {
+        if (this.postDetail == undefined || this.postDetail.length == 0) {
+          this.router.navigate(['/404/']);
+        }
+      }, 2000)
       this.randomID();
     })
     // Subscribe to know if user is logged in
     this.authService.isLoggedInSubject.subscribe((isloggedIn) => this.isLoggedIn = isloggedIn);
 
+
     // Subscribe to user
-    this.usersService.userSubject.subscribe((user) => this.user = user);
+    this.usersService.userSubject.subscribe(user => {
+      this.user = user
+      this.userLogged.email = user.email;
+      this.userLogged.username = user.username;
+      if (user.level == 0) { this.userLogged.level = 1 } else this.userLogged.level = user.level;
+      if (user.posts == undefined) { this.userLogged.posts = 1 }
+      else if (user.posts.length <= 1) {
+        { this.userLogged.posts = 1 }
+      } else this.userLogged.posts = user.posts.length;
+      this.userLogged.url = user.urlImage;
+      this.postComent.userEmail = user.email;
+    });
+
+    // Load all the users
+    userService.loadAllUsers();
+    this.userService.allUsersSubject.subscribe(data =>{this.allUsers = data;})
   }
 
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
   ngOnInit(): void {
@@ -66,39 +96,51 @@ export class PostDetailComponent implements OnInit {
 
   randomID(): number { return Math.floor(Math.random() * 100000) + 1; }
 
-  deletePost(){
+  deletePost() {
     this.postService.deletePost(this.idPost);
     console.log("Entre al delete");
     this.router.navigate(['/404']);
   }
 
-  postPost(){
-    this.postComent= {
+  getUser(){
+    let nombreArray;
+    nombreArray = this.userService.getUsersByUsername("ultry");
+    nombreArray.then( (res) => {
+      console.log(res)
+      this.allUsers = nombreArray;
+      }
+    );
+  }
+
+  postPost() {
+    this.postComent = {
       id: this.randomNumber,
       idPost: this.randomNumber,
-      userEmail: 'prueba@gmail.com',
+      userEmail: this.userLogged.email,
       userId: 7438,
       url: "NA",
       title: this.postDetail[0].title,
       content: this.postComent.content,
       postDate: new Date(),
-      // postDate: '2020-04-24T05:16:36.551+00:00',
       tags: [],
       objtPost: []
     }
+    this.postComent.userEmail = this.userLogged.email;
     let newArray = this.postDetail[0].objtPost
     newArray.push(this.postComent);
     this.postDetail[0].objtPost = newArray;
-    // console.log(this.postDetail[0]);
-    this.postService.putPost(this.idPost,this.postDetail[0])
+    // console.log(this.userLogged.email);
+    
+    console.log(this.postDetail[0]);
+    this.postService.putPost(this.idPost, this.postDetail[0])
   }
 
-  answerPost(){
-    this.activeComment= true;
+  answerPost() {
+    this.activeComment = true;
   }
 
-  comnetPost(){
-    this.activeComment= true;
+  comnetPost() {
+    this.activeComment = true;
   }
 
 }

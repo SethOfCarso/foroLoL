@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-// import { environment } from 'src/environments/environment.prod';
+import { BaseService } from '../base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends BaseService {
   isLoggedInSubject = new BehaviorSubject<boolean>(false);
   token = '';
 
   constructor(private http: HttpClient, private router: Router) {
+    super();
+
     // Get again token if page is refreshed
     if (this.isLoggedIn() && this.token === '') {
       this.token = this.getToken();
@@ -80,7 +81,7 @@ export class AuthService {
 
   public login(email: string, password: string): Observable<any> {
     return this.http
-      .post(environment.url + '/api/auth/login', {email, password})
+      .post(this.getEnvironmentUrl() + '/api/auth/login', {email, password})
       .pipe( // Preprocess response
         map((data: any) => {
           if (data.token) {
@@ -99,7 +100,7 @@ export class AuthService {
       });
       const options = { headers };
       // Delete user's token from DB
-      this.http.post(environment.url + '/api/auth/logout', null, options).subscribe(
+      this.http.post(this.getEnvironmentUrl() + '/api/auth/logout', null, options).subscribe(
         () => {},
         () => {}
       );
@@ -126,7 +127,7 @@ export class AuthService {
     };
 
     return this.http
-      .post(environment.url + '/api/auth/signin', newUser)
+      .post(this.getEnvironmentUrl() + '/api/auth/signin', newUser)
       .pipe( // Preprocess response
         map((data: any) => {
           if (data.token) {
@@ -150,7 +151,7 @@ export class AuthService {
   }
 
   public googleLogin(params) {
-    return this.http.get(environment.url + '/api/auth/google/redirect', { params })
+    return this.http.get(this.getEnvironmentUrl() + '/api/auth/google/redirect', { params })
       .pipe( // Preprocess response
         map((data: any) => {
           if (data.token) {
@@ -160,9 +161,5 @@ export class AuthService {
           return data;
         })
       );
-  }
-
-  getEnvironmentUrl() {
-    return environment.url;
   }
 }

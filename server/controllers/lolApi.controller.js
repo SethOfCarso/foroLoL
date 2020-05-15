@@ -13,8 +13,7 @@ class LOLController{
 
     async getSummoner(req, res){
         if(req.params.Summoner !== undefined){
-            let summoner = req.params.Summoner
-            console.log(summoner)
+            let summoner = req.params.Summoner;
 
             // ===========================================
             // Get basic info by basic summoner Name
@@ -26,6 +25,11 @@ class LOLController{
                 }
             });
             let json = await res_fetch.json();
+
+            if (json.status != undefined && json.status.message == 'Forbidden') {
+                res.status(403).send('LoL API rejected the request');
+                return;
+            }
 
             summoner_base.name = json.name;
             summoner_base.summonerLevel = json.summonerLevel;
@@ -149,6 +153,7 @@ class LOLController{
             });
 
             summoner_base.summaryMatches = summaryMatches;
+            delete summoner_base.matches;
             
             if(summoner_base.accountId !== undefined){
                 res.status(200).send(summoner_base)

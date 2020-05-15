@@ -3,19 +3,20 @@ import { User } from './User';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
-// import { environment } from 'src/environments/environment.prod';
+import { BaseService } from '../base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UsersService extends BaseService {
   isLoggedIn: boolean;
   userSubject = new BehaviorSubject<User>(new User());
   allUsers : User[];
   allUsersSubject = new BehaviorSubject<User[]> ([])
 
   constructor(private authService: AuthService, private http: HttpClient) {
+    super();
+
     authService.isLoggedInSubject.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
@@ -49,7 +50,7 @@ export class UsersService {
     });
     const options = { headers };
 
-    this.http.get(environment.url + '/api/users/' + tokenData.email, options).subscribe(
+    this.http.get(this.getEnvironmentUrl() + '/api/users/' + tokenData.email, options).subscribe(
       (user: User) => {
         this.userSubject.next(user);
       },
@@ -67,7 +68,7 @@ export class UsersService {
     });
     const options = { headers };
 
-    return this.http.get(environment.url + '/api/users?username=' + username, options).toPromise();
+    return this.http.get(this.getEnvironmentUrl() + '/api/users?username=' + username, options).toPromise();
   }
 
   changeEmail(newEmail): Observable<any> {
@@ -76,7 +77,7 @@ export class UsersService {
       'x-auth': this.authService.getToken()
     });
     const options = { headers };
-    return this.http.put(environment.url + '/api/users/' + tokenData.email, { email: newEmail }, options);
+    return this.http.put(this.getEnvironmentUrl() + '/api/users/' + tokenData.email, { email: newEmail }, options);
   }
 
   changePassword(password): Observable<any> {
@@ -85,7 +86,7 @@ export class UsersService {
       'x-auth': this.authService.getToken()
     });
     const options = { headers };
-    return this.http.put(environment.url + '/api/users/' + tokenData.email, { password }, options);
+    return this.http.put(this.getEnvironmentUrl() + '/api/users/' + tokenData.email, { password }, options);
   }
 
   changeUsername(username): Observable<any> {
@@ -94,7 +95,7 @@ export class UsersService {
       'x-auth': this.authService.getToken()
     });
     const options = { headers };
-    return this.http.put(environment.url + '/api/users/' + tokenData.email, { username }, options);
+    return this.http.put(this.getEnvironmentUrl() + '/api/users/' + tokenData.email, { username }, options);
   }
 
   updateUser(updatedUser) {
@@ -103,17 +104,9 @@ export class UsersService {
       'x-auth': this.authService.getToken()
     });
     const options = { headers };
-    this.http.put(environment.url + '/api/users/' + tokenData.email, updatedUser, options).subscribe(
+    this.http.put(this.getEnvironmentUrl() + '/api/users/' + tokenData.email, updatedUser, options).subscribe(
       (user: User) => { this.userSubject.next(user); },
       () => {}
     );
-  }
-
-  updateUserLocal(updatedUser) {
-    this.userSubject.next(updatedUser);
-  }
-
-  getEnvironmentUrl() {
-    return environment.url;
   }
 }

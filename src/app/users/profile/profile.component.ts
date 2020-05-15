@@ -37,10 +37,10 @@ export class ProfileComponent implements OnInit {
     this.usersService.userSubject.subscribe(user => {
       this.user = user;
       this.userEmail = user.email;
-      this.postService.loadPostByEmail(this.userEmail);
-    });
 
-    // this.postService.loadPostByEmail(this.userEmail);
+      // console.log(this.user.email);
+    this.postService.loadPostByEmail(this.userEmail);
+    });
 
     this.postService.postsEmailSubject.subscribe((post) => {
       this.postByUser = post;

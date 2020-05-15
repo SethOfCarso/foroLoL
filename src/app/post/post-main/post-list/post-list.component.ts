@@ -30,9 +30,7 @@ export class PostListComponent implements OnInit {
     userService.loadAllUsers();
     this.userService.allUsersSubject.subscribe(data =>{
       this.allUsers = data;
-      console.log(this.allUsers);
     })
-    // this.allUsers = userService.loadUser();
   }
 
 
@@ -50,13 +48,8 @@ export class PostListComponent implements OnInit {
     nombreArray.then( (res) => {
       console.log(res)
       this.allUsers = nombreArray;
-      this.populatePost();
       }
     );
-  }
-
-  populatePost(){
-
   }
 
   sortBy() {

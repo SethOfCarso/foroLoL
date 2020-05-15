@@ -3,6 +3,7 @@ import { User } from '../../User';
 import { ApiLolService } from 'src/app/api-lol.service';
 import { UsersService } from '../../users.service';
 import { MatchSummary } from '../MatchSummary';
+import { SummonerInfo } from '../../SummonerInfo';
 
 @Component({
   selector: 'app-user-matches',
@@ -11,9 +12,10 @@ import { MatchSummary } from '../MatchSummary';
 })
 export class UserMatchesComponent implements OnInit {
   user: User;
-  summonerInfo: any;
+  summonerInfo: SummonerInfo;
 
   constructor(private usersService: UsersService, private apiLolService: ApiLolService) {
+    this.summonerInfo = new SummonerInfo();
     // Subscribe to user
     this.usersService.userSubject.subscribe((user) => {
       this.user = user;

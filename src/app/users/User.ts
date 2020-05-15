@@ -8,5 +8,14 @@ export class User {
     favorites: any[];
     posts: any[];
 
-    constructor() {}
+    constructor() {
+        this.email = '';
+        this.username = '';
+        this.password = '';
+        this.urlImage = 'default_profile.png';
+        this.level = 0;
+        this.token = '';
+        this.favorites = [];
+        this.posts = [];
+    }
 }

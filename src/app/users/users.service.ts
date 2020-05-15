@@ -31,7 +31,7 @@ export class UsersService extends BaseService {
   }
 
   loadAllUsers(){
-    this.http.get(environment.url + '/api/users/get/GetAll').subscribe(
+    this.http.get(this.getEnvironmentUrl() + '/api/users/get/GetAll').subscribe(
       (data: User[]) => {
         this.allUsers = data;
         this.allUsersSubject.next(this.getAllUsers());

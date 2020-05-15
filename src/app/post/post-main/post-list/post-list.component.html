@@ -71,19 +71,21 @@
                 <h5 class="card-title"><a href="./perfil.html" class="card-link"> {{post.userEmail}} </a> <br></h5>
                 <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}}  </h6>
                 Rango 
-                <img *ngIf="rankUser==1" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="rankUser==1">
-                <img *ngIf="rankUser==2" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango" width="40%">     <br *ngIf="rankUser==2">
-                <img *ngIf="rankUser==3" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango" width="40%">       <br *ngIf="rankUser==3">
-                <img *ngIf="rankUser==4" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango" width="40%">   <br *ngIf="rankUser==4">
-                <img *ngIf="rankUser==5" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango" width="40%">    <br *ngIf="rankUser==5">
-
+                <div *ngFor="let user of allUsers">
+                <img *ngIf="user.level <=1 && user.email == post.userEmail" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level <=1 && user.email == post.userEmail">
+                <img *ngIf="user.level ==2 && user.email == post.userEmail" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level ==2 && user.email == post.userEmail">
+                <img *ngIf="user.level ==3 && user.email == post.userEmail" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango" width="40%">       <br *ngIf="user.level ==3 && user.email == post.userEmail">
+                <img *ngIf="user.level ==4 && user.email == post.userEmail" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level ==4 && user.email == post.userEmail">
+                <img *ngIf="user.level ==5 && user.email == post.userEmail" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level ==5 && user.email == post.userEmail">
+              </div>
                 Post
-                <img *ngIf="postUser==1" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png" alt="imagen de rango" width="40%">    <br *ngIf="postUser==1">
-                <img *ngIf="postUser==2" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png" alt="imagen de rango" width="40%">    <br *ngIf="postUser==2">
-                <img *ngIf="postUser==3" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png" alt="imagen de rango" width="40%">      <br *ngIf="postUser==3">
-                <img *ngIf="postUser==4" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png" alt="imagen de rango" width="40%">  <br *ngIf="postUser==4">
-                <img *ngIf="postUser==5" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png" alt="imagen de rango" width="40%">   <br *ngIf="postUser==5">
-                
+                <div *ngFor="let user of allUsers">
+                <img *ngIf="user.posts.length <=1 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png" alt="imagen de rango" width="40%">    <br *ngIf="user.posts.length <=1 && user.email == post.userEmail">
+                <img *ngIf="user.posts.length ==2 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level.length ==2 && user.email == post.userEmail">
+                <img *ngIf="user.posts.length ==3 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png" alt="imagen de rango" width="40%">      <br *ngIf="user.level.length ==3 && user.email == post.userEmail">
+                <img *ngIf="user.posts.length ==4 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png" alt="imagen de rango" width="40%">  <br *ngIf="user.level.length ==4 && user.email == post.userEmail">
+                <img *ngIf="user.posts.length ==5 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level.length ==5 && user.email == post.userEmail">
+              </div>
               </div>
             </div>
         </div>

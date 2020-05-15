@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 export class UsersService {
   isLoggedIn: boolean;
   userSubject = new BehaviorSubject<User>(new User());
+  allUsers : User[];
+  allUsersSubject = new BehaviorSubject<User[]> ([])
 
   constructor(private authService: AuthService, private http: HttpClient) {
     authService.isLoggedInSubject.subscribe((isLoggedIn) => {
@@ -21,6 +23,21 @@ export class UsersService {
     if (this.isLoggedIn) {
       this.loadUser();
     }
+  }
+
+  getAllUsers(){
+    return this.allUsers.slice();
+  }
+
+  loadAllUsers(){
+    this.http.get(environment.url + '/api/users/get/GetAll').subscribe(
+      (data: User[]) => {
+        this.allUsers = data;
+        this.allUsersSubject.next(this.getAllUsers());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Post');
   }
 
   loadUser() {

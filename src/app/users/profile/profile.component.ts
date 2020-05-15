@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/post/post-main/post.service';
 import { Post } from '../../post/post-main/post';
+import { SummonerInfo } from '../SummonerInfo';
 declare var $: any;
 
 @Component({
@@ -16,31 +17,33 @@ export class ProfileComponent implements OnInit {
   isloggedIn: boolean;
   user: User;
   environment: string;
-  summonerInfo: any;
+  summonerInfo: SummonerInfo;
   userEmail: string;
   postByUser: Post[];
 
   constructor(private router: Router,
-    private authService: AuthService,
-    private usersService: UsersService,
-    private postService: PostService) {
+              private authService: AuthService,
+              private usersService: UsersService,
+              private postService: PostService) {
+
     this.environment = usersService.getEnvironmentUrl();
+    this.summonerInfo = new SummonerInfo();
+    this.user = new User();
 
     // Subscribe to know if user is logged in
     this.authService.isLoggedInSubject.subscribe(isloggedIn => this.isloggedIn = isloggedIn);
 
     // Subscribe to user
     this.usersService.userSubject.subscribe(user => {
-    this.user = user
+      this.user = user;
       this.userEmail = user.email;
       this.postService.loadPostByEmail(this.userEmail);
     });
 
     // this.postService.loadPostByEmail(this.userEmail);
 
-    this.postService.postsEmailSubject.
-    subscribe((post) => {
-    this.postByUser = post
+    this.postService.postsEmailSubject.subscribe((post) => {
+      this.postByUser = post;
     });
 
     if (!this.isloggedIn) {

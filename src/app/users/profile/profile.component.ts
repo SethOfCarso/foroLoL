@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { PostService } from 'src/app/post/post-main/post.service';
 import { Post } from '../../post/post-main/post';
 import { SummonerInfo } from '../SummonerInfo';
+import { Utils } from '../Utils';
 declare var $: any;
 
 @Component({
@@ -18,7 +19,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   environment: string;
   summonerInfo: SummonerInfo;
-  userEmail: string;
+  userRankImage: string;
   postByUser: Post[];
 
   constructor(private router: Router,
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.environment = usersService.getEnvironmentUrl();
     this.summonerInfo = new SummonerInfo();
     this.user = new User();
+    this.userRankImage = Utils.getRankImage(this.user);
 
     // Subscribe to know if user is logged in
     this.authService.isLoggedInSubject.subscribe(isloggedIn => this.isloggedIn = isloggedIn);
@@ -36,11 +38,8 @@ export class ProfileComponent implements OnInit {
     // Subscribe to user
     this.usersService.userSubject.subscribe(user => {
       this.user = user;
-      this.userEmail = user.email;
-      this.postService.loadPostByEmail(this.userEmail);
+      this.postService.loadPostByEmail(this.user.email);
     });
-
-    // this.postService.loadPostByEmail(this.userEmail);
 
     this.postService.postsEmailSubject.subscribe((post) => {
       this.postByUser = post;
@@ -75,5 +74,4 @@ export class ProfileComponent implements OnInit {
     this.usersService.updateUser(this.user);
     $('#modalChangeImage').modal('hide');
   }
-
 }

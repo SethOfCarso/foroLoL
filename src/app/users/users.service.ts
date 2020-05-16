@@ -11,6 +11,8 @@ import { BaseService } from '../base.service';
 export class UsersService extends BaseService {
   isLoggedIn: boolean;
   userSubject = new BehaviorSubject<User>(new User());
+  allUsers: User[];
+  allUsersSubject = new BehaviorSubject<User[]>([]);
 
   constructor(private authService: AuthService, private http: HttpClient) {
     super();
@@ -22,6 +24,21 @@ export class UsersService extends BaseService {
     if (this.isLoggedIn) {
       this.loadUser();
     }
+  }
+
+  getAllUsers() {
+    return this.allUsers.slice();
+  }
+
+  loadAllUsers() {
+    this.http.get(this.getEnvironmentUrl() + '/api/users/get/GetAll').subscribe(
+      (data: User[]) => {
+        this.allUsers = data;
+        this.allUsersSubject.next(this.getAllUsers());
+      },
+      (err) => (console.log(err))
+    );
+    console.log('Entre a load Post');
   }
 
   loadUser() {

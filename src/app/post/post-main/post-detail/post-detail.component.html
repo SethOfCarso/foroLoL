@@ -7,16 +7,31 @@
   <div class="row no-gutters">
     <div class="col-md-2 ">
       <div class="card-profile">
-        <img
-          src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
-          class="card-img-top" alt="Imagen de perfil">
+        <div *ngFor="let user of allUsers">
+        <img *ngIf=" user.email == post.userEmail" src= "{{environment}}/api/image/{{user.urlImage}}" class="card-img-top" alt="Imagen de perfil">
+        </div>
         <div class="card-body">
-          <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
-          <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
-          Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-            alt="imagen de rango" width="40%"> <br>
-          Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-            alt="imagen de rango" width="40%">
+          <div *ngFor="let user of allUsers">
+          <h5 *ngIf=" user.email == post.userEmail" class="card-title"> <a href="/user?username={{user.username}}" class="card-link"> {{user.username}} </a> <br></h5>
+        </div>
+          <h6 class="card-subtitle mb-2 text-muted">Post # {{post.idPost}} </h6>
+        
+          Rango 
+          <div *ngFor="let user of allUsers">
+          <img *ngIf="user.level <=1 && user.email == post.userEmail" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level <=1 && user.email == post.userEmail">
+          <img *ngIf="user.level ==2 && user.email == post.userEmail" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level ==2 && user.email == post.userEmail">
+          <img *ngIf="user.level ==3 && user.email == post.userEmail" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango" width="40%">       <br *ngIf="user.level ==3 && user.email == post.userEmail">
+          <img *ngIf="user.level ==4 && user.email == post.userEmail" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level ==4 && user.email == post.userEmail">
+          <img *ngIf="user.level ==5 && user.email == post.userEmail" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level ==5 && user.email == post.userEmail">
+        </div>
+          Post
+          <div *ngFor="let user of allUsers">
+          <img *ngIf="user.posts.length <=1 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png" alt="imagen de rango" width="40%">    <br *ngIf="user.posts.length <=1 && user.email == post.userEmail">
+          <img *ngIf="user.posts.length ==2 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level.length ==2 && user.email == post.userEmail">
+          <img *ngIf="user.posts.length ==3 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png" alt="imagen de rango" width="40%">      <br *ngIf="user.level.length ==3 && user.email == post.userEmail">
+          <img *ngIf="user.posts.length ==4 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png" alt="imagen de rango" width="40%">  <br *ngIf="user.level.length ==4 && user.email == post.userEmail">
+          <img *ngIf="user.posts.length ==5 && user.email == post.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level.length ==5 && user.email == post.userEmail">
+        </div>
         </div>
       </div>
     </div>
@@ -60,16 +75,30 @@
         <div class="row no-gutters">
           <div class="col-md-2 ">
             <div class="card-profile">
-              <img
-                src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
-                class="card-img-top" alt="Imagen de perfil">
+              <div *ngFor="let user of allUsers">
+              <img *ngIf=" user.email == postObj.userEmail" src= "{{environment}}/api/image/{{user.urlImage}}" class="card-img-top" alt="Imagen de perfil">
+              </div>
               <div class="card-body">
-                <h5 class="card-title"><a href="#" class="card-link">Elias1</a> <br></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Post #155</h6>
-                Rango <img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                  alt="imagen de rango" width="40%"> <br>
-                Post<img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                  alt="imagen de rango" width="40%">
+                <div *ngFor="let user of allUsers">
+                <h5 *ngIf=" user.email == postObj.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{postObj.userEmail}} </a> <br></h5>
+              </div>
+                <h6 class="card-subtitle mb-2 text-muted">Post # {{postObj.idPost}} </h6>
+                Rango 
+                <div *ngFor="let user of allUsers">
+                <img *ngIf="user.level <=1 && user.email == postObj.userEmail" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level <=1 && user.email == postObj.userEmail">
+                <img *ngIf="user.level ==2 && user.email == postObj.userEmail" src="../../../../assets/images/base-icons/silver.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level ==2 && user.email == postObj.userEmail">
+                <img *ngIf="user.level ==3 && user.email == postObj.userEmail" src="../../../../assets/images/base-icons/gold.png" alt="imagen de rango" width="40%">       <br *ngIf="user.level ==3 && user.email == postObj.userEmail">
+                <img *ngIf="user.level ==4 && user.email == postObj.userEmail" src="../../../../assets/images/base-icons/platinum.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level ==4 && user.email == postObj.userEmail">
+                <img *ngIf="user.level ==5 && user.email == postObj.userEmail" src="../../../../assets/images/base-icons/diamond.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level ==5 && user.email == postObj.userEmail">
+              </div>
+                Post
+                <div *ngFor="let user of allUsers">
+                <img *ngIf="user.posts.length <=1 && user.email == postObj.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Bronze.png" alt="imagen de rango" width="40%">    <br *ngIf="user.posts.length <=1 && user.email == postObj.userEmail">
+                <img *ngIf="user.posts.length ==2 && user.email == postObj.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Silver.png" alt="imagen de rango" width="40%">    <br *ngIf="user.level.length ==2 && user.email == postObj.userEmail">
+                <img *ngIf="user.posts.length ==3 && user.email == postObj.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Gold.png" alt="imagen de rango" width="40%">      <br *ngIf="user.level.length ==3 && user.email == postObj.userEmail">
+                <img *ngIf="user.posts.length ==4 && user.email == postObj.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Platinum.png" alt="imagen de rango" width="40%">  <br *ngIf="user.level.length ==4 && user.email == postObj.userEmail">
+                <img *ngIf="user.posts.length ==5 && user.email == postObj.userEmail" src="../../../../assets/images/ranked-emblems/Emblem_Diamond.png" alt="imagen de rango" width="40%">   <br *ngIf="user.level.length ==5 && user.email == postObj.userEmail">
+              </div>
               </div>
             </div>
           </div>
@@ -102,15 +131,13 @@
           <div class="col-md-2 ">
             <div class="card-profile">
               <img
-                src="https://vignette.wikia.nocookie.net/leagueoflegends/images/5/5f/Teemo_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203624"
+                src= "{{environment}}/api/image/{{userLogged.url}}"
                 class="card-img-top" alt="Imagen de perfil">
               <div class="card-body">
-                <h5 class="card-title"><a href="#" class="card-link">SethOfCarso</a> <br></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Post #36</h6>
-                Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png"
-                  alt="imagen de rango" width="40%"> <br>
-                Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1"
-                  alt="imagen de rango" width="40%">
+                <h5 class="card-title"><a href="#" class="card-link"> {{postComent.userEmail}} </a> <br></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Post #{{postComent.idPost}}</h6>
+                <!-- Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png" alt="imagen de rango" width="40%"> <br>
+                Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1" alt="imagen de rango" width="40%"> -->
               </div>
             </div>
           </div>

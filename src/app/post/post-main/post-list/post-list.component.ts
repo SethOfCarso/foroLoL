@@ -25,10 +25,12 @@ export class PostListComponent implements OnInit {
       this.allPost = data;
       this.selectedSort = "newestPost"
       this.sortBy(); 
-      this.getUser()
     })
     this.allPost = postService.getPost();
-    // this.allUsers = userService.loadUser();
+    userService.loadAllUsers();
+    this.userService.allUsersSubject.subscribe(data =>{
+      this.allUsers = data;
+    })
   }
 
 
@@ -42,17 +44,12 @@ export class PostListComponent implements OnInit {
 
   getUser(){
     let nombreArray;
-    nombreArray = this.userService.getUsersByUsername("JuanPerez");
+    nombreArray = this.userService.getUsersByUsername("ultry");
     nombreArray.then( (res) => {
       console.log(res)
       this.allUsers = nombreArray;
-      this.populatePost();
       }
     );
-  }
-
-  populatePost(){
-
   }
 
   sortBy() {

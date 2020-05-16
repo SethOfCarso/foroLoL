@@ -13,4 +13,7 @@ router.route("/:email")
     .put(AuthMiddleware.checkToken, UserController.updateUser)
     .delete(AuthMiddleware.checkToken, UserController.deleteUser);
 
+router.route("/get/GetAll")
+.get(UserController.getUsers)
+
 module.exports = router;

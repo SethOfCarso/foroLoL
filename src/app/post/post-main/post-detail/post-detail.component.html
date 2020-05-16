@@ -9,10 +9,13 @@
       <div class="card-profile">
         <div *ngFor="let user of allUsers">
         <img *ngIf=" user.email == post.userEmail" src= "{{environment}}/api/image/{{user.urlImage}}" class="card-img-top" alt="Imagen de perfil">
-      </div>
+        </div>
         <div class="card-body">
-          <h5 class="card-title"><a href="#" class="card-link"> {{post.userEmail}} </a> <br></h5>
+          <div *ngFor="let user of allUsers">
+          <h5 *ngIf=" user.email == post.userEmail" class="card-title"> <a href="/user?username={{user.username}}" class="card-link"> {{post.userEmail}} </a> <br></h5>
+        </div>
           <h6 class="card-subtitle mb-2 text-muted">Post # {{post.idPost}} </h6>
+        
           Rango 
           <div *ngFor="let user of allUsers">
           <img *ngIf="user.level <=1 && user.email == post.userEmail" src="../../../../assets/images/base-icons/bronze.png" alt="imagen de rango" width="40%">     <br *ngIf="user.level <=1 && user.email == post.userEmail">
@@ -76,7 +79,9 @@
               <img *ngIf=" user.email == postObj.userEmail" src= "{{environment}}/api/image/{{user.urlImage}}" class="card-img-top" alt="Imagen de perfil">
               </div>
               <div class="card-body">
-                <h5 class="card-title"><a href="#" class="card-link"> {{postObj.userEmail}} </a> <br></h5>
+                <div *ngFor="let user of allUsers">
+                <h5 *ngIf=" user.email == postObj.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{postObj.userEmail}} </a> <br></h5>
+              </div>
                 <h6 class="card-subtitle mb-2 text-muted">Post # {{postObj.idPost}} </h6>
                 Rango 
                 <div *ngFor="let user of allUsers">

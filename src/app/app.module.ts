@@ -40,6 +40,7 @@ import 'froala-editor/js/third_party/embedly.min';
 
 
 import { environment } from 'src/environments/environment';
+import { FooterComponent } from './footer/footer.component';
 
 const config: SocketIoConfig = { url: environment.url,  options: {} };
 
@@ -67,7 +68,8 @@ const config: SocketIoConfig = { url: environment.url,  options: {} };
     ChangeUsernameComponent,
     UserComponent,
     UserMatchesComponent,
-    UserMatchComponent
+    UserMatchComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

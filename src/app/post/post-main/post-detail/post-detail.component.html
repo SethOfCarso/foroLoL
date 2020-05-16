@@ -80,7 +80,7 @@
               </div>
               <div class="card-body">
                 <div *ngFor="let user of allUsers">
-                <h5 *ngIf=" user.email == postObj.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{postObj.userEmail}} </a> <br></h5>
+                <h5 *ngIf=" user.email == postObj.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{user.username}} </a> <br></h5>
               </div>
                 <h6 class="card-subtitle mb-2 text-muted">Post # {{postObj.idPost}} </h6>
                 Rango 
@@ -134,7 +134,7 @@
                 src= "{{environment}}/api/image/{{userLogged.url}}"
                 class="card-img-top" alt="Imagen de perfil">
               <div class="card-body">
-                <h5 class="card-title"><a href="#" class="card-link"> {{postComent.userEmail}} </a> <br></h5>
+                <h5 class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{user.username}} </a> <br></h5>
                 <h6 class="card-subtitle mb-2 text-muted">Post #{{postComent.idPost}}</h6>
                 <!-- Rango <img src="https://i.pinimg.com/originals/84/18/94/841894efbeea9776d2bf07a9d2946851.png" alt="imagen de rango" width="40%"> <br>
                 Post<img src="https://opgg-static.akamaized.net/images/medals/bronze_1.png?image=q_auto&v=1" alt="imagen de rango" width="40%"> -->

@@ -69,7 +69,7 @@
           <div class="card">
               <div class="card-body">
                 <div *ngFor="let user of allUsers">
-                <h5 *ngIf="user.email == post.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{post.userEmail}} </a> <br></h5>
+                <h5 *ngIf="user.email == post.userEmail" class="card-title"><a href="/user?username={{user.username}}" class="card-link"> {{user.username}} </a> <br></h5>
               </div>
                 <h6 class="card-subtitle mb-2 text-muted">Post # {{post.id}}  </h6>
               

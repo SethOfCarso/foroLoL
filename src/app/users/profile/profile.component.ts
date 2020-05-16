@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   environment: string;
   summonerInfo: SummonerInfo;
+  userRankImage: string;
   userEmail: string;
   postByUser: Post[];
 
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.environment = usersService.getEnvironmentUrl();
     this.summonerInfo = new SummonerInfo();
     this.user = new User();
+    this.userRankImage = this.getRankImage();
 
     // Subscribe to know if user is logged in
     this.authService.isLoggedInSubject.subscribe(isloggedIn => this.isloggedIn = isloggedIn);
@@ -37,9 +39,7 @@ export class ProfileComponent implements OnInit {
     this.usersService.userSubject.subscribe(user => {
       this.user = user;
       this.userEmail = user.email;
-
-      // console.log(this.user.email);
-    this.postService.loadPostByEmail(this.userEmail);
+      this.postService.loadPostByEmail(this.userEmail);
     });
 
     this.postService.postsEmailSubject.subscribe((post) => {
@@ -74,6 +74,20 @@ export class ProfileComponent implements OnInit {
     this.user.urlImage = image.filename;
     this.usersService.updateUser(this.user);
     $('#modalChangeImage').modal('hide');
+  }
+
+  getRankImage() {
+    if (this.user.level <= 1) {
+      return '../../../../assets/images/base-icons/bronze.png';
+    } else if (this.user.level === 2) {
+      return '../../../../assets/images/base-icons/silver.png';
+    } else if (this.user.level === 3) {
+      return'../../../../assets/images/base-icons/gold.png';
+    } else if (this.user.level === 4) {
+      return '../../../../assets/images/base-icons/platinum.png';
+    } else if (this.user.level === 5) {
+      return '../../../../assets/images/base-icons/diamond.png';
+    }
   }
 
 }
